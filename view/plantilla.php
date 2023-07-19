@@ -28,6 +28,13 @@
           $_GET["ruta"] == "home" ||  
           $_GET["ruta"] == "usuario" ||
           $_GET["ruta"] == "editarSalida" ||
+          $_GET["ruta"] == "calendario" ||
+          $_GET["ruta"] == "historiaClinica" ||
+          $_GET["ruta"] == "procedimientos" ||
+          $_GET["ruta"] == "gastos" ||
+          $_GET["ruta"] == "socios" ||
+          $_GET["ruta"] == "pacientes" ||
+          $_GET["ruta"] == "historialPagos" ||
           $_GET["ruta"] == "signout" 
         )
         {
@@ -62,7 +69,7 @@
   <script src="js/datatables-simple-demo.js"></script>
   <!-- <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script> -->
 
-  <script src="js/plantilla.js"></script>
   <script src="js/usuario.js"></script>
+  <script src="js/calendario.js"></script>
 </body>
 </html>

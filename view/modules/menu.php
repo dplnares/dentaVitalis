@@ -21,3 +21,41 @@
 <?php
   }
 ?>
+
+<!-- Calendario -->
+<div class="sb-sidenav-menu-heading">Calendario</div>
+  <a class="nav-link" href="calendario">
+    <div class="sb-nav-link-icon"><i class="fas fa-calendar"></i></div>
+    Calendario Citas
+  </a>
+
+<!-- Historias Clinica -->
+<div class="sb-sidenav-menu-heading">Historias Clínicas</div>
+  <a class="nav-link" href="historiaClinica">
+    <div class="sb-nav-link-icon"><i class="fas fa-file-text"></i></div>
+    Historias Clinica
+  </a>
+
+<!-- Catalogo -->
+<div class="sb-sidenav-menu-heading">Catálogo</div>
+  <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#listaCatalogo" aria-expanded="false" aria-controls="collapseLayouts">
+    <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
+    Catálogo
+    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+  </a>
+  <div class="collapse" id="listaCatalogo" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+    <nav class="sb-sidenav-menu-nested nav">
+      <a class="nav-link" href="procedimientos">Procedimientos</a>
+      <a class="nav-link" href="gastos">Gastos</a>
+      <a class="nav-link" href="socios">Socios</a>
+      <a class="nav-link" href="pacientes">Pacientes</a>
+    </nav>
+  </div>
+
+<!-- Historias Pagos -->
+<div class="sb-sidenav-menu-heading">Historial Pagos</div>
+  <a class="nav-link" href="historialPagos">
+    <div class="sb-nav-link-icon"><i class="fas fa-money"></i></div>
+    Historias de pagos
+  </a>
+  
