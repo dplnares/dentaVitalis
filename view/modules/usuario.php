@@ -34,8 +34,8 @@
                 </thead>
                 <tbody>
                   <?php
-                  $usuarios = ControllerUsuarios::ctrMostrarUsuarios();
-                  foreach ($usuarios as $key => $value) 
+                  $listaUsuarios = ControllerUsuarios::ctrMostrarUsuarios();
+                  foreach ($listaUsuarios as $key => $value) 
                   {
                     echo
                     '<tr>

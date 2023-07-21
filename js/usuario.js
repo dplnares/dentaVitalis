@@ -13,7 +13,6 @@ $(".table").on("click", ".btnEditarUsuario", function () {
     processData: false,
     dataType: "json",
 
-    //  Ver la forma de pasar el nombre del perfil y del área a una opción del select
     success: function (respuesta) {
       $("#editarNombre").val(respuesta["NombreUsuario"]);
       $("#editarCorreo").val(respuesta["CorreoUsuario"]);

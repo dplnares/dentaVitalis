@@ -72,5 +72,8 @@
   <script src="js/usuario.js"></script>
   <script src="js/calendario.js"></script>
   <script src="js/gastos.js"></script>
+  <script src="js/socios.js"></script>
+  <script src="js/pacientes.js"></script>
+  <script src="js/procedimientos.js"></script>
 </body>
 </html>

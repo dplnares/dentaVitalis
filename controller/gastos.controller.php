@@ -22,8 +22,8 @@ class ControllerGastos
   public static function ctrMostrarDatosEditar($codGasto)
   {
     $tabla = "tba_gasto";
-    $datosUsuario = ModelGastos::mdlMostrarDatosEditar($tabla, $codGasto);
-    return $datosUsuario;
+    $datosGasto = ModelGastos::mdlMostrarDatosEditar($tabla, $codGasto);
+    return $datosGasto;
   }
 
   //  Crear un nuevo gasto
@@ -47,7 +47,7 @@ class ControllerGastos
           Swal.fire({
             icon: "success",
             title: "Correcto",
-            text: "Gast ingresado Correctamente!",
+            text: "Gasto ingresado Correctamente!",
           }).then(function(result){
 					  if(result.value){
 							window.location = "gastos";
