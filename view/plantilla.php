@@ -71,5 +71,6 @@
 
   <script src="js/usuario.js"></script>
   <script src="js/calendario.js"></script>
+  <script src="js/gastos.js"></script>
 </body>
 </html>
