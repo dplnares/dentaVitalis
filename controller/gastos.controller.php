@@ -32,11 +32,12 @@ class ControllerGastos
     if(isset($_POST["nombreGasto"]))
     {
       $tabla = "tba_gasto";
+      
       $datosCreate = array(
         "NombreGasto" => $_POST["nombreGasto"],
         "IdTipoGasto" => $_POST["tipoGasto"],
-        "FechaCreacion"=>date("Y-m-d"),
-        "FechaActualizacion"=>date("Y-m-d"),
+        "FechaCreacion" => date("Y-m-d\TH:i:sP"),
+        "FechaActualizacion"=> date("Y-m-d\TH:i:sP"),
       );
 
       $respuesta = ModelGastos::mdlCrearGasto($tabla, $datosCreate);
@@ -68,7 +69,7 @@ class ControllerGastos
         "IdTipoGasto" =>  $_POST["editarTipoGasto"],
         "NombreGasto" => $_POST["editarNombreGasto"],
         "IdGasto" => $_POST["codGasto"],
-        "FechaActualizacion"=>date("Y-m-d"),
+        "FechaActualizacion"=>date("Y-m-d\TH:i:sP"),
       );
 
       $respuesta = ModelGastos::mdlUpdateGasto($tabla, $datosUpdate);

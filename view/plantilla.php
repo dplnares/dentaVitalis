@@ -25,15 +25,18 @@
       if(isset($_GET["ruta"]))
       {
         if(
-          $_GET["ruta"] == "home" ||  
+          $_GET["ruta"] == "home" ||
           $_GET["ruta"] == "usuario" ||
           $_GET["ruta"] == "editarSalida" ||
-          $_GET["ruta"] == "calendario" ||
-          $_GET["ruta"] == "historiaClinica" ||
           $_GET["ruta"] == "procedimientos" ||
           $_GET["ruta"] == "gastos" ||
           $_GET["ruta"] == "socios" ||
           $_GET["ruta"] == "pacientes" ||
+
+          $_GET["ruta"] == "gastosGenerales" ||
+
+          $_GET["ruta"] == "historiaClinica" ||
+          $_GET["ruta"] == "calendario" ||
           $_GET["ruta"] == "historialPagos" ||
           $_GET["ruta"] == "signout" 
         )

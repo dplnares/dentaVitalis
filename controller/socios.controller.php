@@ -10,6 +10,14 @@ class ControllerSocios
     return $listaSocios;
   }
 
+  //  Mostrar los tipos de socio
+  public static function ctrMostrarTiposSocio()
+  {
+    $tabla =  "tba_tiposocio";
+    $listaTiposSocio = ModelSocios::mdlMostrarTiposSocio($tabla);
+    return $listaTiposSocio;
+  }
+
   //  Mostrar los tipos de identificacion
   public static function ctrMostrarTiposIdentificacion()
   {
@@ -34,10 +42,11 @@ class ControllerSocios
       $tabla = "tba_socio";
       $datosCreate = array(
         "NombreSocio" => $_POST["nombreSocio"],
+        "IdTipoSocio" => $_POST["tipoSocio"],
         "IdTipoIdentificacion" => $_POST["tipoIdentificacion"],
         "Identificacion" => $_POST["numeroIdentificacion"],
-        "FechaCreacion"=>date("Y-m-d"),
-        "FechaActualizacion"=>date("Y-m-d"),
+        "FechaCreacion"=>date("Y-m-d\TH:i:sP"),
+        "FechaActualizacion"=>date("Y-m-d\TH:i:sP"),
       );
 
       $respuesta = ModelSocios::mdlCrearSocio($tabla, $datosCreate);
@@ -68,9 +77,10 @@ class ControllerSocios
       $datosUpdate = array(
         "IdSocio" =>  $_POST["codSocio"],
         "NombreSocio" => $_POST["editarNombreSocio"],
+        "IdTipoSocio" => $_POST["editarTipoSocio"],
         "IdTipoIdentificacion" => $_POST["editarTipoIdentificacion"],
         "Identificacion" => $_POST["editarNumeroIdentificacion"],
-        "FechaActualizacion"=>date("Y-m-d"),
+        "FechaActualizacion"=>date("Y-m-d\TH:i:sP"),
       );
 
       $respuesta = ModelSocios::mdlUpdateSocio($tabla, $datosUpdate);

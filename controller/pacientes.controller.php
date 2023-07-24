@@ -31,8 +31,8 @@ class ControllerPacientes
         "CelularPaciente" => $_POST["numeroDNI"],
         "UsuarioCreado"=>$_SESSION["idUsuario"],
         "UsuarioActualiza"=>$_SESSION["idUsuario"],
-        "FechaCreacion"=>date("Y-m-d"),
-        "FechaActualizacion"=>date("Y-m-d"),
+        "FechaCreacion"=>date("Y-m-d\TH:i:sP"),
+        "FechaActualizacion"=>date("Y-m-d\TH:i:sP"),
       );
 
       $respuesta = ModelPacientes::mdlCrearPaciente($tabla, $datosCreate);
@@ -66,7 +66,7 @@ class ControllerPacientes
         "DNIPaciente" => $_POST["editarDNIPaciente"],
         "CelularPaciente" => $_POST["editarCelularPaciente"],
         "IdPaciente" => $_POST["codPaciente"],
-        "FechaActualizacion"=>date("Y-m-d"),
+        "FechaActualizacion"=>date("Y-m-d\TH:i:sP"),
       );
 
       $respuesta = ModelPacientes::mdlUpdatePaciente($tabla, $datosUpdate);
