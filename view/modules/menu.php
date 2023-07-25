@@ -22,19 +22,19 @@
   }
 ?>
 
-<!-- Calendario -->
+<!-- Calendario 
 <div class="sb-sidenav-menu-heading">Calendario</div>
   <a class="nav-link" href="calendario">
     <div class="sb-nav-link-icon"><i class="fas fa-calendar"></i></div>
     Calendario Citas
-  </a>
+  </a>-->
 
-<!-- Historias Clinica -->
+<!-- Historias Clinica 
 <div class="sb-sidenav-menu-heading">Historias Clínicas</div>
   <a class="nav-link" href="historiaClinica">
     <div class="sb-nav-link-icon"><i class="fas fa-file-text"></i></div>
     Historias Clinica
-  </a>
+  </a>-->
 
 <!-- Catalogo -->
 <div class="sb-sidenav-menu-heading">Catálogo</div>
@@ -52,10 +52,24 @@
     </nav>
   </div>
 
-<!-- Historias Pagos -->
+<!-- Historias Pagos 
 <div class="sb-sidenav-menu-heading">Historial Pagos</div>
   <a class="nav-link" href="historialPagos">
     <div class="sb-nav-link-icon"><i class="fas fa-money"></i></div>
     Historias de pagos
-  </a>
+  </a> -->
   
+<!-- Costos -->
+<div class="sb-sidenav-menu-heading">Costos</div>
+  <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#listaCostos" aria-expanded="false" aria-controls="collapseLayouts">
+    <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
+    Catálogo
+    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+  </a>
+  <div class="collapse" id="listaCostos" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+    <nav class="sb-sidenav-menu-nested nav">
+      <a class="nav-link" href="costosfijos">Costos Fijos</a>
+      <a class="nav-link" href="costosvariables">Costos Variables</a>
+      <a class="nav-link" href="allcostos">Todos los Costos</a>
+    </nav>
+  </div>

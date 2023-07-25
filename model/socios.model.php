@@ -90,4 +90,12 @@ class ModelSocios
       return "error";
     }
   }
+
+  //  Mostrar los socios para la cabecera de costos
+  public static function mdlMostrarSociosGastos($tabla)
+  {
+    $statement = Conexion::conn()->prepare("SELECT tba_socio.IdSocio, tba_socio.NombreSocio FROM $tabla");
+    $statement -> execute();
+    return $statement -> fetchAll();
+  }
 }

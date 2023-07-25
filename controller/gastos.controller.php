@@ -116,4 +116,20 @@ class ControllerGastos
       }
     }
   }
+
+  //  Mostrar los gastos fijos
+  public static function ctrMostrarGastosPorTipo($tipoGasto)
+  {
+    $tabla = "tba_gasto";
+    $listaGastos = ModelGastos::mdlMostrarGastosPorTipo($tabla, $tipoGasto);
+    return $listaGastos;
+  }
+
+  //  Obtener datos de un gasto fijo
+  public static function ctrAgregarGastoFijo($codGastoFijo)
+  {
+    $tabla = "tba_gasto";
+    $datosGasto = ModelGastos::mdlDatosGastoFijo($tabla, $codGastoFijo);
+    return $datosGasto;
+  }
 }

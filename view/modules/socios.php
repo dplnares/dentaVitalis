@@ -148,18 +148,18 @@
             </div>
 
             <!-- Tipo de socio -->
-          <div class="form-group">
-            <label for="editarTipoSocio" class="col-form-label">Tipo de Socio:</label>
-            <select class="form-control" name="editarTipoSocio">
-              <?php
-                $tiposSocio = ControllerSocios::ctrMostrarTiposSocio();
-                foreach ($tiposSocio as $key => $value)
-                {
-                  echo '<option value="'.$value["IdTipoSocio"].'">'.$value["NombreTipoSocio"].'</option>';
-                }
-              ?>
-            </select>
-          </div>
+            <div class="form-group">
+              <label for="editarTipoSocio" class="col-form-label">Tipo de Socio:</label>
+              <select class="form-control" name="editarTipoSocio">
+                <?php
+                  $tiposSocio = ControllerSocios::ctrMostrarTiposSocio();
+                  foreach ($tiposSocio as $key => $value)
+                  {
+                    echo '<option value="'.$value["IdTipoSocio"].'">'.$value["NombreTipoSocio"].'</option>';
+                  }
+                ?>
+              </select>
+            </div>
 
             <!-- Tipo de identificacion -->
             <div class="form-group">

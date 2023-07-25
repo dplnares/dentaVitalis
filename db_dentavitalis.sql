@@ -11,11 +11,63 @@
  Target Server Version : 100428
  File Encoding         : 65001
 
- Date: 24/07/2023 12:43:05
+ Date: 25/07/2023 17:19:01
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for tba_costo
+-- ----------------------------
+DROP TABLE IF EXISTS `tba_costo`;
+CREATE TABLE `tba_costo`  (
+  `IdCosto` int NOT NULL AUTO_INCREMENT,
+  `IdSocio` int NULL DEFAULT NULL,
+  `IdTipoCosto` int NOT NULL,
+  `NombreProveedor` varchar(150) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
+  `NumeroDocumento` varchar(25) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `FechaCosto` date NOT NULL,
+  `SubTotalCosto` decimal(10, 2) NOT NULL,
+  `IGVCosto` decimal(10, 2) NOT NULL,
+  `TotalCosto` decimal(10, 2) NOT NULL,
+  `UsuarioCreado` int NOT NULL,
+  `UsuarioActualiza` int NOT NULL,
+  `FechaCreacion` datetime NOT NULL,
+  `FechaActualizacion` datetime NOT NULL,
+  PRIMARY KEY (`IdCosto`) USING BTREE,
+  INDEX `tba_costo_fksocio`(`IdSocio`) USING BTREE,
+  INDEX `tba_costo_fktipocosto`(`IdTipoCosto`) USING BTREE,
+  CONSTRAINT `tba_costo_fksocio` FOREIGN KEY (`IdSocio`) REFERENCES `tba_socio` (`IdSocio`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `tba_costo_fktipocosto` FOREIGN KEY (`IdTipoCosto`) REFERENCES `tba_tipocosto` (`IdTipoCosto`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tba_costo
+-- ----------------------------
+INSERT INTO `tba_costo` VALUES (5, 4, 1, NULL, '001-54245', '2023-07-22', 1500.00, 270.00, 1770.00, 1, 1, '2023-07-25 16:50:00', '2023-07-25 16:50:00');
+
+-- ----------------------------
+-- Table structure for tba_detallecosto
+-- ----------------------------
+DROP TABLE IF EXISTS `tba_detallecosto`;
+CREATE TABLE `tba_detallecosto`  (
+  `IdDetalleCosto` int NOT NULL AUTO_INCREMENT,
+  `IdCosto` int NOT NULL,
+  `IdGasto` int NOT NULL,
+  `ObservacionGasto` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `PrecioGasto` decimal(10, 2) NOT NULL,
+  PRIMARY KEY (`IdDetalleCosto`) USING BTREE,
+  INDEX `tba_movimiento_fkMovimiento`(`IdCosto`) USING BTREE,
+  INDEX `tba_movimiento_fkGasto`(`IdGasto`) USING BTREE,
+  CONSTRAINT `tba_movimiento_fkGasto` FOREIGN KEY (`IdGasto`) REFERENCES `tba_gasto` (`IdGasto`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `tba_movimiento_fkCosto` FOREIGN KEY (`IdCosto`) REFERENCES `tba_costo` (`IdCosto`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tba_detallecosto
+-- ----------------------------
+INSERT INTO `tba_detallecosto` VALUES (1, 5, 1, 'Por servicio de muestras', 1500.00);
 
 -- ----------------------------
 -- Table structure for tba_detallehistoriaclinica
@@ -46,28 +98,6 @@ CREATE TABLE `tba_detallehistoriaclinica`  (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for tba_detallemovimiento
--- ----------------------------
-DROP TABLE IF EXISTS `tba_detallemovimiento`;
-CREATE TABLE `tba_detallemovimiento`  (
-  `IdDetalleMovimiento` int NOT NULL AUTO_INCREMENT,
-  `IdMovimiento` int NOT NULL,
-  `IdGasto` int NOT NULL,
-  `PrecioGasto` decimal(10, 2) NOT NULL,
-  `FechaCreado` datetime NOT NULL,
-  `FechaActualiza` datetime NOT NULL,
-  PRIMARY KEY (`IdDetalleMovimiento`) USING BTREE,
-  INDEX `tba_movimiento_fkMovimiento`(`IdMovimiento`) USING BTREE,
-  INDEX `tba_movimiento_fkGasto`(`IdGasto`) USING BTREE,
-  CONSTRAINT `tba_movimiento_fkGasto` FOREIGN KEY (`IdGasto`) REFERENCES `tba_gasto` (`IdGasto`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `tba_movimiento_fkMovimiento` FOREIGN KEY (`IdMovimiento`) REFERENCES `tba_movimiento` (`IdMovimiento`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of tba_detallemovimiento
--- ----------------------------
-
--- ----------------------------
 -- Table structure for tba_detalletratamiento
 -- ----------------------------
 DROP TABLE IF EXISTS `tba_detalletratamiento`;
@@ -75,6 +105,7 @@ CREATE TABLE `tba_detalletratamiento`  (
   `IdDetalleTratamiento` int NOT NULL AUTO_INCREMENT,
   `IdTratamiento` int NOT NULL,
   `IdProcedimiento` int NOT NULL,
+  `EstadoTratamiento` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `PrecioProcedimiento` decimal(10, 2) NOT NULL,
   `FechaCreado` datetime NOT NULL,
   `FechaActualiza` datetime NOT NULL,
@@ -107,10 +138,10 @@ CREATE TABLE `tba_gasto`  (
 -- ----------------------------
 -- Records of tba_gasto
 -- ----------------------------
-INSERT INTO `tba_gasto` VALUES (1, 3, 'Servicio de Laboratorio', '2023-07-21 00:00:00', '2023-07-21 00:00:00');
-INSERT INTO `tba_gasto` VALUES (2, 2, 'Servicio de mantenimiento equipos informática', '2023-07-21 00:00:00', '2023-07-21 00:00:00');
-INSERT INTO `tba_gasto` VALUES (4, 3, 'Servicio de Agua', '2023-07-21 21:54:09', '2023-07-21 21:54:09');
-INSERT INTO `tba_gasto` VALUES (5, 3, 'Pago de servicio de luz', '2023-07-21 14:55:32', '2023-07-21 14:55:32');
+INSERT INTO `tba_gasto` VALUES (1, 1, 'Servicio de Laboratorio', '2023-07-21 00:00:00', '2023-07-21 00:00:00');
+INSERT INTO `tba_gasto` VALUES (2, 1, 'Servicio de mantenimiento equipos informática', '2023-07-21 00:00:00', '2023-07-21 00:00:00');
+INSERT INTO `tba_gasto` VALUES (4, 2, 'Servicio de Agua', '2023-07-21 21:54:09', '2023-07-21 21:54:09');
+INSERT INTO `tba_gasto` VALUES (5, 2, 'Pago de servicio de luz', '2023-07-21 14:55:32', '2023-07-21 14:55:32');
 
 -- ----------------------------
 -- Table structure for tba_historiaclinica
@@ -119,7 +150,7 @@ DROP TABLE IF EXISTS `tba_historiaclinica`;
 CREATE TABLE `tba_historiaclinica`  (
   `IdHistoriaClinica` int NOT NULL AUTO_INCREMENT,
   `IdPaciente` int NOT NULL,
-  `IdUsuario` int NOT NULL,
+  `IdSocio` int NOT NULL,
   `AlergiasEncontradas` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
   `AntecedentesFamiliares` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
   `AntecedentesPersonales` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
@@ -135,39 +166,13 @@ CREATE TABLE `tba_historiaclinica`  (
   `FechaActualiza` datetime NOT NULL,
   PRIMARY KEY (`IdHistoriaClinica`) USING BTREE,
   INDEX `tba_historiaclinica_fkPaciente`(`IdPaciente`) USING BTREE,
-  INDEX `tba_historiaclinica_fkUsuario`(`IdUsuario`) USING BTREE,
+  INDEX `tba_historiaclinica_fksocio`(`IdSocio`) USING BTREE,
   CONSTRAINT `tba_historiaclinica_fkPaciente` FOREIGN KEY (`IdPaciente`) REFERENCES `tba_paciente` (`IdPaciente`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `tba_historiaclinica_fkUsuario` FOREIGN KEY (`IdUsuario`) REFERENCES `tba_usuario` (`IdUsuario`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `tba_historiaclinica_fksocio` FOREIGN KEY (`IdSocio`) REFERENCES `tba_socio` (`IdSocio`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tba_historiaclinica
--- ----------------------------
-
--- ----------------------------
--- Table structure for tba_movimiento
--- ----------------------------
-DROP TABLE IF EXISTS `tba_movimiento`;
-CREATE TABLE `tba_movimiento`  (
-  `IdMovimiento` int NOT NULL AUTO_INCREMENT,
-  `IdSocio` int NOT NULL,
-  `IdUsuario` int NOT NULL,
-  `SubTotalMovimiento` decimal(10, 2) NOT NULL,
-  `IGVMovimiento` decimal(10, 2) NOT NULL,
-  `TotalMovimiento` decimal(10, 2) NOT NULL,
-  `UsuarioCreado` int NOT NULL,
-  `UsuarioActualiza` int NOT NULL,
-  `FechaCreacion` datetime NOT NULL,
-  `FechaActualizacion` datetime NOT NULL,
-  PRIMARY KEY (`IdMovimiento`) USING BTREE,
-  INDEX `tba_movimiento_fkSocio`(`IdSocio`) USING BTREE,
-  INDEX `tba_movimiento_fkUsuario`(`IdUsuario`) USING BTREE,
-  CONSTRAINT `tba_movimiento_fkSocio` FOREIGN KEY (`IdSocio`) REFERENCES `tba_socio` (`IdSocio`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `tba_movimiento_fkUsuario` FOREIGN KEY (`IdUsuario`) REFERENCES `tba_usuario` (`IdUsuario`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of tba_movimiento
 -- ----------------------------
 
 -- ----------------------------
@@ -212,7 +217,6 @@ DROP TABLE IF EXISTS `tba_pago`;
 CREATE TABLE `tba_pago`  (
   `IdPago` int NOT NULL AUTO_INCREMENT,
   `IdPaciente` int NOT NULL,
-  `IdTratamiento` int NOT NULL,
   `TotalPago` decimal(10, 2) NOT NULL,
   `SubTotalPago` decimal(10, 2) NOT NULL,
   `IGVPago` decimal(10, 2) NOT NULL,
@@ -222,9 +226,7 @@ CREATE TABLE `tba_pago`  (
   `FechaActualizacion` datetime NOT NULL,
   PRIMARY KEY (`IdPago`) USING BTREE,
   INDEX `tba_pago_fkPaciente`(`IdPaciente`) USING BTREE,
-  INDEX `tba_pago_fkTratamiento`(`IdTratamiento`) USING BTREE,
-  CONSTRAINT `tba_pago_fkPaciente` FOREIGN KEY (`IdPaciente`) REFERENCES `tba_paciente` (`IdPaciente`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `tba_pago_fkTratamiento` FOREIGN KEY (`IdTratamiento`) REFERENCES `tba_tratamiento` (`IdTratamiento`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `tba_pago_fkPaciente` FOREIGN KEY (`IdPaciente`) REFERENCES `tba_paciente` (`IdPaciente`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -283,16 +285,34 @@ CREATE TABLE `tba_socio`  (
   `FechaActualizacion` datetime NOT NULL,
   PRIMARY KEY (`IdSocio`) USING BTREE,
   INDEX `tba_socio_fksocios`(`IdTipoIdentificacion`) USING BTREE,
-  CONSTRAINT `tba_socio_fksocios` FOREIGN KEY (`IdTipoIdentificacion`) REFERENCES `tba_tipoidentificacion` (`IdTipoIdentificacion`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  INDEX `tba_socio_fktiposocio`(`IdTipoSocio`) USING BTREE,
+  CONSTRAINT `tba_socio_fksocios` FOREIGN KEY (`IdTipoIdentificacion`) REFERENCES `tba_tipoidentificacion` (`IdTipoIdentificacion`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `tba_socio_fktiposocio` FOREIGN KEY (`IdTipoSocio`) REFERENCES `tba_tiposocio` (`IdTipoSocio`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tba_socio
 -- ----------------------------
-INSERT INTO `tba_socio` VALUES (1, 'Proveedor ABC', 2, 1, '666666', '2023-07-21 00:00:00', '2023-07-21 00:00:00');
-INSERT INTO `tba_socio` VALUES (2, 'Proveedor y', 2, 1, '16516515', '2023-07-21 00:00:00', '2023-07-21 00:00:00');
-INSERT INTO `tba_socio` VALUES (3, 'Proveedor a', 2, 1, '12312312313', '2023-07-21 00:00:00', '2023-07-21 00:00:00');
+INSERT INTO `tba_socio` VALUES (1, 'Medico X', 1, 1, '666666', '2023-07-21 00:00:00', '2023-07-25 08:48:36');
+INSERT INTO `tba_socio` VALUES (2, 'Medico Y', 1, 1, '16516515', '2023-07-21 00:00:00', '2023-07-25 08:48:44');
+INSERT INTO `tba_socio` VALUES (3, 'Medico Z', 1, 1, '12312312313', '2023-07-21 00:00:00', '2023-07-25 08:48:52');
 INSERT INTO `tba_socio` VALUES (4, 'Diego Jimenez', 1, 2, '66666666', '2023-07-24 10:18:04', '2023-07-24 10:18:04');
+
+-- ----------------------------
+-- Table structure for tba_tipocosto
+-- ----------------------------
+DROP TABLE IF EXISTS `tba_tipocosto`;
+CREATE TABLE `tba_tipocosto`  (
+  `IdTipoCosto` int NOT NULL AUTO_INCREMENT,
+  `NombreTipoCosto` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`IdTipoCosto`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tba_tipocosto
+-- ----------------------------
+INSERT INTO `tba_tipocosto` VALUES (1, 'Costo Fijo');
+INSERT INTO `tba_tipocosto` VALUES (2, 'Costo Variable');
 
 -- ----------------------------
 -- Table structure for tba_tipogasto
@@ -308,8 +328,7 @@ CREATE TABLE `tba_tipogasto`  (
 -- Records of tba_tipogasto
 -- ----------------------------
 INSERT INTO `tba_tipogasto` VALUES (1, 'Gasto Fijo');
-INSERT INTO `tba_tipogasto` VALUES (2, 'Gasto Operacional');
-INSERT INTO `tba_tipogasto` VALUES (3, 'Servicios Terceros');
+INSERT INTO `tba_tipogasto` VALUES (2, 'Gasto Variable');
 
 -- ----------------------------
 -- Table structure for tba_tipoidentificacion
@@ -357,10 +376,9 @@ CREATE TABLE `tba_tiposocio`  (
 -- ----------------------------
 -- Records of tba_tiposocio
 -- ----------------------------
-INSERT INTO `tba_tiposocio` VALUES (1, 'Proveedor');
-INSERT INTO `tba_tiposocio` VALUES (2, 'Medico');
-INSERT INTO `tba_tiposocio` VALUES (3, 'Empleado');
-INSERT INTO `tba_tiposocio` VALUES (4, 'Contratista');
+INSERT INTO `tba_tiposocio` VALUES (1, 'Medico');
+INSERT INTO `tba_tiposocio` VALUES (2, 'Empleado');
+INSERT INTO `tba_tiposocio` VALUES (3, 'Contratista');
 
 -- ----------------------------
 -- Table structure for tba_tratamiento
@@ -374,6 +392,7 @@ CREATE TABLE `tba_tratamiento`  (
   `SubTotalTratamiento` decimal(10, 2) NOT NULL,
   `IGVTratamiento` decimal(10, 2) NOT NULL,
   `TotalTratamiento` decimal(10, 2) NOT NULL,
+  `TotalPagado` decimal(10, 0) NULL DEFAULT NULL,
   `UsuarioCreado` int NOT NULL,
   `UsuarioActualiza` int NOT NULL,
   `FechaCreacion` datetime NOT NULL,
@@ -409,6 +428,6 @@ CREATE TABLE `tba_usuario`  (
 -- ----------------------------
 -- Records of tba_usuario
 -- ----------------------------
-INSERT INTO `tba_usuario` VALUES (1, 1, 'Administrador', 'admin@gmail.com', '$2a$07$usesomesillystringforeh6tvwDNOAiEn9PYXfY79K3vDiKj6Ib6', 987654321, '2023-07-19 00:00:00', '2023-07-19 00:00:00', '2023-07-24 09:57:35');
+INSERT INTO `tba_usuario` VALUES (1, 1, 'Administrador', 'admin@gmail.com', '$2a$07$usesomesillystringforeh6tvwDNOAiEn9PYXfY79K3vDiKj6Ib6', 987654321, '2023-07-19 00:00:00', '2023-07-19 00:00:00', '2023-07-25 11:17:37');
 
 SET FOREIGN_KEY_CHECKS = 1;

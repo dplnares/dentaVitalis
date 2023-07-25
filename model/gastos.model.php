@@ -79,4 +79,20 @@ class ModelGastos
     $statement -> execute();
     return $statement -> fetch();
   }
+
+  //  Mostrar los gastos por tipo de gasto
+  public static function mdlMostrarGastosPorTipo($tabla, $tipoGasto)
+  {
+    $statement = Conexion::conn()->prepare("SELECT tba_gasto.IdGasto, tba_gasto.NombreGasto FROM $tabla WHERE tba_gasto.IdTipoGasto = $tipoGasto");
+    $statement -> execute();
+    return $statement -> fetchAll();
+  }
+
+  //  Mostrar los datos de un gasto fijo
+  public static function mdlDatosGastoFijo($tabla, $codGastoFijo)
+  {
+    $statement = Conexion::conn()->prepare("SELECT tba_gasto.IdGasto, tba_gasto.IdTipoGasto, tba_gasto.NombreGasto FROM $tabla WHERE tba_gasto.IdGasto = $codGastoFijo");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
 }

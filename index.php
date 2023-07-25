@@ -8,6 +8,7 @@ require_once "controller/pacientes.controller.php";
 require_once "controller/procedimientos.controller.php";
 require_once "controller/gastos.controller.php";
 require_once "controller/funciones.controller.php";
+require_once "controller/costos.controller.php";
 
 //  Models
 require_once "model/usuarios.model.php";
@@ -15,6 +16,7 @@ require_once "model/gastos.model.php";
 require_once "model/socios.model.php";
 require_once "model/pacientes.model.php";
 require_once "model/procedimientos.model.php";
+require_once "model/costos.model.php";
 
 
 $plantilla = new ControllerPlantilla();

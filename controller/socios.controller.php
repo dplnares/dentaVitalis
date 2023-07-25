@@ -128,4 +128,11 @@ class ControllerSocios
     }
   }
 
+  //  Mostrar usuarios por tipo de usuario
+  public static function ctrMostrarSociosGastos()
+  {
+    $tabla = "tba_socio";
+    $listaSocios = ModelSocios::mdlMostrarSociosGastos($tabla);
+    return $listaSocios;
+  }
 }
