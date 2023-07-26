@@ -38,9 +38,11 @@
                 <h3>Datos Cabecera</h3>
                 <!-- Seleccionar el Socio -->
                 <div class="form-group col-md-4">
-                  <label for="socioGastoFijo" class="form-label" style="font-weight: bold">Socio:</label>
-                  <select class="form-control" name="socioGastoFijo">
+                  <label for="editarSocioGastoFijo" class="form-label" style="font-weight: bold">Socio:</label>
+                  <select class="form-control" name="editarSocioGastoFijo">
+                    
                     <?php
+                      echo '<option value="'.$cabeceraIngreso["IdSocio"].'">'.$cabeceraIngreso["NombreSocio"].'</option>';
                       $listaSocios = ControllerSocios::ctrMostrarSociosGastos();
                       foreach ($listaSocios as $value)
                       {
@@ -52,14 +54,14 @@
 
                 <!-- Numero de documento -->
                 <div class="col-md-4">
-                  <label for="numeroDocumentoGastoFijo" class="form-label" style="font-weight: bold">Número de documento</label>
-                  <input type="text" class="form-control" id="numeroDocumentoGastoFijo" name="numeroDocumentoGastoFijo">
+                  <label for="editarNumeroDocumentoGastoFijo" class="form-label" style="font-weight: bold">Número de documento</label>
+                  <input type="text" class="form-control" id="editarNumeroDocumentoGastoFijo" name="editarNumeroDocumentoGastoFijo" value="<?php echo $cabeceraIngreso["NumeroDocumento"] ?>">
                 </div>
 
                 <!-- Seleccionar la fecha del costo -->
                 <div class="col-md-4">
-                  <label for="fechaIngresoGastoFijo" class="form-label" style="font-weight: bold">Fecha de Documento</label>
-                  <input type="date" class="form-control" id="fechaIngresoGastoFijo" name="fechaIngresoGastoFijo">
+                  <label for="editarFechaIngresoGastoFijo" class="form-label" style="font-weight: bold">Fecha de Documento</label>
+                  <input type="date" class="form-control" id="editarFechaIngresoGastoFijo" name="editarFechaIngresoGastoFijo" value="<?php echo $cabeceraIngreso["FechaCosto"] ?>">
                 </div>
               </div>
             </span>
@@ -79,8 +81,41 @@
                   <div class="col-lg-2">Costo(S/.)</div>
                 </div>
 
-                <div class="form-group row nuevoGastoFijo">
-                  <input type="hidden" id="listarGastosFijos" name="listarGastosFijos">
+                <div class="form-group row nuevoGasto">
+                  <?php
+                    $listaCostos = ControllerCostos::ctrObtenerDetalleGF($_GET["codCosto"]);
+                    foreach($listaCostos as $value)
+                    {
+                      echo '
+                      <div class="row" style="padding:5px 15px">
+
+                        <!-- Descripción del producto -->
+                        <div class="col-lg-4" style="padding-right:0px">
+                          <div class="input-group">
+                            <span class="input-group-addon"><button type="button" class="btn btn-danger btn-xs quitarGasto" idProducto="'.$value["IdGasto"].'"><i class="fa fa-times"></i></button></span>
+                            <input type="text" class="form-control nuevogasto" idGasto="'.$value["IdGasto"].'" name="agregarProducto" value="'.$value["NombreGasto"].'" readonly>
+                          </div>
+                        </div>
+
+                        <!-- Observacion -->
+                        <div class="col-lg-5">
+                          <input type="text" class="form-control nuevaObservacionGasto" name="nuevaObservacionGasto" value="'.$value["ObservacionGasto"].'" required>
+                        </div>
+
+                        <!-- Cantidad -->
+                        <div class="col-lg-1">
+                          <input type="text" class="form-control cantidadGasto" name="cantidadGasto" value="1" readonly>
+                        </div>
+
+                        <!-- Costo -->
+                        <div class="col-lg-2 ingresoCantidad">
+                          <input type="number" class="form-control nuevoCostoGasto" name="nuevoCostoGasto" min="1" value="'.$value["PrecioGasto"].'" required>
+                        </div>
+                      </div>
+                      ';
+                    }
+                  ?>
+                  <input type="hidden" id="listarGastos" name="listarGastos">
                 </div>
               </div>
             </span>
@@ -91,25 +126,25 @@
                 <h3>Datos Total</h3>
                 <div class="row" style="font-weight: bold">
                   <div class="col-lg-2"></div>
-                  <div class="col-lg-2"><span>SubTotal (S/.):</span></div><div class="col-lg-2"><input type="number" style="text-align: right;" class="form-control input-lg" id="nuevoSubTotalGastoFijo" name="nuevoSubTotalGastoFijo" placeholder="0.00" readonly></div>            
+                  <div class="col-lg-2"><span>SubTotal (S/.):</span></div><div class="col-lg-2"><input type="number" style="text-align: right;" class="form-control input-lg" id="nuevoSubTotalGasto" name="nuevoSubTotalGasto" value="<?php echo $cabeceraIngreso["SubTotalCosto"] ?>" readonly></div>
                 </div>
 
                 <div class="row" style="font-weight: bold">
                   <div class="col-lg-2"></div>
-                  <div class="col-lg-2"><span>IGV (S/.):</span></div><div class="col-lg-2"><input type="number" style="text-align: right;" class="form-control input-lg" min="0" id="nuevoImpuestoGastoFijo" name="nuevoImpuestoGastoFijo" placeholder="0.00" readonly></div>              
+                  <div class="col-lg-2"><span>IGV (S/.):</span></div><div class="col-lg-2"><input type="number" style="text-align: right;" class="form-control input-lg" min="0" id="nuevoImpuestoGasto" name="nuevoImpuestoGasto" value="<?php echo $cabeceraIngreso["IGVCosto"] ?>" readonly></div>
                 </div>
 
                 <div class="row" style="font-weight: bold">
                   <div class="col-lg-2"></div>
-                  <div class="col-lg-2"><span>Total (S/.):</span></div><div class="col-lg-2"><input type="number" style="text-align: right;" class="form-control input-lg" min="0" id="nuevoTotalGastoFijo" name="nuevoTotalGastoFijo" placeholder="0.00" readonly></div>              
+                  <div class="col-lg-2"><span>Total (S/.):</span></div><div class="col-lg-2"><input type="number" style="text-align: right;" class="form-control input-lg" min="0" id="nuevoTotalGasto" name="nuevoTotalGasto" value="<?php echo $cabeceraIngreso["TotalCosto"] ?>" readonly></div>
                 </div>
               </div>
 
               <div class="container row g-3 p-3">
+                <input type="hidden" name="codCosto" id="codCosto" value="<?php echo $_GET["codCosto"] ?>"> 
                 <button type="submit" class="col-2 d-inline-flex p-2 btn btn-primary ">Editar Registro</button>
               </div>
             </span>
-
           </form>
         </div>
       </main>
@@ -117,8 +152,8 @@
   </div>
 
 <?php
-  $crearGastoFijo = new ControllerCostos;
-  $crearGastoFijo -> ctrCrearNuevoCostoFijo();
+  $editarCostoFijo = new ControllerCostos;
+  $editarCostoFijo -> ctrEditaroCostoFijo();
 ?>
 
 <!-- Modal agregar un nuevo gasto -->
@@ -153,7 +188,7 @@
                     <td>'.$value["NombreGasto"].'</td>
                     <td>
                       <div class="btn-group">
-                        <button class="btn btn-primary btnAgregarGastoFijo recuperarBoton" codGasto="'.$value["IdGasto"].'">Agregar</button> 
+                        <button class="btn btn-primary btnAgregarGasto recuperarBoton" codGasto="'.$value["IdGasto"].'">Agregar</button> 
                       </div>
                     </td>
                   </tr>'

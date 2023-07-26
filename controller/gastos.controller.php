@@ -125,11 +125,11 @@ class ControllerGastos
     return $listaGastos;
   }
 
-  //  Obtener datos de un gasto fijo
-  public static function ctrAgregarGastoFijo($codGastoFijo)
+  //  Obtener datos de un gasto
+  public static function ctrAgregarGasto($codGastoFijo)
   {
     $tabla = "tba_gasto";
-    $datosGasto = ModelGastos::mdlDatosGastoFijo($tabla, $codGastoFijo);
+    $datosGasto = ModelGastos::mdlDatosGasto($tabla, $codGastoFijo);
     return $datosGasto;
   }
 }

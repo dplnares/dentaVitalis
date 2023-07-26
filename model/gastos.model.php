@@ -89,7 +89,7 @@ class ModelGastos
   }
 
   //  Mostrar los datos de un gasto fijo
-  public static function mdlDatosGastoFijo($tabla, $codGastoFijo)
+  public static function mdlDatosGasto($tabla, $codGastoFijo)
   {
     $statement = Conexion::conn()->prepare("SELECT tba_gasto.IdGasto, tba_gasto.IdTipoGasto, tba_gasto.NombreGasto FROM $tabla WHERE tba_gasto.IdGasto = $codGastoFijo");
     $statement -> execute();

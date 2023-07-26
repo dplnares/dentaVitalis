@@ -33,15 +33,14 @@
           $_GET["ruta"] == "socios" ||
           $_GET["ruta"] == "pacientes" ||
           $_GET["ruta"] == "costosfijos" ||
-
           $_GET["ruta"] == "editarCostoFijo" ||
-
           $_GET["ruta"] == "costosvariables" ||
           $_GET["ruta"] == "editarCostoVariable" ||
-          $_GET["ruta"] == "allcostos" ||
           $_GET["ruta"] == "crearNuevoCostoFijo" ||
           $_GET["ruta"] == "crearNuevoCostoVariable" ||
+
           $_GET["ruta"] == "historiaClinica" ||
+          
           $_GET["ruta"] == "calendario" ||
           $_GET["ruta"] == "historialPagos" ||
           $_GET["ruta"] == "signout" 

@@ -63,8 +63,8 @@
                   <div class="col-lg-2">Costo(S/.)</div>
                 </div>
 
-                <div class="form-group row nuevoGastoFijo">
-                  <input type="hidden" id="listarGastosFijos" name="listarGastosFijos">
+                <div class="form-group row nuevoGasto">
+                  <input type="hidden" id="listarGastos" name="listarGastos">
                 </div>
               </div>
             </span>
@@ -75,17 +75,17 @@
                 <h3>Datos Total</h3>
                 <div class="row" style="font-weight: bold">
                   <div class="col-lg-2"></div>
-                  <div class="col-lg-2"><span>SubTotal (S/.):</span></div><div class="col-lg-2"><input type="number" style="text-align: right;" class="form-control input-lg" id="nuevoSubTotalGastoFijo" name="nuevoSubTotalGastoFijo" placeholder="0.00" readonly></div>            
+                  <div class="col-lg-2"><span>SubTotal (S/.):</span></div><div class="col-lg-2"><input type="number" style="text-align: right;" class="form-control input-lg" id="nuevoSubTotalGasto" name="nuevoSubTotalGasto" placeholder="0.00" readonly></div>            
                 </div>
 
                 <div class="row" style="font-weight: bold">
                   <div class="col-lg-2"></div>
-                  <div class="col-lg-2"><span>IGV (S/.):</span></div><div class="col-lg-2"><input type="number" style="text-align: right;" class="form-control input-lg" min="0" id="nuevoImpuestoGastoFijo" name="nuevoImpuestoGastoFijo" placeholder="0.00" readonly></div>              
+                  <div class="col-lg-2"><span>IGV (S/.):</span></div><div class="col-lg-2"><input type="number" style="text-align: right;" class="form-control input-lg" min="0" id="nuevoImpuestoGasto" name="nuevoImpuestoGasto" placeholder="0.00" readonly></div>              
                 </div>
 
                 <div class="row" style="font-weight: bold">
                   <div class="col-lg-2"></div>
-                  <div class="col-lg-2"><span>Total (S/.):</span></div><div class="col-lg-2"><input type="number" style="text-align: right;" class="form-control input-lg" min="0" id="nuevoTotalGastoFijo" name="nuevoTotalGastoFijo" placeholder="0.00" readonly></div>              
+                  <div class="col-lg-2"><span>Total (S/.):</span></div><div class="col-lg-2"><input type="number" style="text-align: right;" class="form-control input-lg" min="0" id="nuevoTotalGasto" name="nuevoTotalGasto" placeholder="0.00" readonly></div>              
                 </div>
               </div>
 
@@ -101,8 +101,8 @@
   </div>
 
 <?php
-  $crearGastoFijo = new ControllerCostos;
-  $crearGastoFijo -> ctrCrearNuevoCostoFijo();
+  $crearCostoFijo = new ControllerCostos;
+  $crearCostoFijo -> ctrCrearNuevoCostoFijo();
 ?>
 
 <!-- Modal agregar un nuevo gasto -->
@@ -137,7 +137,7 @@
                     <td>'.$value["NombreGasto"].'</td>
                     <td>
                       <div class="btn-group">
-                        <button class="btn btn-primary btnAgregarGastoFijo recuperarBoton" codGasto="'.$value["IdGasto"].'">Agregar</button> 
+                        <button class="btn btn-primary btnAgregarGasto recuperarBoton" codGasto="'.$value["IdGasto"].'">Agregar</button> 
                       </div>
                     </td>
                   </tr>'

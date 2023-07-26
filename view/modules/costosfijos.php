@@ -24,7 +24,7 @@
             </div>
 
             <div class="card-body">
-              <table id="datatablesSimple" class="data-table-AllGastos table">
+              <table id="datatablesSimple" class="data-table-AllGastosFijos table">
                 <thead>
                   <tr>
                     <th>#</th>
@@ -37,8 +37,8 @@
                 </thead>
                 <tbody>
                   <?php
-                    $listaCostos = ControllerCostos::ctrMostrarCostosFijos();
-                    foreach ($listaCostos as $key => $value)
+                    $listaCostosFijos = ControllerCostos::ctrMostrarCostosFijos("1");
+                    foreach ($listaCostosFijos as $key => $value)
                     {
                       echo
                       '<tr>

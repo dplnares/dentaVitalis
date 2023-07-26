@@ -14,11 +14,11 @@ class AjaxGastos
     echo json_encode($respuesta);
   }
 
-  public $codGastoFijo;
-  public function ajaxAgregarGastoFijo()
+  public $codGastoAgregar;
+  public function ajaxAgregarGasto()
   {
-    $codGastoFijo = $this->codGastoFijo;
-    $respuesta = ControllerGastos::ctrAgregarGastoFijo($codGastoFijo);
+    $codGastoAgregar = $this->codGastoAgregar;
+    $respuesta = ControllerGastos::ctrAgregarGasto($codGastoAgregar);
     echo json_encode($respuesta);
   }
 }
@@ -30,9 +30,9 @@ if(isset($_POST["codGasto"])){
 	$editarGasto -> ajaxEditarGasto();
 }
 
-//  Agregar Gasto a guia de nuevo gasto fijo
-if(isset($_POST["codGastoFijo"])){
+//  Agregar Gasto a guia de nuevo gasto
+if(isset($_POST["codGastoAgregar"])){
 	$agregarGastoFijo = new AjaxGastos();
-	$agregarGastoFijo -> codGastoFijo = $_POST["codGastoFijo"];
-	$agregarGastoFijo -> ajaxAgregarGastoFijo();
+	$agregarGastoFijo -> codGastoAgregar = $_POST["codGastoAgregar"];
+	$agregarGastoFijo -> ajaxAgregarGasto();
 }
