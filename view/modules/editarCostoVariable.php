@@ -39,7 +39,7 @@
                 <!-- Nombre del proveedor -->
                 <div class="col-md-4">
                   <label for="editarNombreProveedorGastoVariable" class="form-label" style="font-weight: bold">Nombre de Proveedor</label>
-                  <input type="text" class="form-control" id="editarNombreProveedorGastoVariable" name="editarNombreProveedorGastoVariable" value="<?php echo $cabeceraIngreso["NumeroDocumento"] ?>">
+                  <input type="text" class="form-control" id="editarNombreProveedorGastoVariable" name="editarNombreProveedorGastoVariable" value="<?php echo $cabeceraIngreso["NombreProveedor"] ?>">
                 </div>
 
                 <!-- Numero de documento -->
@@ -89,7 +89,7 @@
 
                         <!-- Observacion -->
                         <div class="col-lg-5">
-                          <input type="text" class="form-control nuevaObservacionGasto" name="nuevaObservacionGasto" value="'.$value["ObservacionGasto"].'" required>
+                          <input type="text" class="form-control nuevaObservacionGasto" name="nuevaObservacionGasto" value="'.$value["ObservacionGasto"].'" >
                         </div>
 
                         <!-- Cantidad -->

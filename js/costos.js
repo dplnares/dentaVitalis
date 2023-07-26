@@ -99,7 +99,7 @@ $(".tablaGastos").on("click", ".btnAgregarGasto", function(){
 
         '<!-- Observacion -->'+
         '<div class="col-lg-5 ingresoObservacionGasto">'+
-          '<input type="text" class="form-control nuevaObservacionGasto" name="nuevaObservacionGasto" required>'+
+          '<input type="text" class="form-control nuevaObservacionGasto" name="nuevaObservacionGasto" >'+
         '</div>' +
 
         '<!-- Cantidad del producto -->'+

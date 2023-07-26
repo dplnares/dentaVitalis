@@ -29,12 +29,12 @@
     Calendario Citas
   </a>
 
-<!-- Historias Clinica -->
+<!-- Historias Clinica 
 <div class="sb-sidenav-menu-heading">Historias Clínicas</div>
   <a class="nav-link" href="historiaClinica">
     <div class="sb-nav-link-icon"><i class="fas fa-file-text"></i></div>
     Historias Clinica
-  </a>
+  </a> -->
 
 <!-- Catalogo -->
 <div class="sb-sidenav-menu-heading">Catálogo</div>
@@ -52,12 +52,12 @@
     </nav>
   </div>
 
-<!-- Historias Pagos -->
+<!-- Historias Pagos 
 <div class="sb-sidenav-menu-heading">Historial Pagos</div>
   <a class="nav-link" href="historialPagos">
     <div class="sb-nav-link-icon"><i class="fas fa-money"></i></div>
     Historias de pagos
-  </a>
+  </a> -->
   
 <!-- Costos -->
 <div class="sb-sidenav-menu-heading">Costos</div>

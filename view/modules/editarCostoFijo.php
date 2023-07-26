@@ -99,7 +99,7 @@
 
                         <!-- Observacion -->
                         <div class="col-lg-5">
-                          <input type="text" class="form-control nuevaObservacionGasto" name="nuevaObservacionGasto" value="'.$value["ObservacionGasto"].'" required>
+                          <input type="text" class="form-control nuevaObservacionGasto" name="nuevaObservacionGasto" value="'.$value["ObservacionGasto"].'" >
                         </div>
 
                         <!-- Cantidad -->
