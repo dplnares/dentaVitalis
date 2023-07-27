@@ -11,6 +11,15 @@ class ModelProcedimientos
     $statement -> execute();
     return $statement -> fetchAll();
   }
+  
+  //  Mostrar lista de procedimientos para el modal de historia clinica
+  public static function mdlMostrarProcedimientosHistoria($tabla)
+  {
+    $statement = Conexion::conn()->prepare("SELECT tba_procedimiento.IdProcedimiento, tba_procedimiento.NombreProcedimiento, tba_procedimiento.PrecioPromedio FROM $tabla");
+    $statement -> execute();
+    return $statement -> fetchAll();
+  }
+
 
   //  Mostrar los tipos de procedimiento existentes
   public static function mdlMostrarTiposProcedimiento($tabla)

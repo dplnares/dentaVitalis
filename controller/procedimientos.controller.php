@@ -117,4 +117,12 @@ class ControllerProcedimientos
     $datosProcedimiento = ModelProcedimientos::mdlMostrarDatosEditar($tabla, $codProcedimiento);
     return $datosProcedimiento;
   }
+
+  //  Mostrar procedimientos para el modal de historia clinica
+  public static function ctrMostraProcedimientosHistoria()
+  {
+    $tabla = "tba_procedimiento";
+    $listaProcedimientos = ModelProcedimientos::mdlMostrarProcedimientosHistoria($tabla);
+    return $listaProcedimientos;
+  }
 }

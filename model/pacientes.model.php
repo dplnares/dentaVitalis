@@ -76,4 +76,52 @@ class ModelPacientes
       return "error";
     }
   }
+
+  //  Mostrar los pacientes para la historia clinica
+  public static function mdlMostrarPacientesHistoria($tabla)
+  {
+    $statement = Conexion::conn()->prepare("SELECT tba_paciente.IdPaciente, tba_paciente.NombrePaciente, tba_paciente.ApellidoPaciente FROM $tabla");
+    $statement -> execute();
+    return $statement -> fetchAll();
+  }
+
+  //  Mostrar los datos de un paciente al momento de seleccionarlo en la historia
+  public static function mdlMostrarDatosPacienteHistoria($tabla, $codPaciente)
+  {
+    $statement = Conexion::conn()->prepare("SELECT tba_paciente.IdPaciente, tba_paciente.NombrePaciente, tba_paciente.ApellidoPaciente, tba_paciente.DNIPaciente, tba_paciente.FechaNacimiento, tba_paciente.CelularPaciente, tba_paciente.DomicilioPaciente, tba_paciente.CorreoPaciente, tba_paciente.LugarNacimiento, tba_paciente.GradoInstruccion, tba_paciente.RazaPaciente, tba_paciente.OcupacionPaciente, tba_paciente.ReligionPaciente, tba_paciente.EstadoCivil, tba_paciente.NumeroContactopaciente, tba_paciente.NombreContactoPaciente FROM $tabla WHERE idPaciente = $codPaciente");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
+  
+  //  Update de los datos del paciente en la historia clínica
+  public static function mdlUpdateDatospaciente($tabla, $datosUpdatePaciente)
+  {
+    $statement = Conexion::conn()->prepare("UPDATE $tabla SET DNIPaciente=:DNIPaciente, SexoPaciente=:SexoPaciente, EdadPaciente=:EdadPaciente, FechaNacimiento=:FechaNacimiento, CelularPaciente=:CelularPaciente, DomicilioPaciente=:DomicilioPaciente, LugarProcedencia=:LugarProcedencia, LugarNacimiento=:LugarNacimiento, GradoInstruccion=:GradoInstruccion, RazaPaciente=:RazaPaciente, OcupacionPaciente=:OcupacionPaciente, ReligionPaciente=:ReligionPaciente, EstadoCivil=:EstadoCivil, NumeroContactoPaciente=:NumeroContactoPaciente, NombreContactoPaciente=:NombreContactoPaciente, UsuarioActualiza=:UsuarioActualiza, FechaActualizacion=:FechaActualizacion WHERE IdPaciente=:IdPaciente");
+    $statement -> bindParam(":EdadPaciente", $datosUpdatePaciente["EdadPaciente"], PDO::PARAM_STR);
+    $statement -> bindParam(":SexoPaciente", $datosUpdatePaciente["SexoPaciente"], PDO::PARAM_STR);
+    $statement -> bindParam(":DNIPaciente", $datosUpdatePaciente["DNIPaciente"], PDO::PARAM_STR);
+    $statement -> bindParam(":FechaNacimiento", $datosUpdatePaciente["FechaNacimiento"], PDO::PARAM_STR);
+    $statement -> bindParam(":CelularPaciente", $datosUpdatePaciente["CelularPaciente"], PDO::PARAM_STR);
+    $statement -> bindParam(":DomicilioPaciente", $datosUpdatePaciente["DomicilioPaciente"], PDO::PARAM_STR);
+    $statement -> bindParam(":LugarProcedencia", $datosUpdatePaciente["LugarProcedencia"], PDO::PARAM_STR);
+    $statement -> bindParam(":LugarNacimiento", $datosUpdatePaciente["LugarNacimiento"], PDO::PARAM_STR);
+    $statement -> bindParam(":GradoInstruccion", $datosUpdatePaciente["GradoInstruccion"], PDO::PARAM_STR);
+    $statement -> bindParam(":RazaPaciente", $datosUpdatePaciente["RazaPaciente"], PDO::PARAM_STR);
+    $statement -> bindParam(":OcupacionPaciente", $datosUpdatePaciente["OcupacionPaciente"], PDO::PARAM_STR);
+    $statement -> bindParam(":ReligionPaciente", $datosUpdatePaciente["ReligionPaciente"], PDO::PARAM_STR);
+    $statement -> bindParam(":EstadoCivil", $datosUpdatePaciente["EstadoCivil"], PDO::PARAM_STR);
+    $statement -> bindParam(":NumeroContactoPaciente", $datosUpdatePaciente["NumeroContactoPaciente"], PDO::PARAM_STR);
+    $statement -> bindParam(":NombreContactoPaciente", $datosUpdatePaciente["NombreContactoPaciente"], PDO::PARAM_STR);
+    $statement -> bindParam(":UsuarioActualiza", $datosUpdatePaciente["UsuarioActualiza"], PDO::PARAM_STR);
+    $statement -> bindParam(":FechaActualizacion", $datosUpdatePaciente["FechaActualizacion"], PDO::PARAM_STR);
+    $statement -> bindParam(":IdPaciente", $datosUpdatePaciente["IdPaciente"], PDO::PARAM_STR);
+    if($statement -> execute())
+    {
+      return "ok";
+    }
+    else
+    {
+      return "error";
+    }
+  }
 }

@@ -113,4 +113,28 @@ class ControllerPacientes
       }
     }
   }
+
+  //  Mostrar los pacientes para la historia clínica
+  public static function ctrMostrarPacientesHistoria()
+  {
+    $tabla = "tba_paciente";
+    $listaPacientes = ModelPacientes::mdlMostrarPacientesHistoria($tabla);
+    return $listaPacientes;
+  }
+
+  //  Devolver los datos de un paciente para llenar datos de la historia
+  public static function ctrMostrarDatosUnPaciente($codPaciente)
+  {
+    $tabla = "tba_paciente";
+    $datosPaciente = ModelPacientes::mdlMostrarDatosPacienteHistoria($tabla, $codPaciente);
+    return $datosPaciente;
+  }
+
+  //  Update datos del paciente en la historia clínica
+  public static function ctrUpdateDatosPaciente($datosUpdatePaciente)
+  {
+    $tabla = "tba_paciente";
+    $respuesta = ModelPacientes::mdlUpdateDatospaciente($tabla, $datosUpdatePaciente);
+    return $respuesta;
+  }
 }

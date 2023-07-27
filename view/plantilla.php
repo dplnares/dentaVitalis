@@ -33,14 +33,16 @@
           $_GET["ruta"] == "socios" ||
           $_GET["ruta"] == "pacientes" ||
           $_GET["ruta"] == "costosfijos" ||
+          $_GET["ruta"] == "crearNuevoCostoFijo" ||
           $_GET["ruta"] == "editarCostoFijo" ||
           $_GET["ruta"] == "costosvariables" ||
-          $_GET["ruta"] == "editarCostoVariable" ||
-          $_GET["ruta"] == "crearNuevoCostoFijo" ||
           $_GET["ruta"] == "crearNuevoCostoVariable" ||
-
+          $_GET["ruta"] == "editarCostoVariable" ||
           $_GET["ruta"] == "historiaClinica" ||
-          
+
+          $_GET["ruta"] == "crearNuevaHistoria" ||
+          $_GET["ruta"] == "editarHistoria" ||
+          $_GET["ruta"] == "visualizarHistoria" ||
           $_GET["ruta"] == "calendario" ||
           $_GET["ruta"] == "historialPagos" ||
           $_GET["ruta"] == "signout" 
@@ -84,5 +86,6 @@
   <script src="js/pacientes.js"></script>
   <script src="js/procedimientos.js"></script>
   <script src="js/costos.js"></script>
+  <script src="js/historias.js"></script>
 </body>
 </html>

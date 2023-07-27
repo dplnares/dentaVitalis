@@ -12,7 +12,7 @@
           <h1 class="mt-4">Todos los pacientes</h1>
           
           <div class="d-flex m-2">
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregarPaciente">
+            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalAgregarPaciente">
               Agregar Paciente
             </button>
           </div>

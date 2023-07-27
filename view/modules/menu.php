@@ -22,19 +22,19 @@
   }
 ?>
 
-<!-- Calendario -->
+<!-- Calendario 
 <div class="sb-sidenav-menu-heading">Calendario</div>
   <a class="nav-link" href="calendario">
     <div class="sb-nav-link-icon"><i class="fas fa-calendar"></i></div>
     Calendario Citas
-  </a>
+  </a> -->
 
-<!-- Historias Clinica 
+<!-- Historias Clinica -->
 <div class="sb-sidenav-menu-heading">Historias Clínicas</div>
   <a class="nav-link" href="historiaClinica">
     <div class="sb-nav-link-icon"><i class="fas fa-file-text"></i></div>
     Historias Clinica
-  </a> -->
+  </a> 
 
 <!-- Catalogo -->
 <div class="sb-sidenav-menu-heading">Catálogo</div>
@@ -59,7 +59,7 @@
     Historias de pagos
   </a> -->
   
-<!-- Costos -->
+<!-- Costos 
 <div class="sb-sidenav-menu-heading">Costos</div>
   <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#listaCostos" aria-expanded="false" aria-controls="collapseLayouts">
     <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
@@ -71,4 +71,4 @@
       <a class="nav-link" href="costosfijos">Costos Fijos</a>
       <a class="nav-link" href="costosvariables">Costos Variables</a>
     </nav>
-  </div>
+  </div> -->
