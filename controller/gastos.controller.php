@@ -11,10 +11,10 @@ class ControllerGastos
   }
 
   //  Mostrar los tipos de gastos
-  public static function ctrMostrarTiposGastos()
+  public static function ctrMostrarCentrosCostos()
   {
-    $tabla = "tba_tipogasto";
-    $listaTiposDetalles = ModelGastos::mdlMostrarTiposGastos($tabla);
+    $tabla = "tba_centrocostos";
+    $listaTiposDetalles = ModelGastos::mdlMostrarCentrosCostos($tabla);
     return $listaTiposDetalles;
   }
 
@@ -35,7 +35,7 @@ class ControllerGastos
       
       $datosCreate = array(
         "NombreGasto" => $_POST["nombreGasto"],
-        "IdTipoGasto" => $_POST["tipoGasto"],
+        "IdCentroCostos" => $_POST["centroCosto"],
         "FechaCreacion" => date("Y-m-d\TH:i:sP"),
         "FechaActualizacion"=> date("Y-m-d\TH:i:sP"),
       );
@@ -66,7 +66,7 @@ class ControllerGastos
     {
       $tabla = "tba_gasto";
       $datosUpdate = array(
-        "IdTipoGasto" =>  $_POST["editarTipoGasto"],
+        "IdCentroCostos" =>  $_POST["editarCentroCosto"],
         "NombreGasto" => $_POST["editarNombreGasto"],
         "IdGasto" => $_POST["codGasto"],
         "FechaActualizacion"=>date("Y-m-d\TH:i:sP"),
@@ -117,7 +117,7 @@ class ControllerGastos
     }
   }
 
-  //  Mostrar los gastos fijos
+  //  Mostrar los gastos fijos --> No iría
   public static function ctrMostrarGastosPorTipo($tipoGasto)
   {
     $tabla = "tba_gasto";
@@ -131,5 +131,13 @@ class ControllerGastos
     $tabla = "tba_gasto";
     $datosGasto = ModelGastos::mdlDatosGasto($tabla, $codGastoFijo);
     return $datosGasto;
+  }
+
+  //  Mostrar los gastos por un centro de costos en específico
+  public static function ctrNostrarGastosCentro($codCentroCosto)
+  {
+    $tabla = "tba_gasto";
+    $listaGastos = ModelGastos::mdlMostrarGastosCentroCosto($tabla, $codCentroCosto);
+    return $listaGastos;
   }
 }

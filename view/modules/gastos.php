@@ -27,7 +27,7 @@
                   <tr>
                     <th>#</th>
                     <th>Descripcion</th>
-                    <th>Tipo Gasto</th>
+                    <th>Centro de Costos</th>
                     <th>Acciones</th>
                   </tr>
                 </thead>
@@ -40,7 +40,7 @@
                     '<tr>
                       <td>'.($key + 1).'</td>
                       <td>'.$value["NombreGasto"].'</td>
-                      <td>'.$value["NombreTipoGasto"].'</td>
+                      <td>'.$value["DescripcionCentro"].'</td>
                       <td>
                         <button class="btn btn-warning btnEditarGasto" codGasto="'.$value["IdGasto"].'" data-bs-toggle="modal" data-bs-target="#modalEditarGasto">Editar <i class="fa-solid fa-pencil"></i></button>
                         <button class="btn btn-danger btnEliminarGasto" codGasto="'.$value["IdGasto"].'">Eliminar <i class="fa-solid fa-trash"></i></button>
@@ -78,13 +78,13 @@
 
           <!-- Tipo de Gasto -->
           <div class="form-group">
-            <label for="tipoGasto" class="col-form-label">Tipo de Gasto:</label>
-            <select class="form-control" name="tipoGasto">
+            <label for="centroCosto" class="col-form-label">Tipo de Gasto:</label>
+            <select class="form-control" name="centroCosto">
               <?php
-                $tiposGastos = ControllerGastos::ctrMostrarTiposGastos();
-                foreach ($tiposGastos as $key => $value)
+                $centrosCosto = ControllerGastos::ctrMostrarCentrosCostos();
+                foreach ($centrosCosto as $key => $value)
                 {
-                  echo '<option value="'.$value["IdTipoGasto"].'">'.$value["NombreTipoGasto"].'</option>';
+                  echo '<option value="'.$value["IdCentroCostos"].'">'.$value["DescripcionCentro"].'</option>';
                 }
               ?>
             </select>
@@ -123,13 +123,13 @@
 
             <!-- Tipo de Gasto -->
             <div class="form-group">
-              <label for="editarTipoGasto" class="col-form-label">Tipo de Gasto:</label>
-              <select class="form-control" name="editarTipoGasto">
+              <label for="editarCentroCosto" class="col-form-label">Tipo de Gasto:</label>
+              <select class="form-control" name="editarCentroCosto">
                 <?php
-                  $tiposGastos = ControllerGastos::ctrMostrarTiposGastos();
-                  foreach ($tiposGastos as $key => $value)
+                  $centrosCosto = ControllerGastos::ctrMostrarCentrosCostos();
+                  foreach ($centrosCosto as $key => $value)
                   {
-                    echo '<option value="'.$value["IdTipoGasto"].'">'.$value["NombreTipoGasto"].'</option>';
+                    echo '<option value="'.$value["IdCentroCostos"].'">'.$value["DescripcionCentro"].'</option>';
                   }
                 ?>
               </select>

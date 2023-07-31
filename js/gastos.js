@@ -15,7 +15,7 @@ $(".table").on("click", ".btnEditarGasto", function () {
 
     success: function (respuesta) {
       $("#editarNombreGasto").val(respuesta["NombreGasto"]);
-      $("#editarTipoGasto").val(respuesta["NombreTipoGasto"]);
+      $("#editarCentroCosto").val(respuesta["DescripcionCentro"]);
       $("#codGasto").val(respuesta["IdGasto"]);
     }
   });

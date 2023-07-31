@@ -1,68 +1,50 @@
+//  Mostrar los datos en el modal para editar centro de costos
+$(".table").on("click", ".btnEditarCentro", function () {
+  var codCentroCosto = $(this).attr("codCentroCosto");
+  var datos = new FormData();
+
+  datos.append("codCentroCosto", codCentroCosto);
+  $.ajax({
+    url: "ajax/costos.ajax.php",
+    method: "POST",
+    data: datos,
+    cache: false,
+    contentType: false,
+    processData: false,
+    dataType: "json",
+
+    success: function (respuesta) {
+      $("#editarNombreCentro").val(respuesta["DescripcionCentro"]);
+      $("#codCentroCosto").val(respuesta["IdCentroCostos"]);
+    }
+  });
+});
+
+//  Alerta para eliminar un centro de costos
+$(".table").on("click", ".btnEliminarCentro", function () {
+  var codCentroCosto = $(this).attr("codCentroCosto");
+
+  swal.fire({
+    title: '¿Está seguro de borrar el centro de costos?',
+    text: "¡No podrá revertir el cambio!",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    cancelButtonText: 'Cancelar',
+    confirmButtonText: 'Si, borrar Centro de Costos!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      window.location = "index.php?ruta=centroCostos&codCentroCosto="+codCentroCosto;
+    }
+  });
+});
+
 //  Redirigir la vista para crear un nuevo gasto fijo
-$("#btnNuevoGastoFijo").on("click", function(){
-  window.location = "index.php?ruta=crearNuevoCostoFijo";
+$("#btnNuevoCosto").on("click", function(){
+  window.location = "index.php?ruta=crearNuevoCosto";
 });
 
-//  Redirigir la vista para editar un gasto fijo
-$(".table").on("click", ".btnEditarCostoFijo", function () {
-  var codCosto = $(this).attr("codCosto");
-  if(codCosto!=null)
-  {
-    window.location = "index.php?ruta=editarCostoFijo&codCosto="+codCosto;
-  }
-});
-
-//  Alerta para eliminar un gasto Fijo
-$(".table").on("click", ".btnEliminarCosto", function () {
-  var codCosto = $(this).attr("codCosto");
-  swal.fire({
-    title: '¿Está seguro de borrar el registro?',
-    text: "¡No podrá revertir el cambio!",
-    type: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    cancelButtonText: 'Cancelar',
-    confirmButtonText: 'Si, borrar costo!'
-  }).then((result) => {
-    if (result.isConfirmed) {
-      window.location = "index.php?ruta=costosfijos&codCosto="+codCosto;
-    }
-  });
-});
-
-//  Redirigir la vista para crear un nuevo gasto Variables
-$("#btnNuevoGastoVariable").on("click", function(){
-  window.location = "index.php?ruta=crearNuevoCostoVariable";
-});
-
-//  Redirigir la vista para editar un gasto Variable
-$(".table").on("click", ".btnEditarCostoVariable", function () {
-  var codCosto = $(this).attr("codCosto");
-  if(codCosto!=null)
-  {
-    window.location = "index.php?ruta=editarCostoVariable&codCosto="+codCosto;
-  }
-});
-
-//  Alerta para eliminar un gasto Variable
-$(".table").on("click", ".btnEliminarCostoVariable", function () {
-  var codCosto = $(this).attr("codCosto");
-  swal.fire({
-    title: '¿Está seguro de borrar el registro?',
-    text: "¡No podrá revertir el cambio!",
-    type: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    cancelButtonText: 'Cancelar',
-    confirmButtonText: 'Si, borrar costo!'
-  }).then((result) => {
-    if (result.isConfirmed) {
-      window.location = "index.php?ruta=costosvariables&codCosto="+codCosto;
-    }
-  });
-});
 
 //  Agregar los productos del modal al detalle del ingreso
 $(".tablaGastos").on("click", ".btnAgregarGasto", function(){
@@ -90,7 +72,7 @@ $(".tablaGastos").on("click", ".btnAgregarGasto", function(){
       '<div class="row" style="padding:5px 15px">'+
 
         '<!-- Descripción del producto -->'+          
-        '<div class="col-lg-4" style="padding-right:0px">'+
+        '<div class="col-lg-2" style="padding-right:0px">'+
           '<div class="input-group">'+
             '<span class="input-group-addon"><button type="button" class="btn btn-danger btn-xs quitarGasto" idGasto="'+idGasto+'"><i class="fa fa-times"></i></button></span>'+
             '<input type="text" class="form-control nuevogasto" idGasto="'+idGasto+'" value="'+nombreGasto+'" readonly>'+
@@ -98,7 +80,7 @@ $(".tablaGastos").on("click", ".btnAgregarGasto", function(){
         '</div>'+
 
         '<!-- Observacion -->'+
-        '<div class="col-lg-5 ingresoObservacionGasto">'+
+        '<div class="col-lg-2 ingresoObservacionGasto">'+
           '<input type="text" class="form-control nuevaObservacionGasto" name="nuevaObservacionGasto" >'+
         '</div>' +
 
@@ -107,8 +89,23 @@ $(".tablaGastos").on("click", ".btnAgregarGasto", function(){
           '<input type="number" class="form-control cantidadGasto" name="cantidadGasto" value="1" readonly>'+
         '</div>' +
 
+        '<!-- Socio -->'+
+          '<div class="col-lg-2 ingresoSocio">'+
+            '<input type="text" class="form-control nuevoSocio" name="nuevoSocio">'+
+          '</div>'+
+
+        '<!-- Numero Documento -->'+
+        '<div class="col-lg-2 ingresoNroDocumento">'+
+          '<input type="text" class="form-control nuevonNroDocumento" name="nuevonNroDocumento" required>'+
+        '</div>' +
+
+        '<!-- Fecha de Documento -->'+
+        '<div class="col-lg-2 ingresoFecha">'+
+          '<input type="date" class="form-control nuevaFechaDocumento" name="nuevaFechaDocumento" required>'+
+        '</div>' +
+
         '<!-- Precio del Gasto -->'+
-        '<div class="col-lg-2 ingresoPrecioGasto">'+
+        '<div class="col-lg-1 ingresoPrecioGasto">'+
           '<input type="number" class="form-control nuevoCostoGasto" name="nuevoCostoGasto" min="1.00" step="0.01" required>'+
         '</div>' +
 
@@ -116,21 +113,12 @@ $(".tablaGastos").on("click", ".btnAgregarGasto", function(){
       );
       listarGastos();
       sumarListaGastos();
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      // Manejar el error aquí si es necesario
+      console.log("Error en la solicitud AJAX: ", textStatus, errorThrown);
     } 
 	});
-});
-
-//  Quitar los producto del ingreso
-$(".formularioCostoFijo").on("click", "button.quitarGasto", function(){
-  //  Eliminar el elemento listado
-  $(this).parent().parent().parent().parent().remove();
-  var idGasto = $(this).attr("idGasto");
-  //  reactivar el boton del producto en el modal
-  $("button.recuperarBoton[codGasto='"+idGasto+"']").removeClass('btn-default disabled');
-  $("button.recuperarBoton[codGasto='"+idGasto+"']").addClass('btn-primary btnAgregarGasto');
-
-  listarGastos();
-  sumarListaGastos();
 });
 
 //  Actualizar el costo de un gasto
@@ -139,23 +127,37 @@ $(".formularioCostoFijo").on("change", "input.nuevoCostoGasto", function(){
   sumarListaGastos();
 });
 
-//  Quitar los producto del ingreso
-$(".formularioCostoVariable").on("click", "button.quitarGasto", function(){
-  //  Eliminar el elemento listado
-  $(this).parent().parent().parent().parent().remove();
-  var idGasto = $(this).attr("idGasto");
-  //  reactivar el boton del producto en el modal
-  $("button.recuperarBoton[codGasto='"+idGasto+"']").removeClass('btn-default disabled');
-  $("button.recuperarBoton[codGasto='"+idGasto+"']").addClass('btn-primary btnAgregarGasto');
+//  Actualizar el modal al momento de modificar el centro de costos, solo mostrará los gastos que tienen este codigo de centro de costos.
+$("#centroDeCostos").change(function(){
+  var codCCostosModal = $('#centroDeCostos').val();
+  var datos = new FormData();
 
-  listarGastos();
-  sumarListaGastos();
-});
-
-//  Actualizar el costo de un gasto
-$(".formularioCostoVariable").on("change", "input.nuevoCostoGasto", function(){
-  listarGastos();
-  sumarListaGastos();
+  datos.append("codCCostosModal", codCCostosModal);
+  $.ajax({
+    url:"ajax/gastos.ajax.php",
+    method: "POST",
+    data: datos,
+    cache: false,
+    contentType: false,
+    processData: false,
+    dataType:"json",
+    success:function(respuesta)
+    {
+      respuesta.forEach(elemento => {
+        $(".nuevaListaGastos").append(
+          '<tr>'+
+          '<td> 1 </td>'+
+          '<td>'+elemento["NombreGasto"]+'</td>'+
+          '<td>'+
+            '<div class="btn-group">'+
+              '<button class="btn btn-primary btnAgregarGasto recuperarBoton" codGasto="'+elemento["IdGasto"]+'">Agregar</button>'+
+            '</div>'+
+          '</td>'+
+        '</tr>'
+        );
+      });
+    }
+  });
 });
 
 //  FUNCIONES PARA SUMAR Y LISTAR LOS PRODUCTOS
@@ -164,12 +166,18 @@ function listarGastos()
   var listarGastos = [];
   var recurso = $(".nuevogasto")
   var observacion = $(".nuevaObservacionGasto")
+  var socio = $(".nuevoSocio")
+  var nroDocumento = $(".nuevonNroDocumento")
+  var fechaDocumento = $(".nuevaFechaDocumento")
   var precioGasto = $(".nuevoCostoGasto")
   for(var i = 0; i < recurso.length; i++)
   {
     listarGastos.push({
       "CodGasto" : $(recurso[i]).attr("idGasto"),
       "Observacion" : $(observacion[i]).val(),
+      "Socio" : $(socio[i]).val(),
+      "NroDocumento" : $(nroDocumento[i]).val(),
+      "FechaDocumento" : $(fechaDocumento[i]).val(),
       "PrecioGasto" : $(precioGasto[i]).val(),
     });
   }
@@ -201,10 +209,5 @@ function sumarListaGastos()
     var sumaTotalPrecio = arraySumaPrecio.reduce(sumaArrayPrecios);
   }
 
-  var igv=(sumaTotalPrecio*18)/100;
-  var total=sumaTotalPrecio+igv;
-
-  $("#nuevoSubTotalGasto").val(sumaTotalPrecio.toFixed(2));
-  $("#nuevoImpuestoGasto").val(igv.toFixed(2));
-  $("#nuevoTotalGasto").val(total.toFixed(2));
+  $("#nuevoTotalGasto").val(sumaTotalPrecio.toFixed(2));
 }

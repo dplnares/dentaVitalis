@@ -47,7 +47,7 @@ class ControllerHistorias
       {
         $datosCreateHistoria = array(
           "IdPaciente" => $_POST["nombrePaciente"],
-          //  Solo el doctor creará la historia clínica con su usuario, o puede crearla otra persona
+          //  Solo el doctor creará la historia clínica con su usuario, o puede crearla otra persona????
           "IdSocio" => $_SESSION["idUsuario"],
           "AlergiasEncontradas" => $_POST["riesgoAlergia"],
           "DatosInformante" => $_POST["datosInformante"],

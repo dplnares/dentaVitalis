@@ -31,23 +31,15 @@
 
 <!-- Historias Clinica -->
 <div class="sb-sidenav-menu-heading">Historias Clínicas</div>
-  <a class="nav-link" href="historiaClinica">
-    <div class="sb-nav-link-icon"><i class="fas fa-file-text"></i></div>
-    Historias Clinica
-  </a> 
-
-<!-- Catalogo -->
-<div class="sb-sidenav-menu-heading">Catálogo</div>
   <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#listaCatalogo" aria-expanded="false" aria-controls="collapseLayouts">
     <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
-    Catálogo
+    Historias Clinicas
     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
   </a>
   <div class="collapse" id="listaCatalogo" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
     <nav class="sb-sidenav-menu-nested nav">
+      <a class="nav-link" href="historiaClinica">Historias Clinica</a>
       <a class="nav-link" href="procedimientos">Procedimientos</a>
-      <a class="nav-link" href="gastos">Gastos</a>
-      <a class="nav-link" href="socios">Socios</a>
       <a class="nav-link" href="pacientes">Pacientes</a>
     </nav>
   </div>
@@ -59,7 +51,7 @@
     Historias de pagos
   </a> -->
   
-<!-- Costos 
+<!-- Costos  -->
 <div class="sb-sidenav-menu-heading">Costos</div>
   <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#listaCostos" aria-expanded="false" aria-controls="collapseLayouts">
     <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
@@ -68,7 +60,9 @@
   </a>
   <div class="collapse" id="listaCostos" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
     <nav class="sb-sidenav-menu-nested nav">
-      <a class="nav-link" href="costosfijos">Costos Fijos</a>
-      <a class="nav-link" href="costosvariables">Costos Variables</a>
+      <a class="nav-link" href="allCostos">Todos los Costos</a>
+      <a class="nav-link" href="gastos">Catálogo Gastos</a>
+      <a class="nav-link" href="socios">Socios</a>
+      <a class="nav-link" href="centroCostos">Centro Costos</a>
     </nav>
-  </div> -->
+  </div>

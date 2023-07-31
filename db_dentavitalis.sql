@@ -11,11 +11,29 @@
  Target Server Version : 100428
  File Encoding         : 65001
 
- Date: 26/07/2023 17:30:37
+ Date: 31/07/2023 17:27:22
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for tba_centrocostos
+-- ----------------------------
+DROP TABLE IF EXISTS `tba_centrocostos`;
+CREATE TABLE `tba_centrocostos`  (
+  `IdCentroCostos` int NOT NULL AUTO_INCREMENT,
+  `DescripcionCentro` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `FechaCreacion` datetime NOT NULL,
+  `FechaActualizacion` datetime NOT NULL,
+  PRIMARY KEY (`IdCentroCostos`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tba_centrocostos
+-- ----------------------------
+INSERT INTO `tba_centrocostos` VALUES (1, 'Servicios Generales', '2023-07-31 11:49:50', '2023-07-31 11:49:50');
+INSERT INTO `tba_centrocostos` VALUES (3, 'Costos de laboratorio', '2023-07-31 13:22:06', '2023-07-31 13:22:06');
 
 -- ----------------------------
 -- Table structure for tba_costo
@@ -23,13 +41,10 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `tba_costo`;
 CREATE TABLE `tba_costo`  (
   `IdCosto` int NOT NULL AUTO_INCREMENT,
-  `IdSocio` int NULL DEFAULT NULL,
-  `IdTipoCosto` int NOT NULL,
-  `NombreProveedor` varchar(150) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
+  `IdSocio` int NOT NULL,
+  `IdCentroCostos` int NOT NULL,
   `NumeroDocumento` varchar(25) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `FechaCosto` date NOT NULL,
-  `SubTotalCosto` decimal(10, 2) NOT NULL,
-  `IGVCosto` decimal(10, 2) NOT NULL,
   `TotalCosto` decimal(10, 2) NOT NULL,
   `UsuarioCreado` int NOT NULL,
   `UsuarioActualiza` int NOT NULL,
@@ -37,18 +52,16 @@ CREATE TABLE `tba_costo`  (
   `FechaActualizacion` datetime NOT NULL,
   PRIMARY KEY (`IdCosto`) USING BTREE,
   INDEX `tba_costo_fksocio`(`IdSocio`) USING BTREE,
-  INDEX `tba_costo_fktipocosto`(`IdTipoCosto`) USING BTREE,
-  CONSTRAINT `tba_costo_fksocio` FOREIGN KEY (`IdSocio`) REFERENCES `tba_socio` (`IdSocio`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `tba_costo_fktipocosto` FOREIGN KEY (`IdTipoCosto`) REFERENCES `tba_tipocosto` (`IdTipoCosto`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `tba_costo_fksocio` FOREIGN KEY (`IdSocio`) REFERENCES `tba_socio` (`IdSocio`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tba_costo
 -- ----------------------------
-INSERT INTO `tba_costo` VALUES (7, 1, 1, NULL, '001-5555', '2023-07-20', 123.00, 22.14, 145.14, 1, 1, '2023-07-26 11:13:44', '2023-07-26 11:30:17');
-INSERT INTO `tba_costo` VALUES (9, 4, 1, NULL, '001-3333', '2023-08-01', 12312.00, 2216.16, 14528.16, 1, 1, '2023-07-26 11:21:59', '2023-07-26 11:21:59');
-INSERT INTO `tba_costo` VALUES (10, NULL, 2, 'Laboratorio XYZ', '001-002', '2023-07-20', 1500.00, 270.00, 1770.00, 1, 1, '2023-07-26 11:44:54', '2023-07-26 11:44:54');
-INSERT INTO `tba_costo` VALUES (11, NULL, 2, 'Proveedor ABC', '001-787878722', '2023-08-10', 1213.00, 218.34, 1431.34, 1, 1, '2023-07-26 12:15:44', '2023-07-26 12:26:14');
+INSERT INTO `tba_costo` VALUES (7, 1, 0, '001-5555', '2023-07-20', 145.14, 1, 1, '2023-07-26 11:13:44', '2023-07-26 11:30:17');
+INSERT INTO `tba_costo` VALUES (9, 4, 0, '001-3333', '2023-08-01', 14528.16, 1, 1, '2023-07-26 11:21:59', '2023-07-26 11:21:59');
+INSERT INTO `tba_costo` VALUES (10, 0, 0, '001-002', '2023-07-20', 1770.00, 1, 1, '2023-07-26 11:44:54', '2023-07-26 11:44:54');
+INSERT INTO `tba_costo` VALUES (11, 0, 0, '001-787878722', '2023-08-10', 1431.34, 1, 1, '2023-07-26 12:15:44', '2023-07-26 12:26:14');
 
 -- ----------------------------
 -- Table structure for tba_detallecosto
@@ -83,14 +96,19 @@ DROP TABLE IF EXISTS `tba_detallehistoriaclinica`;
 CREATE TABLE `tba_detallehistoriaclinica`  (
   `IdDetalleHistoriaClinica` int NOT NULL AUTO_INCREMENT,
   `IdHistoriaClinica` int NOT NULL,
-  `IdTratamiento` int NULL DEFAULT NULL,
+  `IdTratamiento` int NOT NULL,
   `FechaAtencion` date NOT NULL,
-  `DiagnosticoPresuntivo` varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `DiagnosticoDefinitivo` varchar(80) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `Pronostico` varchar(150) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `TratamientoPaciente` varchar(150) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `RecomendacionesPaciente` varchar(150) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `InformacionAlta` varchar(150) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
+  `DiagnosticoPresuntivo` varchar(150) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
+  `DiagnosticoDefinitivo` varchar(150) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
+  `Pronostico` varchar(500) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
+  `TratamientoPaciente` varchar(500) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
+  `PresionArterial` varchar(25) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
+  `Pulso` varchar(25) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
+  `Temperatura` varchar(25) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
+  `FrecuenciaCardiaca` varchar(25) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
+  `FrecuenciaRespiratoria` varchar(25) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
+  `ExamenOdonto` varchar(150) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
+  `InformacionAlta` varchar(500) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
   `IdPersonal` int NOT NULL,
   `FechaCreacion` datetime NOT NULL,
   `FechaActualizacion` datetime NOT NULL,
@@ -133,22 +151,22 @@ CREATE TABLE `tba_detalletratamiento`  (
 DROP TABLE IF EXISTS `tba_gasto`;
 CREATE TABLE `tba_gasto`  (
   `IdGasto` int NOT NULL AUTO_INCREMENT,
-  `IdTipoGasto` int NOT NULL,
+  `IdCentroCostos` int NOT NULL,
   `NombreGasto` varchar(150) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `FechaCreacion` datetime NOT NULL,
   `FechaActualizacion` datetime NOT NULL,
   PRIMARY KEY (`IdGasto`) USING BTREE,
-  INDEX `fk_gasto_fkgasto`(`IdTipoGasto`) USING BTREE,
-  CONSTRAINT `fk_gasto_fkgasto` FOREIGN KEY (`IdTipoGasto`) REFERENCES `tba_tipogasto` (`IdTipoGasto`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
+  INDEX `tba_gasto_fkcentrocostos`(`IdCentroCostos`) USING BTREE,
+  CONSTRAINT `tba_gasto_fkcentrocostos` FOREIGN KEY (`IdCentroCostos`) REFERENCES `tba_centrocostos` (`IdCentroCostos`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tba_gasto
 -- ----------------------------
-INSERT INTO `tba_gasto` VALUES (1, 2, 'Servicio de Laboratorio', '2023-07-21 00:00:00', '2023-07-21 00:00:00');
-INSERT INTO `tba_gasto` VALUES (2, 2, 'Servicio de mantenimiento equipos informática', '2023-07-21 00:00:00', '2023-07-21 00:00:00');
+INSERT INTO `tba_gasto` VALUES (1, 3, 'Servicio de Laboratorio', '2023-07-21 00:00:00', '2023-07-21 00:00:00');
 INSERT INTO `tba_gasto` VALUES (4, 1, 'Servicio de Agua', '2023-07-21 21:54:09', '2023-07-21 21:54:09');
 INSERT INTO `tba_gasto` VALUES (5, 1, 'Pago de servicio de luz', '2023-07-21 14:55:32', '2023-07-21 14:55:32');
+INSERT INTO `tba_gasto` VALUES (6, 1, 'Gastos Energía Eléctrica', '2023-07-31 12:10:47', '2023-07-31 12:14:14');
 
 -- ----------------------------
 -- Table structure for tba_historiaclinica
@@ -158,15 +176,15 @@ CREATE TABLE `tba_historiaclinica`  (
   `IdHistoriaClinica` int NOT NULL AUTO_INCREMENT,
   `IdPaciente` int NOT NULL,
   `IdSocio` int NOT NULL,
-  `AlergiasEncontradas` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
-  `AntecedentesFamiliares` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
-  `AntecedentesPersonales` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
-  `PrimeraEvaluacion` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `PresionArterialPaciente` varchar(15) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
-  `PulsoPaciente` varchar(15) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
-  `TemperaturaPaciente` varchar(15) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
-  `FrecuenciaCardiacaPaciente` varchar(15) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
-  `ExamenOdontologico` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `AlergiasEncontradas` varchar(500) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
+  `MotivoConsulta` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
+  `DatosInformante` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
+  `TiempoEnfermedad` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
+  `SignosSintomas` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
+  `RelatoCronologico` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
+  `FuncionesBiologicas` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
+  `AntecedentesFamiliares` varchar(500) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
+  `AntecedentesPersonales` varchar(500) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
   `UsuarioCreado` int NOT NULL,
   `UsuarioActualizado` int NOT NULL,
   `FechaCreado` datetime NOT NULL,
@@ -181,8 +199,8 @@ CREATE TABLE `tba_historiaclinica`  (
 -- ----------------------------
 -- Records of tba_historiaclinica
 -- ----------------------------
-INSERT INTO `tba_historiaclinica` VALUES (1, 1, 1, NULL, NULL, NULL, 'asdasda', NULL, NULL, NULL, NULL, '', 1, 1, '2023-07-26 12:39:30', '2023-07-26 12:39:34');
-INSERT INTO `tba_historiaclinica` VALUES (2, 2, 2, NULL, NULL, NULL, 'asdas', NULL, NULL, NULL, NULL, '', 1, 1, '2023-07-26 12:39:30', '2023-07-26 12:39:30');
+INSERT INTO `tba_historiaclinica` VALUES (1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2023-07-26 12:39:30', '2023-07-26 12:39:34');
+INSERT INTO `tba_historiaclinica` VALUES (2, 2, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2023-07-26 12:39:30', '2023-07-26 12:39:30');
 
 -- ----------------------------
 -- Table structure for tba_paciente
@@ -309,38 +327,6 @@ INSERT INTO `tba_socio` VALUES (3, 'Medico Z', 1, 1, '12312312313', '2023-07-21 
 INSERT INTO `tba_socio` VALUES (4, 'Diego Jimenez', 1, 2, '66666666', '2023-07-24 10:18:04', '2023-07-24 10:18:04');
 
 -- ----------------------------
--- Table structure for tba_tipocosto
--- ----------------------------
-DROP TABLE IF EXISTS `tba_tipocosto`;
-CREATE TABLE `tba_tipocosto`  (
-  `IdTipoCosto` int NOT NULL AUTO_INCREMENT,
-  `NombreTipoCosto` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  PRIMARY KEY (`IdTipoCosto`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of tba_tipocosto
--- ----------------------------
-INSERT INTO `tba_tipocosto` VALUES (1, 'Costo Fijo');
-INSERT INTO `tba_tipocosto` VALUES (2, 'Costo Variable');
-
--- ----------------------------
--- Table structure for tba_tipogasto
--- ----------------------------
-DROP TABLE IF EXISTS `tba_tipogasto`;
-CREATE TABLE `tba_tipogasto`  (
-  `IdTipoGasto` int NOT NULL AUTO_INCREMENT,
-  `NombreTipoGasto` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  PRIMARY KEY (`IdTipoGasto`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of tba_tipogasto
--- ----------------------------
-INSERT INTO `tba_tipogasto` VALUES (1, 'Gasto Fijo');
-INSERT INTO `tba_tipogasto` VALUES (2, 'Gasto Variable');
-
--- ----------------------------
 -- Table structure for tba_tipoidentificacion
 -- ----------------------------
 DROP TABLE IF EXISTS `tba_tipoidentificacion`;
@@ -438,6 +424,6 @@ CREATE TABLE `tba_usuario`  (
 -- ----------------------------
 -- Records of tba_usuario
 -- ----------------------------
-INSERT INTO `tba_usuario` VALUES (1, 1, 'Administrador', 'admin@gmail.com', '$2a$07$usesomesillystringforeh6tvwDNOAiEn9PYXfY79K3vDiKj6Ib6', 987654321, '2023-07-19 00:00:00', '2023-07-19 00:00:00', '2023-07-26 11:17:41');
+INSERT INTO `tba_usuario` VALUES (1, 1, 'Administrador', 'admin@gmail.com', '$2a$07$usesomesillystringforeh6tvwDNOAiEn9PYXfY79K3vDiKj6Ib6', 987654321, '2023-07-19 00:00:00', '2023-07-19 00:00:00', '2023-07-31 15:03:47');
 
 SET FOREIGN_KEY_CHECKS = 1;

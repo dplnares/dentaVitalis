@@ -317,7 +317,7 @@
 
       <!-- Cuerpo modal -->
       <div class="modal-body">
-        <table class="table table-striped dt-responsive tablaGastos" width="100%">
+        <table class="table table-striped dt-responsive tablaHistoria" width="100%">
           <thead>
             <tr>
               <th style ="width:10px">#</th>
