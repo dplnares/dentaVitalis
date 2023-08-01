@@ -13,18 +13,15 @@
         </div>
 
         <div class="container-fluid">
-          <form role="form" method="post" class="row g-3 m-2 formularioCostoFijo">
+          <form role="form" method="post" class="row g-3 m-2 formularioNuevoCosto">
 
             <!-- Cabecera -->
             <span class="border border-3 p-3">
               <div class="container row g-3">
-
-                <h3></h3>
-
                 <!-- Seleccionar la fecha del costo -->
                 <div class="col-md-3">
-                  <label for="fechaIngresoGastoFijo" class="form-label" style="font-weight: bold">Mes de Ingreso</label>
-                  <input type="month" class="form-control" id="fechaIngresoGastoFijo" name="fechaIngresoGastoFijo">
+                  <label for="mesIngresoGasto" class="form-label" style="font-weight: bold">Mes de Ingreso</label>
+                  <input type="month" class="form-control" id="mesIngresoGasto" name="mesIngresoGasto">
                 </div>
 
                 <!-- Seleccionar el centro de costos -->
@@ -78,7 +75,8 @@
                 </div>
               </div>
 
-              <div class="container row g-3 p-3">
+              <div class="container row g-3 p-3 justify-content-between">
+                <button type="button" class="col-1 d-inline-flex-center p-2 btn btn-secondary cerrarCosto">Cerrar</button>
                 <button type="submit" class="col-2 d-inline-flex p-2 btn btn-primary ">Registrar Movimiento</button>
               </div>
             </span>
@@ -109,7 +107,6 @@
         <table class="table table-striped dt-responsive tablaGastos" width="100%">
           <thead>
             <tr>
-              <th style ="width:10px">#</th>
               <th>Descripción del Gasto</th>
               <th>Acciones</th>           
             </tr> 

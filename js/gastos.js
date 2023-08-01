@@ -28,7 +28,7 @@ $(".table").on("click", ".btnEliminarGasto", function () {
   swal.fire({
     title: '¿Está seguro de borrar el gasto?',
     text: "¡No podrá revertir el cambio!",
-    type: 'warning',
+    icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',

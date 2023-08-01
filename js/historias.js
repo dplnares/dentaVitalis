@@ -27,7 +27,7 @@ $(".table").on("click", ".btnEliminarHistoria", function () {
   swal.fire({
     title: '¿Está seguro de borrar la Historia Clínica?',
     text: "¡No podrá revertir el cambio!",
-    type: 'warning',
+    icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',

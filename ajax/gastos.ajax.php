@@ -2,6 +2,8 @@
 
 require_once "../controller/gastos.controller.php";
 require_once "../model/gastos.model.php";
+require_once "../controller/socios.controller.php";
+require_once "../model/socios.model.php";
 
 class AjaxGastos
 {
@@ -14,11 +16,29 @@ class AjaxGastos
     echo json_encode($respuesta);
   }
 
+  //  Agregar los datos del modal hacia el listado
   public $codGastoAgregar;
   public function ajaxAgregarGasto()
   {
     $codGastoAgregar = $this->codGastoAgregar;
-    $respuesta = ControllerGastos::ctrAgregarGasto($codGastoAgregar);
+    $listaSocios = ControllerSocios::ctrMostrarSociosGastos();
+    $datosGasto = ControllerGastos::ctrAgregarGasto($codGastoAgregar);
+    $opcionesSocios = array();
+
+    foreach($listaSocios as $value)
+    {
+      $opcionesSocios[] = array(
+        "IdSocio" => $value["IdSocio"],
+        "NombreSocio" => $value["NombreSocio"]
+      );
+    }
+
+    $respuesta = array(
+      "IdGasto" => $datosGasto["IdGasto"],
+      "NombreGasto" => $datosGasto["NombreGasto"],
+      "OpcionesSocios" => $opcionesSocios
+    );
+
     echo json_encode($respuesta);
   }
 
@@ -29,21 +49,6 @@ class AjaxGastos
     $codCCostosModal = $this->codCCostosModal;
     $listaGastos = ControllerGastos::ctrNostrarGastosCentro($codCCostosModal);
     echo json_encode($listaGastos);
-    /*foreach($listaGastos as $key => $value)
-    {
-      $contenidoModal = ('
-          <tr>
-          <td>'.($key + 1).'</td>
-          <td>'.$value["NombreGasto"].'</td>
-          <td>
-            <div class="btn-group">
-              <button class="btn btn-primary btnAgregarGasto recuperarBoton" codGasto="'.$value["IdGasto"].'">Agregar</button> 
-            </div>
-          </td>
-        </tr>
-      ');
-    }
-    echo $contenidoModal;*/
   }
 }
 

@@ -61,8 +61,9 @@
   <div class="collapse" id="listaCostos" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
     <nav class="sb-sidenav-menu-nested nav">
       <a class="nav-link" href="allCostos">Todos los Costos</a>
-      <a class="nav-link" href="gastos">Catálogo Gastos</a>
-      <a class="nav-link" href="socios">Socios</a>
-      <a class="nav-link" href="centroCostos">Centro Costos</a>
+      <a class="nav-link" href="buscarCostos">Filtrar Costos</a>
+      <a class="nav-link" href="gastos">Catálogo de Gastos</a>
+      <a class="nav-link" href="socios">Catálogo de Socios</a>
+      <a class="nav-link" href="centroCostos">Centros de Costos</a>
     </nav>
   </div>

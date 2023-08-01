@@ -32,10 +32,12 @@
           $_GET["ruta"] == "gastos" ||
           $_GET["ruta"] == "socios" ||
           $_GET["ruta"] == "pacientes" ||
-
           $_GET["ruta"] == "allCostos" ||
           $_GET["ruta"] == "centroCostos" ||
           $_GET["ruta"] == "crearNuevoCosto" ||
+          $_GET["ruta"] == "editarCosto" ||
+          
+          $_GET["ruta"] == "buscarCostos" ||
 
           $_GET["ruta"] == "crearNuevaHistoria" ||
           $_GET["ruta"] == "editarHistoria" ||
@@ -74,7 +76,10 @@
   <script src="assets/demo/chart-bar-demo.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
   <script src="js/datatables-simple-demo.js"></script>
-  <!-- <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script> -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
   <script src="js/usuario.js"></script>
   <script src="js/calendario.js"></script>

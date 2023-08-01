@@ -38,8 +38,42 @@
                 <tbody>
                   <?php
                     $listaCostos = ControllerCostos::ctrMostrarTodosCostos();
-                    foreach($listaCostos as $value)
+                    foreach($listaCostos as $key => $value)
                     {
+                      if($value["EstadoCosto"] == "1")
+                      {
+                        echo
+                        '<tr>
+                          <td>'.($key + 1).'</td>
+                          <td>'.$value["DescripcionCentro"].'</td>
+                          <td>'.$value["MesCosto"].'</td>
+                          <td>'.$value["TotalCosto"].'</td>
+                          <td>'.$value["FechaCreacion"].'</td>
+                          <td>
+                            <button class="btn btn-success btnDescargarGasto" id="btnDescargarGasto" codCosto="'.$value["IdCosto"].'"><i class="fa-solid fa-file-text"></i></button>
+                            <button class="btn btn-primary btnFinalizarEstado" id="btnFinalizarEstado" codCosto="'.$value["IdCosto"].'"><i class="fa fa-check-circle"></i></button>
+                            <button class="btn btn-warning btnEditarCosto" id="btnEditarCosto" codCosto="'.$value["IdCosto"].'"><i class="fa-solid fa-pencil"></i></button>
+                            <button class="btn btn-danger btnEliminarCosto" codCosto="'.$value["IdCosto"].'"><i class="fa-solid fa-trash"></i></button>
+                          </td>
+                        </tr>';
+                      }
+                      else
+                      {
+                        echo
+                        '<tr>
+                          <td>'.($key + 1).'</td>
+                          <td>'.$value["DescripcionCentro"].'</td>
+                          <td>'.$value["MesCosto"].'</td>
+                          <td>'.$value["TotalCosto"].'</td>
+                          <td>'.$value["FechaCreacion"].'</td>
+                          <td>
+                            <button class="btn btn-success btnDescargarGasto" id="btnDescargarGasto" codCosto="'.$value["IdCosto"].'"><i class="fa-solid fa-file-text"></i></button>
+                            <button class="btn btn-primary btnFinalizarEstado" id="btnFinalizarEstado" codCosto="'.$value["IdCosto"].'" disabled><i class="fa fa-check-circle"></i></button>
+                            <button class="btn btn-warning btnEditarCosto" id="btnEditarCosto" codCosto="'.$value["IdCosto"].'" disabled><i class="fa-solid fa-pencil"></i></button>
+                            <button class="btn btn-danger btnEliminarCosto" codCosto="'.$value["IdCosto"].'" disabled><i class="fa-solid fa-trash"></i></button>
+                          </td>
+                        </tr>';
+                      }
                       
                     }
                   ?>
@@ -51,3 +85,10 @@
       </main>
     </div>
   </div>
+<?php
+  $eliminarCosto = new ControllerCostos();
+  $eliminarCosto -> ctrEliminarCosto();
+
+  $cerrarCosto = new ControllerCostos();
+  $cerrarCosto -> ctrCerrarCosto();
+?>
