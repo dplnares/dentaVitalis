@@ -44,15 +44,8 @@
                 <!-- Seleccionar el centro de costos -->
                 <div class="form-group col-md-4">
                   <label for="centroDeCostos" class="form-label" style="font-weight: bold">Centro de Costos:</label>
-                  <select class="form-control" name="centroDeCostos" id="centroDeCostos">
+                  <select class="form-select" name="centroDeCostos" id="centroDeCostos" disabled>
                     <option selected="true" value="<?php echo $cabeceraIngreso['IdCentroCostos']?>"><?php echo $cabeceraIngreso['DescripcionCentro']?></option>
-                    <?php
-                      $centrosCostos = ControllerCostos::ctrMostrarCentrosCostos();
-                      foreach ($centrosCostos as $key => $value)
-                      {
-                        echo '<option value="'.$value["IdCentroCostos"].'">'.$value["DescripcionCentro"].'</option>';
-                      }
-                    ?>
                   </select>
                 </div>
               </div>

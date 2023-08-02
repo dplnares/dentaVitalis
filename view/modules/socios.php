@@ -9,7 +9,7 @@
     <div id="layoutSidenav_content">
       <main class="bg">
         <div class="container-fluid px-4">
-          <h1 class="mt-4">Todos los socios</h1>
+          <h1 class="mt-4">Catálogo de Socios</h1>
           <div class="d-flex m-2">
             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregarSocio">
               Agregar Socio
@@ -18,7 +18,7 @@
           <div class="card mb-4">
             <div class="card-header">
               <i class="fas fa-table me-1"></i>
-              Todos los Socios
+              Catálogo de Socios
             </div>
             <div class="card-body">
               <table id="datatablesSimple" class="data-table-Socio table">
@@ -78,13 +78,13 @@
           <!-- Nombre del Socio-->
           <div class="form-group">
             <label for="nombreSocio" class="col-form-label">Nombre Socio:</label>
-            <input type="text" class="form-control" id="nombreSocio" name="nombreSocio">
+            <input type="text" class="form-control" id="nombreSocio" name="nombreSocio" required>
           </div>
 
           <!-- Tipo de socio -->
           <div class="form-group">
             <label for="tipoSocio" class="col-form-label">Tipo de Socio:</label>
-            <select class="form-control" name="tipoSocio">
+            <select class="form-select" name="tipoSocio">
               <?php
                 $tiposSocio = ControllerSocios::ctrMostrarTiposSocio();
                 foreach ($tiposSocio as $key => $value)
@@ -98,7 +98,7 @@
           <!-- Tipo de identificacion -->
           <div class="form-group">
             <label for="tipoIdentificacion" class="col-form-label">Tipo de Identificacion:</label>
-            <select class="form-control" name="tipoIdentificacion">
+            <select class="form-select" name="tipoIdentificacion">
               <?php
                 $tiposIdentificacion = ControllerSocios::ctrMostrarTiposIdentificacion();
                 foreach ($tiposIdentificacion as $key => $value)

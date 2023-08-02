@@ -9,7 +9,7 @@
     <div id="layoutSidenav_content">
       <main class="bg">
         <div class="container-fluid px-4">
-          <h1 class="mt-4">Todos los Gastos</h1>
+          <h1 class="mt-4">Catálogo de Costos</h1>
           
           <div class="d-flex m-2">
             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregarGasto">
@@ -19,7 +19,7 @@
           <div class="card mb-4">
             <div class="card-header">
               <i class="fas fa-table me-1"></i>
-              Todos los Gastos
+              Catálogo de Costos
             </div>
             <div class="card-body">
               <table id="datatablesSimple" class="data-table-Gasto table">

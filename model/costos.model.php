@@ -216,8 +216,49 @@ class ModelCostos
   //  Mostrar los costos por rango de fechas
   public static function mdlMostrarCostosPorFechas($tabla, $fechaInicial, $fechaFinal)
   {
-    $statement = Conexion::conn()->prepare("SELECT tba_costo.IdCosto, tba_costo.IdCentroCostos, tba_detallecosto.IdDetalleCosto, tba_detallecosto.IdGasto, tba_detallecosto.IdSocio, tba_detallecosto.NumeroDocumento, tba_detallecosto.ObservacionGasto, tba_detalleCosto.FechaCosto, tba_detallecosto.PrecioGasto, tba_centroCostos.DescripcionCentro, tba_gasto.NombreGasto, tba_socio.NombreSocio FROM tba_costo INNER JOIN tba_detallecosto ON tba_costo.IdCosto = tba_detallecosto.IdCosto INNER JOIN tba_centrocostos ON tba_costo.IdCentroCostos = tba_centrocostos.IdCentroCostos INNER JOIN tba_gasto ON tba_detallecosto.IdGasto = tba_gasto.IdGasto INNER JOIN tba_socio ON tba_detallecosto.IdSocio = tba_socio.IdSocio WHERE tba_detallecosto.FechaCosto BETWEEN '$fechaInicial' AND '$fechaFinal'");
+    $statement = Conexion::conn()->prepare("SELECT tba_costo.IdCosto, tba_costo.IdCentroCostos, tba_detallecosto.IdDetalleCosto, tba_detallecosto.IdGasto, tba_detallecosto.IdSocio, tba_detallecosto.NumeroDocumento, tba_detallecosto.ObservacionGasto, tba_detalleCosto.FechaCosto, tba_detallecosto.PrecioGasto, tba_centroCostos.DescripcionCentro, tba_gasto.NombreGasto, tba_socio.NombreSocio FROM $tabla INNER JOIN tba_detallecosto ON tba_costo.IdCosto = tba_detallecosto.IdCosto INNER JOIN tba_centrocostos ON tba_costo.IdCentroCostos = tba_centrocostos.IdCentroCostos INNER JOIN tba_gasto ON tba_detallecosto.IdGasto = tba_gasto.IdGasto INNER JOIN tba_socio ON tba_detallecosto.IdSocio = tba_socio.IdSocio WHERE tba_detallecosto.FechaCosto BETWEEN '$fechaInicial' AND '$fechaFinal'");
     $statement -> execute();
     return $statement -> fetchAll();
   }
+
+  //  Sumar todos los costos de la base de datos
+  public static function mdlSumarTodosCostos($tabla)
+  {
+    $statement = Conexion::conn()->prepare("SELECT SUM(TotalCosto) AS suma_total FROM $tabla");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
+  
+  //  Sumar los costos del mes actual
+  public static function mdlSumarCostosMesActual($tabla, $mesActual)
+  {
+    $statement = Conexion::conn()->prepare("SELECT SUM(TotalCosto) AS suma_mes FROM $tabla WHERE MesCosto = '$mesActual'");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
+
+  //  Sumar el costo del mayor centro de costos
+  public static function mdlSumarMayorCentroCostos($tabla)
+  {
+    $statement = Conexion::conn()->prepare("SELECT cc.IdCentroCostos, cc.DescripcionCentro, SUM(c.TotalCosto) AS SumaMayorCosto FROM tba_centrocostos cc INNER JOIN tba_costo c ON cc.IdCentroCostos = c.IdCentroCostos GROUP BY cc.IdCentroCostos, cc.DescripcionCentro HAVING SUM(c.TotalCosto) = (SELECT MAX(TotalCostoSum) FROM (SELECT IdCentroCostos, SUM(TotalCosto) AS TotalCostoSum FROM tba_costo GROUP BY IdCentroCostos) AS Subquery)");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
+  
+  //  Mostrar costos por rango de meses
+  public static function mldMostrarSumaCostosPorMeses($tabla, $fechaInicial, $fechaFinal)
+  {
+    $statement = Conexion::conn()->prepare("SELECT cc.IdCentroCostos, cc.DescripcionCentro, SUM(c.TotalCosto) AS SumaTotalCosto FROM $tabla cc INNER JOIN tba_costo c ON cc.IdCentroCostos = c.IdCentroCostos WHERE c.FechaCreacion >= '$fechaInicial' AND c.FechaCreacion <= '$fechaFinal' GROUP BY cc.IdCentroCostos, cc.DescripcionCentro");
+    $statement -> execute();
+    return $statement -> fetchAll();
+  }
+
+  //  Mostrar costos por centro de costos
+  public static function mldMostrarSumaCostosPorCentro($tabla, $codCentroCosto)
+  {
+    $statement = Conexion::conn()->prepare("SELECT MesCosto, SUM(TotalCosto) AS SumaTotalCosto FROM $tabla WHERE IdCentroCostos = $codCentroCosto GROUP BY MesCosto");
+    $statement -> execute();
+    return $statement -> fetchAll();
+  }
+  
 }

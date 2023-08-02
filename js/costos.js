@@ -83,8 +83,8 @@ $(".table").on("click", ".btnEditarCosto", function () {
 $(".tablaGastos").on("click", ".btnAgregarGasto", function(){
   
   var codGastoAgregar = $(this).attr("codGasto");
-  $(this).removeClass("btn-primary btnAgregarGasto");
-  $(this).addClass("btn-default disabled");
+  // $(this).removeClass("btn-primary btnAgregarGasto");
+  // $(this).addClass("btn-default disabled");
 
   var datos = new FormData();
   datos.append("codGastoAgregar", codGastoAgregar);
@@ -102,7 +102,7 @@ $(".tablaGastos").on("click", ".btnAgregarGasto", function(){
       var nombreGasto = respuesta["NombreGasto"];
       var opcionesSocios = respuesta["OpcionesSocios"];
 
-      var selectSocios = '<select class="form-control nuevoSocio" name="nuevoSocio">';
+      var selectSocios = '<select class="form-select nuevoSocio" name="nuevoSocio">';
       opcionesSocios.forEach(function (opcion) {
         selectSocios += '<option value="' + opcion.IdSocio + '">' + opcion.NombreSocio + '</option>';
       });
@@ -166,8 +166,8 @@ $(".formularioNuevoCosto").on("click", "button.quitarGasto", function(){
   $(this).parent().parent().parent().parent().remove();
   var idGasto = $(this).attr("idGasto");
   //  reactivar el boton del producto en el modal
-  $("button.recuperarBoton[codGasto='"+idGasto+"']").removeClass('btn-default disabled');
-  $("button.recuperarBoton[codGasto='"+idGasto+"']").addClass('btn-primary btnAgregarGasto');
+  // $("button.recuperarBoton[codGasto='"+idGasto+"']").removeClass('btn-default disabled');
+  // $("button.recuperarBoton[codGasto='"+idGasto+"']").addClass('btn-primary btnAgregarGasto');
 
   listarGastos();
   sumarListaGastos();
@@ -225,9 +225,37 @@ $(".table").on("click", ".btnEliminarCosto", function () {
 //  Actualizar el modal al momento de modificar el centro de costos, solo mostrará los gastos que tienen este codigo de centro de costos.
 $("#centroDeCostos").change(function(){
   var codCCostosModal = $('#centroDeCostos').val();
+  var listaGastos = $('.nuevogasto').val();
+  //  Datos para ajax
   var datos = new FormData();
-
   datos.append("codCCostosModal", codCCostosModal);
+
+  //  Validamos hay una lista de gastos, de ser asi y se selecciona otro valor del select de costos, se le notificará que se borrará toda la lista acumulada del momento.
+  if(listaGastos != undefined)
+  {
+    swal.fire({
+      title: '¿Está seguro de cambiar el centro de costos?',
+      text: "¡Se borrarán todos los costos seleccionados!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Si, borrar costo!'
+    }).then((result) => {
+      if (result.isConfirmed) 
+      {
+        $(".nuevoGasto").empty();
+        listarGastos();
+        sumarListaGastos();
+      }/*
+      else
+      {
+        document.getElementById('centroDeCostos').value = codCCostosModal;
+      }*/
+    });
+  }
+
   $.ajax({
     url:"ajax/gastos.ajax.php",
     method: "POST",
@@ -258,7 +286,7 @@ $("#centroDeCostos").change(function(){
 });
 // Al cerrar el modal, la lista de gastos se eliminará totalmente.
 $("#modalAgregarGasto").on('hidden.bs.modal', function () {
-  $(".nuevaListaGastos").empty(); 
+  $(".nuevaListaGastos").empty();
 });
 
 //  FUNCIONES PARA SUMAR Y LISTAR LOS PRODUCTOS

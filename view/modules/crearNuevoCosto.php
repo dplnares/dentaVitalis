@@ -21,13 +21,14 @@
                 <!-- Seleccionar la fecha del costo -->
                 <div class="col-md-3">
                   <label for="mesIngresoGasto" class="form-label" style="font-weight: bold">Mes de Ingreso</label>
-                  <input type="month" class="form-control" id="mesIngresoGasto" name="mesIngresoGasto">
+                  <input type="month" class="form-control" id="mesIngresoGasto" name="mesIngresoGasto" required>
                 </div>
 
                 <!-- Seleccionar el centro de costos -->
                 <div class="form-group col-md-4">
                   <label for="centroDeCostos" class="form-label" style="font-weight: bold">Centro de Costos:</label>
-                  <select class="form-control" name="centroDeCostos" id="centroDeCostos">
+                  <select class="form-select" name="centroDeCostos" id="centroDeCostos" required>
+                    <option selected="true" value="" disabled>Elige una opcion</option>
                     <?php
                       $centrosCostos = ControllerCostos::ctrMostrarCentrosCostos();
                       foreach ($centrosCostos as $key => $value)
@@ -77,7 +78,7 @@
 
               <div class="container row g-3 p-3 justify-content-between">
                 <button type="button" class="col-1 d-inline-flex-center p-2 btn btn-secondary cerrarCosto">Cerrar</button>
-                <button type="submit" class="col-2 d-inline-flex p-2 btn btn-primary ">Registrar Movimiento</button>
+                <button type="submit" class="col-2 d-inline-flex-center p-2 btn btn-primary ">Registrar Movimiento</button>
               </div>
             </span>
 

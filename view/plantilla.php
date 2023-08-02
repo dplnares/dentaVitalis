@@ -36,8 +36,9 @@
           $_GET["ruta"] == "centroCostos" ||
           $_GET["ruta"] == "crearNuevoCosto" ||
           $_GET["ruta"] == "editarCosto" ||
-          
           $_GET["ruta"] == "buscarCostos" ||
+
+          $_GET["ruta"] == "reporteCostos" ||
 
           $_GET["ruta"] == "crearNuevaHistoria" ||
           $_GET["ruta"] == "editarHistoria" ||
@@ -72,8 +73,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
   <script src="js/scripts.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-  <script src="assets/demo/chart-area-demo.js"></script>
-  <script src="assets/demo/chart-bar-demo.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
   <script src="js/datatables-simple-demo.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
@@ -89,5 +88,8 @@
   <script src="js/procedimientos.js"></script>
   <script src="js/costos.js"></script>
   <script src="js/historias.js"></script>
+
+  <script src="assets/chartCostoRango.js"></script>
+  <script src="assets/chartCentroCosto.js"></script>
 </body>
 </html>

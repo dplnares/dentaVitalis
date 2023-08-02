@@ -9,7 +9,7 @@
     <div id="layoutSidenav_content">
       <main class="bg">
         <div class="container-fluid px-4">
-          <h1 class="mt-4">Todos los Costos</h1>
+          <h1 class="mt-4">Planilla de Costos</h1>
           
           <div class="d-inline-flex m-2">
             <button type="button" class="btn btn-warning btnNuevoCosto" id="btnNuevoCosto">
@@ -20,7 +20,7 @@
           <div class="card mb-4">
             <div class="card-header">
               <i class="fas fa-table me-1"></i>
-              Todos los Costos Fijos
+              Planilla de Costos
             </div>
 
             <div class="card-body">
@@ -30,6 +30,7 @@
                     <th>#</th>
                     <th>Centro de Costos</th>
                     <th>Mes de Costo</th>
+                    <th>Estado</th>
                     <th>Total</th>
                     <th>Fecha Creacion</th>
                     <th>Acciones</th>
@@ -40,6 +41,7 @@
                     $listaCostos = ControllerCostos::ctrMostrarTodosCostos();
                     foreach($listaCostos as $key => $value)
                     {
+                      $estado = ControllerCostos::ctrValidarEstado($value["EstadoCosto"]);
                       if($value["EstadoCosto"] == "1")
                       {
                         echo
@@ -47,6 +49,7 @@
                           <td>'.($key + 1).'</td>
                           <td>'.$value["DescripcionCentro"].'</td>
                           <td>'.$value["MesCosto"].'</td>
+                          <td>'.$estado.'</td>
                           <td>'.$value["TotalCosto"].'</td>
                           <td>'.$value["FechaCreacion"].'</td>
                           <td>
@@ -64,6 +67,7 @@
                           <td>'.($key + 1).'</td>
                           <td>'.$value["DescripcionCentro"].'</td>
                           <td>'.$value["MesCosto"].'</td>
+                          <td>'.$estado.'</td>
                           <td>'.$value["TotalCosto"].'</td>
                           <td>'.$value["FechaCreacion"].'</td>
                           <td>

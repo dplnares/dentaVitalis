@@ -477,4 +477,52 @@ class ControllerCostos
     $listaCostos = ModelCostos::mdlMostrarCostosPorFechas($tabla, $fechaInicial, $fechaFinal);
     return $listaCostos;
   }
+
+  //  Validar el estado
+  public static function ctrValidarEstado($estado)
+  {
+    if($estado == "1") return "Abierto";
+    else return "Cerrado";
+  }
+
+  //  Sumatoria de todos los costos
+  public static function ctrSumarTodosCostos()
+  {
+    $tabla = "tba_costo";
+    $sumaTotal = ModelCostos::mdlSumarTodosCostos($tabla);
+    return $sumaTotal;
+  }
+
+  //  Sumatorio de los costos del mes actual
+  public static function ctrSumarCostosMesActual()
+  {
+    $tabla = "tba_costo";
+    $mesActual = date('Y-m');
+    $sumaMesActual = ModelCostos::mdlSumarCostosMesActual($tabla, $mesActual);
+    return $sumaMesActual;
+  }
+
+  //  Suma el mayor centro de costos actual
+  public static function ctrSumarMayorCentroCostos()
+  {
+    $tabla = "tba_centrocostos";
+    $mayorCosto = ModelCostos::mdlSumarMayorCentroCostos($tabla);
+    return $mayorCosto;
+  }
+
+  //  Mostrar los costos por rango de meses
+  public static function ctrMostrarCostosPorMeses($fechaInicial, $fechaFinal)
+  {
+    $tabla = "tba_centrocostos";
+    $listaMesesCostos = ModelCostos::mldMostrarSumaCostosPorMeses($tabla, $fechaInicial, $fechaFinal);
+    return $listaMesesCostos;
+  }
+
+  //  Mostrar los costos por centro de costos
+  public static function ctrMostrarCostosPorCentro($codCentroCosto)
+  {
+    $tabla = "tba_costo";
+    $listaCentroCostos = ModelCostos::mldMostrarSumaCostosPorCentro($tabla, $codCentroCosto);
+    return $listaCentroCostos;
+  }
 }

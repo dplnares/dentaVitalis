@@ -15,13 +15,13 @@
             {
               $fechaInicial = $_GET["fechaInicial"];
               $fechaFinal = $_GET["fechaFinal"];
-              echo 'Reporte de Costos (Del : ' . $fechaInicial . ' Hasta: ' . $fechaFinal . ')';
+              echo 'Filtrar Costos del (Del : ' . $fechaInicial . ' Hasta: ' . $fechaFinal . ')';
             } 
             else 
             {
               $fechaInicial = null;
               $fechaFinal = null;
-              echo 'Reporte de Costos';
+              echo 'Filtrar Costos Por Fecha';
             }
           ?>
         </h1>
@@ -36,7 +36,7 @@
         </div>
 
         <div class="card-body">
-          <table class="table table-bordered table-striped dt-responsive tablasReporteCostos" width="100%">
+          <table class="data-table table tablasFiltrarCostos" width="100%">
             <thead>
               <tr>
                 <th>Centro de Costos</th>
