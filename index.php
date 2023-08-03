@@ -1,5 +1,8 @@
 <?php 
 date_default_timezone_set('America/Lima');
+//  Librerias
+require_once "library/PHPExcel/Classes/PHPExcel.php";
+
 //  Controllers
 require_once "controller/plantilla.controller.php";
 require_once "controller/usuarios.controller.php";
@@ -10,6 +13,7 @@ require_once "controller/gastos.controller.php";
 require_once "controller/funciones.controller.php";
 require_once "controller/costos.controller.php";
 require_once "controller/historias.controller.php";
+require_once "controller/reportesExcel.controller.php";
 
 //  Models
 require_once "model/usuarios.model.php";

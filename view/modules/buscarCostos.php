@@ -24,39 +24,38 @@
               echo 'Filtrar Costos Por Fecha';
             }
           ?>
+          <!-- <input type="text" value="texto" style="border: 0cm; " disabled> -->
         </h1>
 
         <div class="d-inline-flex m-2">
           <div class="p-1">
             <button type="button" class="btn btn-warning" id="dateRangeCosto">
-            <i class="fa fa-calendar"></i> Rango de fecha<i class="fa fa-caret-down"></i>
-          </button>
+              <i class="fa fa-calendar"></i> Rango de fecha<i class="fa fa-caret-down"></i>
+            </button>
           </div>
           <div class="p-1">
-            <button type="button" class="btn btn-success btnDescargarRptCostos" id="btnDescargarRptCostos">
-            <i class="fa fa-file-excel"></i> Descargar Excel
-          </button>
+            <button class="btn btn-success" id="descargarFiltro">
+              Descargar Excel
+            </button>
           </div>
         </div>
-
+        
         <div class="card-body">
           <table class="data-table table tablasFiltrarCostos" width="100%">
             <thead>
               <tr>
                 <th>Centro de Costos</th>
                 <th>Socio</th>
-                <th>Gasto</th>
+                <th>Descripción de Costo</th>
                 <th>Nro. Documento</th>
                 <th>Fecha</th>
-                <th>Costo</th>
+                <th>Costo (S/.)</th>
               </tr>
             </thead>
             <tbody class="listaCostosPickFechas">
 
             </tbody>
           </table>
-          <input type="hidden" value="<?php echo $fechaInicial; ?>" id="fechaInicial">
-          <input type="hidden" value="<?php echo $fechaFinal; ?>" id="fechaFinal">
         </div>
 
       </div>

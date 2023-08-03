@@ -46,11 +46,11 @@
               <div class="container row g-3">
                 <h3>Datos Detalle</h3>
                 <div class="d-inline-flex m-2">
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAgregarGasto">Agregar Gasto</button>
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAgregarGasto">Agregar Item</button>
                 </div>
 
                 <div class="row" style="font-weight: bold">
-                  <div class="col-lg-2">Nombre Gasto</div>
+                  <div class="col-lg-2">Nombre Costo</div>
                   <div class="col-lg-2">Observacion</div>
                   <div class="col-lg-1">Cantidad</div>
                   <div class="col-lg-2">Socio</div>
@@ -97,7 +97,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Listado de Gastos</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Listado de Costos</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -108,7 +108,7 @@
         <table class="table table-striped dt-responsive tablaGastos" width="100%">
           <thead>
             <tr>
-              <th>Descripción del Gasto</th>
+              <th>Descripción de Costo</th>
               <th>Acciones</th>           
             </tr> 
           </thead>

@@ -366,7 +366,6 @@ $('#dateRangeCosto').on('apply.daterangepicker', function(ev, picker) {
     url:"ajax/costos.ajax.php",
     method: "POST",
     data: datos,
-    data: datos,
     cache: false,
     contentType: false,
     processData: false,
@@ -385,6 +384,7 @@ $('#dateRangeCosto').on('apply.daterangepicker', function(ev, picker) {
           '</tr>'
         );
       });
+      $("#descargarFiltro").val('<a href=view/modules/descargar-reporte.php?&fechaInicial='+fechaInicial+'&fechaFinal='+fechaFinal+'</a>');
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.log("Error en la solicitud AJAX: ", textStatus, errorThrown);
