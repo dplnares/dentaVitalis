@@ -59,7 +59,7 @@
                   <div class="col-lg-1">Costo(S/.)</div>
                 </div>
 
-                <div class="form-group row nuevoGasto">
+                <div class="form-group row nuevoGasto" id="nuevaListaGastos">
                   <input type="hidden" id="listarGastos" name="listarGastos">
                 </div>
               </div>

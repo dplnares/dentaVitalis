@@ -23,9 +23,9 @@ $("#chartCentroCostos").change(function(){
         data.push(parseFloat(item.SumaTotalCosto));
       });
 
-      myLineChart.data.labels = labels;
-      myLineChart.data.datasets[0].data = data;
-      myLineChart.update();
+      chartCentrCostos.data.labels = labels;
+      chartCentrCostos.data.datasets[0].data = data;
+      chartCentrCostos.update();
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.log("Error en la solicitud AJAX: ", textStatus, errorThrown);
@@ -34,18 +34,18 @@ $("#chartCentroCostos").change(function(){
 });
 
 // Set new default font family and font color to mimic Bootstrap's default styling
-Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-Chart.defaults.global.defaultFontColor = '#292b2c';
+Chart.defaults.global.defaultFontFamily = 'Arial,sans-serif, -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue"';
+Chart.defaults.global.defaultFontColor = '#1C2427';
 
 // Bar Chart Example
 var ctx = document.getElementById("charCentroCosto");
-var myLineChart = new Chart(ctx, {
+var chartCentrCostos = new Chart(ctx, {
   type: 'bar',
   data: {
     labels: ["January", "February", "March", "April", "May", "June"],
     datasets: [{
-      label: "Revenue",
-      backgroundColor: "rgba(2,117,216,1)",
+      label: "Gasto Total (S/.)",
+      backgroundColor: "rgba(2,117,216,0.8)",
       borderColor: "rgba(2,117,216,1)",
     }],
   },

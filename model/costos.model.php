@@ -7,7 +7,7 @@ class ModelCostos
   //  Mostrar todos los centros de costos
   public static function mdlMostrarCentrosCostos($tabla)
   {
-    $statement = Conexion::conn()->prepare("SELECT tba_centrocostos.IdCentroCostos, tba_centrocostos.DescripcionCentro, tba_centrocostos.FechaCreacion FROM $tabla ORDER BY IdCentroCostos ASC");
+    $statement = Conexion::conn()->prepare("SELECT tba_centrocostos.IdCentroCostos, tba_centrocostos.DescripcionCentro, tba_centrocostos.FechaCreacion FROM $tabla ORDER BY IdCentroCostos DESC");
     $statement -> execute();
     return $statement -> fetchAll();
   }
@@ -126,7 +126,7 @@ class ModelCostos
   //  Mostrar todos los costos
   public static function mdlMostrarAllCostos($tabla)
   {
-    $statement = Conexion::conn()->prepare("SELECT tba_costo.IdCosto, tba_costo.IdCentroCostos, tba_costo.MesCosto, tba_costo.TotalCosto, tba_costo.EstadoCosto, tba_costo.FechaCreacion, tba_centrocostos.DescripcionCentro FROM $tabla INNER JOIN tba_centrocostos ON tba_costo.IdCentroCostos = tba_centrocostos.IdCentroCostos ORDER BY IdCosto ASC");
+    $statement = Conexion::conn()->prepare("SELECT tba_costo.IdCosto, tba_costo.IdCentroCostos, tba_costo.MesCosto, tba_costo.TotalCosto, tba_costo.EstadoCosto, tba_costo.FechaCreacion, tba_centrocostos.DescripcionCentro FROM $tabla INNER JOIN tba_centrocostos ON tba_costo.IdCentroCostos = tba_centrocostos.IdCentroCostos ORDER BY IdCosto DESC");
     $statement -> execute();
     return $statement -> fetchAll();
   }

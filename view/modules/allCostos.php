@@ -42,13 +42,14 @@
                     foreach($listaCostos as $key => $value)
                     {
                       $estado = ControllerCostos::ctrValidarEstado($value["EstadoCosto"]);
+                      $mesCosto = ControllerFunciones::ctrConvertirMes($value["MesCosto"]);
                       if($value["EstadoCosto"] == "1")
                       {
                         echo
                         '<tr>
                           <td>'.($key + 1).'</td>
                           <td>'.$value["DescripcionCentro"].'</td>
-                          <td>'.$value["MesCosto"].'</td>
+                          <td>'.$mesCosto.'</td>
                           <td>'.$estado.'</td>
                           <td>'.$value["TotalCosto"].'</td>
                           <td>'.$value["FechaCreacion"].'</td>
@@ -66,7 +67,7 @@
                         '<tr>
                           <td>'.($key + 1).'</td>
                           <td>'.$value["DescripcionCentro"].'</td>
-                          <td>'.$value["MesCosto"].'</td>
+                          <td>'.$mesCosto.'</td>
                           <td>'.$estado.'</td>
                           <td>'.$value["TotalCosto"].'</td>
                           <td>'.$value["FechaCreacion"].'</td>

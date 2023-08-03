@@ -42,8 +42,8 @@
                 </label>
               </div>
               <div class="card-footer d-flex align-items-center justify-content-between">
-                <a class="small text-white stretched-link" href="#">Ver Detalles</a>
-                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                <!-- <a class="small text-white stretched-link" href="#">Ver Detalles</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div> -->
               </div>
             </div>
           </div>
@@ -60,13 +60,16 @@
                 </label>
               </div>
               <div class="card-footer d-flex align-items-center justify-content-between">
-                <a class="small text-white stretched-link" href="#">Ver Detalles</a>
-                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                <!-- <a class="small text-white stretched-link" href="#">Ver Detalles</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div> -->
               </div>
               </div>
             </div>
           </div>
 
+          <hr>
+
+          <h3 class="mt-4">Filtrar Por Fechas</h3>
           <!-- Grafica de gastos por filtrado de fecha -->
           <div class="row justify-content-center">
             <div class="col-xl-10">
@@ -79,12 +82,14 @@
               <div class="card mb-4">
                 <div class="card-header">
                   <i class="fas fa-chart-area me-1"></i>
-                  Costo Por Rango De Fechas
+                  Gasto Por Fechas 
                 </div>
                 <div class="card-body"><canvas id="chartCostoFecha" width="100%" height="40"></canvas></div>
               </div>
             </div>
           </div>
+
+          <h3 class="mt-4">Filtrar Por Centro de Costos</h3>
 
           <div class="row justify-content-center">
             <div class="col-xl-10">
@@ -103,7 +108,7 @@
               <div class="card mb-4">
                 <div class="card-header">
                   <i class="fas fa-chart-bar me-1"></i>
-                  Bar Chart Example
+                  Costos Por Centro de Costos
                 </div>
                 <div class="card-body"><canvas id="charCentroCosto" width="100%" height="40"></canvas></div>
               </div>

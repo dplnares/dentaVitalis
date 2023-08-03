@@ -245,14 +245,19 @@ $("#centroDeCostos").change(function(){
     }).then((result) => {
       if (result.isConfirmed) 
       {
-        $(".nuevoGasto").empty();
-        listarGastos();
-        sumarListaGastos();
-      }/*
-      else
-      {
-        document.getElementById('centroDeCostos').value = codCCostosModal;
-      }*/
+        var divVaciar = document.getElementById("nuevaListaGastos");
+        divVaciar.innerHTML = "";
+
+        // Crear un nuevo elemento <input> de tipo "hidden"
+        var nuevoInput = document.createElement("input");
+        nuevoInput.type = "hidden";
+        nuevoInput.id = "listarGastos";
+        nuevoInput.name = "listarGastos";
+
+        // Agregar el nuevo elemento <input> al elemento divVaciar
+        divVaciar.appendChild(nuevoInput);
+        divVaciar.add;
+      }
     });
   }
 
