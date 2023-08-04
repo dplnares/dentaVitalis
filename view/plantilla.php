@@ -37,11 +37,12 @@
           $_GET["ruta"] == "crearNuevoCosto" ||
           $_GET["ruta"] == "editarCosto" ||
           $_GET["ruta"] == "buscarCostos" ||
-
           $_GET["ruta"] == "reporteCostos" ||
-
+          $_GET["ruta"] == "historiaClinica" ||
           $_GET["ruta"] == "crearNuevaHistoria" ||
           $_GET["ruta"] == "editarHistoria" ||
+
+          
           $_GET["ruta"] == "visualizarHistoria" ||
           $_GET["ruta"] == "calendario" ||
           $_GET["ruta"] == "historialPagos" ||

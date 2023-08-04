@@ -7,7 +7,7 @@ class ModelGastos
   //  Mostrar todos los gastos creados
   public static function mdlMostrarGastos($tabla)
   {
-    $statement = Conexion::conn()->prepare("SELECT tba_gasto.IdGasto, tba_gasto.NombreGasto, tba_gasto.IdCentroCostos, tba_centrocostos.DescripcionCentro FROM $tabla INNER JOIN tba_centrocostos ON tba_gasto.IdCentroCostos = tba_centrocostos.IdCentroCostos ORDER BY IdGasto ASC");
+    $statement = Conexion::conn()->prepare("SELECT tba_gasto.IdGasto, tba_gasto.NombreGasto, tba_gasto.IdCentroCostos, tba_centrocostos.DescripcionCentro FROM $tabla INNER JOIN tba_centrocostos ON tba_gasto.IdCentroCostos = tba_centrocostos.IdCentroCostos ORDER BY IdGasto DESC");
     $statement -> execute();
     return $statement -> fetchAll();
   }

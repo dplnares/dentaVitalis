@@ -13,11 +13,26 @@ class AjaxProcedimientos
     $respuesta = ControllerProcedimientos::ctrMostrarDatosEditar($codProcedimiento);
     echo json_encode($respuesta);
   }
+
+  public $codProcedimientoAgregar;
+  public function ajaxAgregarProcedimiento()
+  {
+    $codProcedimientoAgregar = $this->codProcedimientoAgregar;
+    $respuesta = ControllerProcedimientos::ctrObtenerDatosProcedimiento($codProcedimientoAgregar);
+    echo json_encode($respuesta);
+  }
 }
 
 //  Editar Procedimiento
 if(isset($_POST["codProcedimiento"])){
-	$editarSocio = new AjaxProcedimientos();
-	$editarSocio -> codProcedimiento = $_POST["codProcedimiento"];
-	$editarSocio -> ajaxEditarProcedimiento();
+	$editarProcedimiento = new AjaxProcedimientos();
+	$editarProcedimiento -> codProcedimiento = $_POST["codProcedimiento"];
+	$editarProcedimiento -> ajaxEditarProcedimiento();
+}
+
+//  Editar Procedimiento
+if(isset($_POST["codProcedimientoAgregar"])){
+	$agregarProcedimiento = new AjaxProcedimientos();
+	$agregarProcedimiento -> codProcedimientoAgregar = $_POST["codProcedimientoAgregar"];
+	$agregarProcedimiento -> ajaxAgregarProcedimiento();
 }

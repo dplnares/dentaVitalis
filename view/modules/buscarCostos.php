@@ -34,7 +34,7 @@
             </button>
           </div>
           <div class="p-1">
-            <button class="btn btn-success" id="descargarFiltro">
+            <button class="btn btn-success" id="descargarFiltro" disabled>
               Descargar Excel
             </button>
           </div>

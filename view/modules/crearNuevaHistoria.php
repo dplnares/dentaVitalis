@@ -48,7 +48,7 @@
                 
                 <!-- Edad -->
                 <div class="col-md-3">
-                  <label for="edadPaciente" class="form-label" style="font-weight: bold">DNI: </label>
+                  <label for="edadPaciente" class="form-label" style="font-weight: bold">Edad: </label>
                   <input type="text" class="form-control" id="edadPaciente" name="edadPaciente">
                 </div>
 
@@ -110,12 +110,6 @@
                 <div class="col-md-3">
                   <label for="celularPaciente" class="form-label" style="font-weight: bold">Telefono / Celular: </label>
                   <input type="text" class="form-control" id="celularPaciente" name="celularPaciente">
-                </div>
-
-                <!-- Lugar de Procedencia -->
-                <div class="col-md-3">
-                  <label for="lugarProcedencia" class="form-label" style="font-weight: bold">Lugar de Procedencia: </label>
-                  <input type="text" class="form-control" id="lugarProcedencia" name="lugarProcedencia">
                 </div>
 
                 <!-- Persona Contacto Celular -->
@@ -182,13 +176,13 @@
                 <!-- Antecedentes Familiares -->
                 <div class="col-md-12">
                   <label for="antecedentesFamiliares" class="form-label" style="font-weight: bold">Antecedentes Familiares: </label>
-                  <textarea class="form-control" id="antecedentesFamiliares" rows="3"></textarea>
+                  <textarea class="form-control" id="antecedentesFamiliares" name="antecedentesFamiliares" rows="3"></textarea>
                 </div>
 
                 <!-- Antecedentes Personales -->
                 <div class="col-md-12">
                   <label for="antecedentesPersonales" class="form-label" style="font-weight: bold">Antecedentes Personales: </label>
-                  <textarea class="form-control" id="antecedentesPersonales" rows="3"></textarea>
+                  <textarea class="form-control" id="antecedentesPersonales" name="antecedentesPersonales" rows="3"></textarea>
                 </div>
 
                 <h4>Exploración Física</h4>
@@ -200,8 +194,8 @@
 
                 <!-- Pulso -->
                 <div class="col-md-2">
-                  <label for="pulsoPacientev" class="form-label" style="font-weight: bold">Pulso: </label>
-                  <input type="text" class="form-control" id="pulsoPacientev" name="pulsoPacientev">
+                  <label for="pulsoPaciente" class="form-label" style="font-weight: bold">Pulso: </label>
+                  <input type="text" class="form-control" id="pulsoPaciente" name="pulsoPaciente">
                 </div>
 
                 <!-- Antecedentes Personales -->
@@ -225,7 +219,7 @@
                 <!-- Primer examen, evaluacion -->
                 <div class="col-md-12">
                   <label for="examenOdontoEst" class="form-label" style="font-weight: bold">Exámen Odontoestoamatológico: </label>
-                  <textarea class="form-control" id="examenOdontoEst" rows="3"></textarea>
+                  <textarea class="form-control" id="examenOdontoEst" name="examenOdontoEst" rows="3"></textarea>
                 </div>
 
                 <!-- Diagnóstico presuntivo -->
@@ -249,13 +243,13 @@
                 <!-- Tratamiento -->
                 <div class="col-md-12">
                   <label for="tratamientoHistoria" class="form-label" style="font-weight: bold">Tratamiento: </label>
-                  <textarea class="form-control" id="tratamientoHistoria" rows="3"></textarea>
+                  <textarea class="form-control" id="tratamientoHistoria" name="tratamientoHistoria" rows="3"></textarea>
                 </div>
 
                 <!-- Alta Paciente -->
                 <div class="col-md-12">
                   <label for="altaHistoria" class="form-label" style="font-weight: bold">Alta Paciente: </label>
-                  <textarea class="form-control" id="altaHistoria" rows="3"></textarea>
+                  <textarea class="form-control" id="altaHistoria" name="altaHistoria" rows="3"></textarea>
                 </div>
                 
               </div>
@@ -270,9 +264,9 @@
                 </div>
 
                 <div class="row" style="font-weight: bold">
-                  <div class="col-lg-4">Descripción</div>
-                  <div class="col-lg-5">Tipo</div>
-                  <div class="col-lg-1">Precio(S/.)</div>
+                  <div class="col-lg-5">Descripción</div>
+                  <div class="col-lg-5">Observacion</div>
+                  <div class="col-lg-2">Precio(S/.)</div>
                 </div>
 
                 <div class="form-group row nuevoProcedimiento">
@@ -287,9 +281,12 @@
                 <h3>Costo Total</h3>
                 <div class="row" style="font-weight: bold">
                   <div class="col-lg-2"></div>
-                  <div class="col-lg-2"><span>Costo Total(S/.):</span></div><div class="col-lg-2"><input type="number" style="text-align: right;" class="form-control input-lg" id="nuevoTotal" name="nuevoTotal" placeholder="0.00" readonly></div>            
+                  <div class="col-lg-2"><span>Costo Total(S/.):</span></div><div class="col-lg-2"><input type="number" style="text-align: right;" class="form-control input-lg" id="nuevoTotalTratamiento" name="nuevoTotalTratamiento" placeholder="0.00" readonly></div>            
                 </div>
-                <button type="submit" class="col-2 d-inline-flex p-2 btn btn-primary ">Registrar Historia</button>
+                <div class="container row g-3 p-3 justify-content-between">
+                  <button type="button" class="col-1 d-inline-flex-center p-2 btn btn-secondary cerrarHistoria">Cerrar</button>
+                  <button type="submit" class="col-2 d-inline-flex-center p-2 btn btn-primary ">Registrar Historia</button>
+                </div>
               </div>
             </span>
           </form>
@@ -317,7 +314,7 @@
 
       <!-- Cuerpo modal -->
       <div class="modal-body">
-        <table class="table table-striped dt-responsive tablaHistoria" width="100%">
+        <table class="table table-striped dt-responsive tablaProcedimientos" width="100%">
           <thead>
             <tr>
               <th style ="width:10px">#</th>

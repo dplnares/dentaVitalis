@@ -137,4 +137,20 @@ class ControllerPacientes
     $respuesta = ModelPacientes::mdlUpdateDatospaciente($tabla, $datosUpdatePaciente);
     return $respuesta;
   }
+
+  //  Mostrar datos del paciente para la historia clínica
+  public static function ctrMostrarDatosHistoria($codPaciente)
+  {
+    $tabla = "tba_paciente";
+    $datosPaciente = ModelPacientes::mdlMostrarDatosHistoria($tabla, $codPaciente);
+    return $datosPaciente;
+  }
+
+  //  Editar los datos del en la vista de editar
+  public static function ctrUpdateDatosPacienteEditar($datosUpdatePaciente)
+  {
+    $tabla = "tba_paciente";
+    $respuesta = ModelPacientes::mdlUpdateDatosPacienteEditar($tabla, $datosUpdatePaciente);
+    return $respuesta;
+  }
 }

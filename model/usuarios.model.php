@@ -85,7 +85,7 @@ class ModelUsuarios
   //  Mostrar todos los usuarios
   static public function mdlMostrarUsuarios($tabla)
   {
-    $statement = Conexion::conn()->prepare("SELECT tba_usuario.IdUsuario, tba_usuario.NombreUsuario, tba_usuario.CorreoUsuario, tba_usuario.IdPerfilUsuario, tba_perfilusuario.NombrePerfil FROM $tabla INNER JOIN tba_perfilusuario ON tba_usuario.IdPerfilUsuario = tba_perfilusuario.IdPerfilUsuario ORDER BY IdUsuario ASC");
+    $statement = Conexion::conn()->prepare("SELECT tba_usuario.IdUsuario, tba_usuario.NombreUsuario, tba_usuario.CorreoUsuario, tba_usuario.IdPerfilUsuario, tba_perfilusuario.NombrePerfil FROM $tabla INNER JOIN tba_perfilusuario ON tba_usuario.IdPerfilUsuario = tba_perfilusuario.IdPerfilUsuario ORDER BY IdUsuario DESC");
     $statement -> execute();
     return $statement -> fetchAll();
   }

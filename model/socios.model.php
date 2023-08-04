@@ -7,7 +7,7 @@ class ModelSocios
   //  Mostrar todos los socios
   public static function mdlMostrarSocios($tabla)
   {
-    $statement = Conexion::conn()->prepare("SELECT tba_socio.IdSocio, tba_socio.NombreSocio, tba_socio.IdTipoIdentificacion, tba_socio.IdTipoSocio, tba_socio.Identificacion, tba_socio.FechaCreacion, tba_tipoidentificacion.NombreTipoIdentificacion, tba_tiposocio.NombreTipoSocio FROM $tabla INNER JOIN tba_tipoidentificacion ON tba_socio.IdTipoIdentificacion = tba_tipoidentificacion.IdTipoIdentificacion INNER JOIN tba_tiposocio ON tba_socio.IdTipoSocio = tba_tiposocio.IdTipoSocio ORDER BY IdSocio ASC");
+    $statement = Conexion::conn()->prepare("SELECT tba_socio.IdSocio, tba_socio.NombreSocio, tba_socio.IdTipoIdentificacion, tba_socio.IdTipoSocio, tba_socio.Identificacion, tba_socio.FechaCreacion, tba_tipoidentificacion.NombreTipoIdentificacion, tba_tiposocio.NombreTipoSocio FROM $tabla INNER JOIN tba_tipoidentificacion ON tba_socio.IdTipoIdentificacion = tba_tipoidentificacion.IdTipoIdentificacion INNER JOIN tba_tiposocio ON tba_socio.IdTipoSocio = tba_tiposocio.IdTipoSocio ORDER BY IdSocio DESC");
     $statement -> execute();
     return $statement -> fetchAll();
   }

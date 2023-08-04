@@ -125,4 +125,12 @@ class ControllerProcedimientos
     $listaProcedimientos = ModelProcedimientos::mdlMostrarProcedimientosHistoria($tabla);
     return $listaProcedimientos;
   }
+
+  //  Obtener los datos de un procedimiento en especifico para agregar a la lista de procedimientos
+  public static function ctrObtenerDatosProcedimiento($codProcedimientoAgregar)
+  {
+    $tabla = "tba_procedimiento";
+    $datosProcedimiento = ModelProcedimientos::mdlObtenerDatosProcedimiento($tabla, $codProcedimientoAgregar);
+    return $datosProcedimiento;
+  }
 }

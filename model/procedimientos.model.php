@@ -7,7 +7,7 @@ class ModelProcedimientos
   //  Mostrar lista de procedimientos modulo procedimientos
   public static function mdlMostrarProcedimientos($tabla)
   {
-    $statement = Conexion::conn()->prepare("SELECT tba_procedimiento.IdProcedimiento, tba_procedimiento.NombreProcedimiento, tba_procedimiento.PrecioPromedio, tba_procedimiento.IdTipoProcedimiento, tba_tipoprocedimiento.NombreTipoProcedimiento FROM $tabla INNER JOIN tba_tipoprocedimiento ON tba_procedimiento.IdTipoProcedimiento = tba_tipoprocedimiento.IdTipoProcedimiento ORDER BY IdProcedimiento ASC");
+    $statement = Conexion::conn()->prepare("SELECT tba_procedimiento.IdProcedimiento, tba_procedimiento.NombreProcedimiento, tba_procedimiento.PrecioPromedio, tba_procedimiento.IdTipoProcedimiento, tba_tipoprocedimiento.NombreTipoProcedimiento FROM $tabla INNER JOIN tba_tipoprocedimiento ON tba_procedimiento.IdTipoProcedimiento = tba_tipoprocedimiento.IdTipoProcedimiento ORDER BY IdProcedimiento DESC");
     $statement -> execute();
     return $statement -> fetchAll();
   }
@@ -86,6 +86,14 @@ class ModelProcedimientos
   public static function mdlMostrarDatosEditar($tabla, $codProcedimiento)
   {
     $statement = Conexion::conn()->prepare("SELECT tba_procedimiento.IdProcedimiento, tba_procedimiento.NombreProcedimiento, tba_procedimiento.PrecioPromedio, tba_procedimiento.IdTipoProcedimiento, tba_tipoprocedimiento.NombreTipoProcedimiento FROM $tabla INNER JOIN tba_tipoprocedimiento ON tba_procedimiento.IdTipoProcedimiento = tba_tipoprocedimiento.IdTipoProcedimiento WHERE tba_procedimiento.IdProcedimiento = $codProcedimiento");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
+
+  //  Obtener los datos de un procedimiento
+  public static function mdlObtenerDatosProcedimiento($tabla, $codProcedimiento)
+  {
+    $statement = Conexion::conn()->prepare("SELECT tba_procedimiento.IdProcedimiento, tba_procedimiento.NombreProcedimiento, tba_procedimiento.PrecioPromedio FROM $tabla WHERE tba_procedimiento.IdProcedimiento = $codProcedimiento");
     $statement -> execute();
     return $statement -> fetch();
   }
