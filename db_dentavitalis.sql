@@ -11,7 +11,7 @@
  Target Server Version : 100428
  File Encoding         : 65001
 
- Date: 04/08/2023 17:26:30
+ Date: 07/08/2023 17:17:36
 */
 
 SET NAMES utf8mb4;
@@ -150,17 +150,13 @@ CREATE TABLE `tba_detallehistoriaclinica`  (
   INDEX `tba_detallehistoriaclinica_fkHistoriaClinica`(`IdHistoriaClinica`) USING BTREE,
   INDEX `tba_detallehistoriaclinica_fkTratamiento`(`IdTratamiento`) USING BTREE,
   CONSTRAINT `tba_detallehistoriaclinica_fkHistoriaClinica` FOREIGN KEY (`IdHistoriaClinica`) REFERENCES `tba_historiaclinica` (`IdHistoriaClinica`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tba_detallehistoriaclinica
 -- ----------------------------
-INSERT INTO `tba_detallehistoriaclinica` VALUES (3, 7, 1, '55', '33', '56', '33', '23', NULL, '', '', '', NULL, NULL, '2023-08-04 11:32:26', '2023-08-04 11:32:26', 1, 1);
-INSERT INTO `tba_detallehistoriaclinica` VALUES (4, 8, 2, '55', '33', '56', '33', '23', NULL, '', '', '', NULL, NULL, '2023-08-04 11:33:27', '2023-08-04 11:33:27', 1, 1);
-INSERT INTO `tba_detallehistoriaclinica` VALUES (5, 9, 3, '55', '33', '56', '33', '23', NULL, '', '', '', NULL, NULL, '2023-08-04 11:33:55', '2023-08-04 11:33:55', 1, 1);
-INSERT INTO `tba_detallehistoriaclinica` VALUES (6, 10, 4, '', '', '', '', '', NULL, '', '', '', NULL, NULL, '2023-08-04 11:38:12', '2023-08-04 11:38:12', 1, 1);
-INSERT INTO `tba_detallehistoriaclinica` VALUES (7, 11, 5, '', '', '', '', '', NULL, '', '', '', NULL, NULL, '2023-08-04 14:54:21', '2023-08-04 14:54:21', 1, 1);
-INSERT INTO `tba_detallehistoriaclinica` VALUES (8, 12, 6, '', '', '', '', '', '', '', '', '', '', '', '2023-08-04 14:56:34', '2023-08-04 14:56:34', 1, 1);
+INSERT INTO `tba_detallehistoriaclinica` VALUES (9, 13, 7, '', '', '', '', '', '', '', '', '', '', '', '2023-08-07 09:02:33', '2023-08-07 09:48:56', 1, 1);
+INSERT INTO `tba_detallehistoriaclinica` VALUES (10, 14, 8, '', '', '', '', '', '', '', '', '', '', '', '2023-08-07 09:49:56', '2023-08-07 13:13:32', 1, 1);
 
 -- ----------------------------
 -- Table structure for tba_detalletratamiento
@@ -171,6 +167,7 @@ CREATE TABLE `tba_detalletratamiento`  (
   `IdTratamiento` int NOT NULL,
   `IdProcedimiento` int NOT NULL,
   `EstadoTratamiento` int NOT NULL,
+  `FechaProcedimiento` date NULL DEFAULT NULL,
   `ObservacionProcedimiento` varchar(150) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
   `PrecioProcedimiento` decimal(10, 2) NOT NULL,
   `FechaCreado` datetime NOT NULL,
@@ -182,19 +179,15 @@ CREATE TABLE `tba_detalletratamiento`  (
   INDEX `tba_detalletratamiento_fkProcedimiento`(`IdProcedimiento`) USING BTREE,
   CONSTRAINT `tba_detalletratamiento_fkDetalleTratamiento` FOREIGN KEY (`IdTratamiento`) REFERENCES `tba_tratamiento` (`IdTratamiento`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `tba_detalletratamiento_fkProcedimiento` FOREIGN KEY (`IdProcedimiento`) REFERENCES `tba_procedimiento` (`IdProcedimiento`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tba_detalletratamiento
 -- ----------------------------
-INSERT INTO `tba_detalletratamiento` VALUES (1, 1, 1, 1, NULL, 3333.00, '2023-08-04 11:33:27', '2023-08-04 11:33:27', 1, 1);
-INSERT INTO `tba_detalletratamiento` VALUES (2, 1, 1, 1, NULL, 1500.00, '2023-08-04 11:33:27', '2023-08-04 11:33:27', 1, 1);
-INSERT INTO `tba_detalletratamiento` VALUES (3, 1, 1, 1, NULL, 3333.00, '2023-08-04 11:33:55', '2023-08-04 11:33:55', 1, 1);
-INSERT INTO `tba_detalletratamiento` VALUES (4, 1, 1, 1, NULL, 1500.00, '2023-08-04 11:33:55', '2023-08-04 11:33:55', 1, 1);
-INSERT INTO `tba_detalletratamiento` VALUES (5, 4, 1, 1, NULL, 1500.00, '2023-08-04 11:38:12', '2023-08-04 11:38:12', 1, 1);
-INSERT INTO `tba_detalletratamiento` VALUES (6, 4, 1, 1, NULL, 4000.00, '2023-08-04 14:54:21', '2023-08-04 14:54:21', 1, 1);
-INSERT INTO `tba_detalletratamiento` VALUES (7, 4, 1, 1, NULL, 5000.00, '2023-08-04 14:54:21', '2023-08-04 14:54:21', 1, 1);
-INSERT INTO `tba_detalletratamiento` VALUES (8, 4, 1, 1, NULL, 6666.00, '2023-08-04 14:56:34', '2023-08-04 14:56:34', 1, 1);
+INSERT INTO `tba_detalletratamiento` VALUES (17, 7, 3, 1, NULL, NULL, 4444.00, '2023-08-07 09:49:05', '2023-08-07 09:49:05', 1, 1);
+INSERT INTO `tba_detalletratamiento` VALUES (24, 8, 4, 2, '2023-08-03', NULL, 777.00, '2023-08-07 13:13:37', '2023-08-07 13:13:37', 1, 1);
+INSERT INTO `tba_detalletratamiento` VALUES (25, 8, 3, 1, '2023-08-15', NULL, 4444.00, '2023-08-07 13:13:37', '2023-08-07 13:13:37', 1, 1);
+INSERT INTO `tba_detalletratamiento` VALUES (26, 8, 4, 1, NULL, NULL, 5555.00, '2023-08-07 13:13:38', '2023-08-07 13:13:38', 1, 1);
 
 -- ----------------------------
 -- Table structure for tba_gasto
@@ -247,21 +240,13 @@ CREATE TABLE `tba_historiaclinica`  (
   INDEX `tba_historiaclinica_fksocio`(`IdSocio`) USING BTREE,
   CONSTRAINT `tba_historiaclinica_fkPaciente` FOREIGN KEY (`IdPaciente`) REFERENCES `tba_paciente` (`IdPaciente`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `tba_historiaclinica_fksocio` FOREIGN KEY (`IdSocio`) REFERENCES `tba_socio` (`IdSocio`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tba_historiaclinica
 -- ----------------------------
-INSERT INTO `tba_historiaclinica` VALUES (3, 1, 1, 'no', 'nosi', 'si', '', '', NULL, '', NULL, NULL, 1, 1, '2023-08-04 11:28:06', '2023-08-04 11:28:06');
-INSERT INTO `tba_historiaclinica` VALUES (4, 1, 1, 'no', 'nosi', 'si', '', '', NULL, '', NULL, NULL, 1, 1, '2023-08-04 11:28:51', '2023-08-04 11:28:51');
-INSERT INTO `tba_historiaclinica` VALUES (5, 1, 1, 'no', 'nosi', 'si', '', '', NULL, '', NULL, NULL, 1, 1, '2023-08-04 11:31:14', '2023-08-04 11:31:14');
-INSERT INTO `tba_historiaclinica` VALUES (6, 1, 1, 'no', 'nosi', 'si', '', '', NULL, '', NULL, NULL, 1, 1, '2023-08-04 11:31:46', '2023-08-04 11:31:46');
-INSERT INTO `tba_historiaclinica` VALUES (7, 1, 1, 'no', 'nosi', 'si', '', '', NULL, '', NULL, NULL, 1, 1, '2023-08-04 11:32:26', '2023-08-04 11:32:26');
-INSERT INTO `tba_historiaclinica` VALUES (8, 1, 1, 'no', 'nosi', 'si', '', '', NULL, '', NULL, NULL, 1, 1, '2023-08-04 11:33:27', '2023-08-04 11:33:27');
-INSERT INTO `tba_historiaclinica` VALUES (9, 1, 1, 'no', 'nosi', 'si', '', '', NULL, '', NULL, NULL, 1, 1, '2023-08-04 11:33:55', '2023-08-04 11:33:55');
-INSERT INTO `tba_historiaclinica` VALUES (10, 2, 1, '', '', '', '', '', NULL, '', NULL, NULL, 1, 1, '2023-08-04 11:38:12', '2023-08-04 11:38:12');
-INSERT INTO `tba_historiaclinica` VALUES (11, 2, 1, '', '', '', '', '', NULL, '', NULL, NULL, 1, 1, '2023-08-04 14:54:21', '2023-08-04 14:54:21');
-INSERT INTO `tba_historiaclinica` VALUES (12, 2, 1, '', '', '', '', '', NULL, '', '123', '321', 1, 1, '2023-08-04 14:56:34', '2023-08-04 14:56:34');
+INSERT INTO `tba_historiaclinica` VALUES (13, 1, 1, '', '', '', '', '', '', '', 'zxcxzc', 'zxczxcz', 1, 1, '2023-08-07 09:02:33', '2023-08-07 09:48:56');
+INSERT INTO `tba_historiaclinica` VALUES (14, 2, 1, '', '', '', '', '', '', '', '', '', 1, 1, '2023-08-07 09:49:56', '2023-08-07 13:13:32');
 
 -- ----------------------------
 -- Table structure for tba_paciente
@@ -273,7 +258,7 @@ CREATE TABLE `tba_paciente`  (
   `ApellidoPaciente` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `DNIPaciente` int NOT NULL,
   `SexoPaciente` varchar(12) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
-  `EdadPaciente` int NULL DEFAULT NULL,
+  `EdadPaciente` varchar(11) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
   `FechaNacimiento` date NULL DEFAULT NULL,
   `CelularPaciente` varchar(11) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `DomicilioPaciente` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
@@ -296,8 +281,8 @@ CREATE TABLE `tba_paciente`  (
 -- ----------------------------
 -- Records of tba_paciente
 -- ----------------------------
-INSERT INTO `tba_paciente` VALUES (1, 'Juan Jose', 'Perez Perez', 123456789, 'M', 25, '1995-12-08', '0', 'asd', '', 'aqp', 'un', 'asd', 'trab', 'das', 'asd', '0', '', 1, 0, '2023-07-21 00:00:00', '2023-08-04 11:33:55');
-INSERT INTO `tba_paciente` VALUES (2, 'Juan Miguel', 'Jimenez Jimenez', 12345678, '', 0, '0000-00-00', '987654321', '', '', '', '', '', '', '', '', '', '', 1, 0, '2023-07-21 00:00:00', '2023-08-04 14:56:34');
+INSERT INTO `tba_paciente` VALUES (1, 'Juan Jose', 'Perez Perez', 123123312, 'Masculino', '26', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', 1, 0, '2023-07-21 00:00:00', '2023-08-07 09:48:56');
+INSERT INTO `tba_paciente` VALUES (2, 'Juan Miguel', 'Jimenez Jimenez', 12345678, 'Masculino', '', '2023-08-17', '987654321', '', '', '', '', '', '', '', '', '', '', 1, 0, '2023-07-21 00:00:00', '2023-08-07 13:13:32');
 
 -- ----------------------------
 -- Table structure for tba_pago
@@ -306,21 +291,25 @@ DROP TABLE IF EXISTS `tba_pago`;
 CREATE TABLE `tba_pago`  (
   `IdPago` int NOT NULL AUTO_INCREMENT,
   `IdPaciente` int NOT NULL,
+  `IdTipoPago` int NOT NULL,
   `TotalPago` decimal(10, 2) NOT NULL,
-  `SubTotalPago` decimal(10, 2) NOT NULL,
-  `IGVPago` decimal(10, 2) NOT NULL,
+  `FechaPago` date NOT NULL,
   `UsuarioCreado` int NOT NULL,
   `UsuarioActualiza` int NOT NULL,
   `FechaCreacion` datetime NOT NULL,
   `FechaActualizacion` datetime NOT NULL,
   PRIMARY KEY (`IdPago`) USING BTREE,
   INDEX `tba_pago_fkPaciente`(`IdPaciente`) USING BTREE,
-  CONSTRAINT `tba_pago_fkPaciente` FOREIGN KEY (`IdPaciente`) REFERENCES `tba_paciente` (`IdPaciente`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
+  INDEX `tba_pago_fkTipoPago`(`IdTipoPago`) USING BTREE,
+  CONSTRAINT `tba_pago_fkPaciente` FOREIGN KEY (`IdPaciente`) REFERENCES `tba_paciente` (`IdPaciente`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `tba_pago_fkTipoPago` FOREIGN KEY (`IdTipoPago`) REFERENCES `tba_tipodepago` (`IdTipoPago`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tba_pago
 -- ----------------------------
+INSERT INTO `tba_pago` VALUES (1, 1, 1, 1500.00, '2023-08-02', 1, 1, '2023-08-07 15:21:23', '2023-08-07 15:21:28');
+INSERT INTO `tba_pago` VALUES (2, 2, 1, 1500.00, '2023-08-07', 1, 1, '2023-08-07 15:21:23', '2023-08-07 15:21:28');
 
 -- ----------------------------
 -- Table structure for tba_perfilusuario
@@ -353,12 +342,14 @@ CREATE TABLE `tba_procedimiento`  (
   PRIMARY KEY (`IdProcedimiento`) USING BTREE,
   INDEX `tba_procedimiento_fkTipoProcedimiento`(`IdTipoProcedimiento`) USING BTREE,
   CONSTRAINT `tba_procedimiento_fkTipoProcedimiento` FOREIGN KEY (`IdTipoProcedimiento`) REFERENCES `tba_tipoprocedimiento` (`IdTipoProcedimiento`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tba_procedimiento
 -- ----------------------------
 INSERT INTO `tba_procedimiento` VALUES (1, 'Cirugía de maxilar ', 1500.00, 1, '2023-07-21 00:00:00', '2023-07-21 00:00:00');
+INSERT INTO `tba_procedimiento` VALUES (3, 'Endodoncia al maxilar externo', 4444.00, 3, '2023-08-07 09:48:25', '2023-08-07 09:48:44');
+INSERT INTO `tba_procedimiento` VALUES (4, 'Implantologia X', 333.00, 3, '2023-08-07 09:48:39', '2023-08-07 09:48:39');
 
 -- ----------------------------
 -- Table structure for tba_socio
@@ -386,6 +377,25 @@ INSERT INTO `tba_socio` VALUES (1, 'Medico X', 1, 1, '666666', '2023-07-21 00:00
 INSERT INTO `tba_socio` VALUES (2, 'Medico Y', 1, 1, '16516515', '2023-07-21 00:00:00', '2023-07-25 08:48:44');
 INSERT INTO `tba_socio` VALUES (3, 'Medico Z', 1, 1, '12312312313', '2023-07-21 00:00:00', '2023-07-25 08:48:52');
 INSERT INTO `tba_socio` VALUES (4, 'Diego Jimenez', 1, 2, '66666666', '2023-07-24 10:18:04', '2023-07-24 10:18:04');
+
+-- ----------------------------
+-- Table structure for tba_tipodepago
+-- ----------------------------
+DROP TABLE IF EXISTS `tba_tipodepago`;
+CREATE TABLE `tba_tipodepago`  (
+  `IdTipoPago` int NOT NULL AUTO_INCREMENT,
+  `DescripcionTipo` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`IdTipoPago`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tba_tipodepago
+-- ----------------------------
+INSERT INTO `tba_tipodepago` VALUES (1, 'Contado');
+INSERT INTO `tba_tipodepago` VALUES (2, 'Deposito');
+INSERT INTO `tba_tipodepago` VALUES (3, 'Transferencia');
+INSERT INTO `tba_tipodepago` VALUES (4, 'Yape');
+INSERT INTO `tba_tipodepago` VALUES (5, 'Plin');
 
 -- ----------------------------
 -- Table structure for tba_tipoidentificacion
@@ -455,17 +465,13 @@ CREATE TABLE `tba_tratamiento`  (
   PRIMARY KEY (`IdTratamiento`) USING BTREE,
   INDEX `tba_tratamiento_fkHistoriaClinica`(`IdHistoriaClinica`) USING BTREE,
   CONSTRAINT `tba_tratamiento_fkHistoriaClinica` FOREIGN KEY (`IdHistoriaClinica`) REFERENCES `tba_historiaclinica` (`IdHistoriaClinica`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tba_tratamiento
 -- ----------------------------
-INSERT INTO `tba_tratamiento` VALUES (1, 7, 1, 4833.00, 4833.00, 1, 1, '2023-08-04 11:32:26', '2023-08-04 11:32:26');
-INSERT INTO `tba_tratamiento` VALUES (2, 8, 1, NULL, NULL, 1, 1, '2023-08-04 11:33:27', '2023-08-04 11:33:27');
-INSERT INTO `tba_tratamiento` VALUES (3, 9, 1, NULL, NULL, 1, 1, '2023-08-04 11:33:55', '2023-08-04 11:33:55');
-INSERT INTO `tba_tratamiento` VALUES (4, 10, 2, 6666.00, 500.00, 1, 1, '2023-08-04 11:38:12', '2023-08-04 11:38:12');
-INSERT INTO `tba_tratamiento` VALUES (5, 11, 2, NULL, NULL, 1, 1, '2023-08-04 14:54:21', '2023-08-04 14:54:21');
-INSERT INTO `tba_tratamiento` VALUES (6, 12, 2, NULL, NULL, 1, 1, '2023-08-04 14:56:34', '2023-08-04 14:56:34');
+INSERT INTO `tba_tratamiento` VALUES (7, 13, 1, 5944.00, NULL, 1, 1, '2023-08-07 09:02:33', '2023-08-07 09:02:33');
+INSERT INTO `tba_tratamiento` VALUES (8, 14, 2, 10776.00, NULL, 1, 1, '2023-08-07 09:49:56', '2023-08-07 09:49:56');
 
 -- ----------------------------
 -- Table structure for tba_usuario
@@ -489,6 +495,6 @@ CREATE TABLE `tba_usuario`  (
 -- ----------------------------
 -- Records of tba_usuario
 -- ----------------------------
-INSERT INTO `tba_usuario` VALUES (1, 1, 'Administrador', 'admin@gmail.com', '$2a$07$usesomesillystringforeh6tvwDNOAiEn9PYXfY79K3vDiKj6Ib6', 987654321, '2023-07-19 00:00:00', '2023-07-19 00:00:00', '2023-08-04 10:54:04');
+INSERT INTO `tba_usuario` VALUES (1, 1, 'Administrador', 'admin@gmail.com', '$2a$07$usesomesillystringforeh6tvwDNOAiEn9PYXfY79K3vDiKj6Ib6', 987654321, '2023-07-19 00:00:00', '2023-07-19 00:00:00', '2023-08-07 08:55:29');
 
 SET FOREIGN_KEY_CHECKS = 1;

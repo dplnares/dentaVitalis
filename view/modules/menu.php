@@ -8,20 +8,6 @@
 
 <!-- Definir las vistas de los modulos de cada usuario -->
 
-<?php
-  if($_SESSION["perfilUsuario"] == "1")
-  {
-?>
-  <!-- Usuarios -->
-  <div class="sb-sidenav-menu-heading">Usuarios</div>
-  <a class="nav-link" href="usuario">
-    <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
-    Administrar Usuarios
-  </a>
-<?php
-  }
-?>
-
 <!-- Calendario 
 <div class="sb-sidenav-menu-heading">Calendario</div>
   <a class="nav-link" href="calendario">
@@ -43,12 +29,19 @@
     </nav>
   </div>
 
-<!-- Historias Pagos 
-<div class="sb-sidenav-menu-heading">Historial Pagos</div>
-  <a class="nav-link" href="historialPagos">
-    <div class="sb-nav-link-icon"><i class="fas fa-money"></i></div>
-    Historias de pagos
-  </a> -->
+<!-- Historias Pagos -->
+<div class="sb-sidenav-menu-heading">Pagos</div>
+  <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#listaPagos" aria-expanded="false" aria-controls="collapseLayouts">
+    <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
+    Pagos
+    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+  </a>
+  <div class="collapse" id="listaPagos" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+    <nav class="sb-sidenav-menu-nested nav">
+      <a class="nav-link" href="historialPagos">Todo los pagos</a>
+      <a class="nav-link" href="pagosPendientes">Pagos pendientes</a>
+    </nav>    
+</div> 
   
 <!-- Costos  -->
 <div class="sb-sidenav-menu-heading">Costos</div>
@@ -67,6 +60,8 @@
 
 <!-- Catálogo -->
 <div class="sb-sidenav-menu-heading">Catálogo</div>
+
+  <!-- Catálogo  de Costos -->
   <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#listaCatalogoCostos" aria-expanded="false" aria-controls="collapseLayouts">
     <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
     Catálogo Costos
@@ -79,6 +74,8 @@
       <a class="nav-link" href="gastos">Catálogo de Costos</a>
     </nav>
   </div>
+
+  <!-- Catálogo  de Historias Clinicas -->
   <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#listaCatalogoPacientes" aria-expanded="false" aria-controls="collapseLayouts">
     <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
     Catálogo Historias
@@ -88,5 +85,17 @@
     <nav class="sb-sidenav-menu-nested nav">
       <a class="nav-link" href="procedimientos">Procedimientos</a>
       <a class="nav-link" href="pacientes">Pacientes</a>
+    </nav>
+  </div>
+
+  <!-- Catálogo de Usuarios -->
+    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#listaCatalogoUsuarios" aria-expanded="false" aria-controls="collapseLayouts">
+    <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
+    Catálogo de Usuarios
+    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+  </a>
+  <div class="collapse" id="listaCatalogoUsuarios" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+    <nav class="sb-sidenav-menu-nested nav">
+      <a class="nav-link" href="usuario">Usuarios</a>
     </nav>
   </div>

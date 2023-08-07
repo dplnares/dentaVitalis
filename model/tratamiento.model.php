@@ -114,4 +114,55 @@ class ModelTratamiento
     $statement -> execute();
     return $statement -> fetchAll();
   }
+
+  public static function mdlMostrarDetalleTratamientoCompleto($tabla, $codHistoria)
+  {
+    $statement = Conexion::conn()->prepare("SELECT
+    tba_procedimiento.NombreProcedimiento, 
+    tba_detalletratamiento.PrecioProcedimiento, 
+    tba_detalletratamiento.ObservacionProcedimiento,
+    tba_detalletratamiento.EstadoTratamiento,
+    tba_detalletratamiento.FechaProcedimiento, 
+    tba_procedimiento.IdProcedimiento
+  FROM
+    $tabla
+    INNER JOIN
+    tba_tratamiento
+    ON 
+      tba_detalletratamiento.IdTratamiento = tba_tratamiento.IdTratamiento
+    INNER JOIN
+    tba_historiaclinica
+    ON 
+      tba_tratamiento.IdHistoriaClinica = tba_historiaclinica.IdHistoriaClinica
+    INNER JOIN
+    tba_procedimiento
+    ON 
+      tba_detalletratamiento.IdProcedimiento = tba_procedimiento.IdProcedimiento
+  WHERE
+    tba_historiaclinica.IdHistoriaClinica = $codHistoria");
+    $statement -> execute();
+    return $statement -> fetchAll();
+  }
+
+  //  Eliminar la lista de procedimientos para crear una nueva lista al editar la historia clínica
+  public static function mdlEliminarTodoDetalle($tabla, $codTratamiento)
+  {
+    $statement = Conexion::conn()->prepare("DELETE FROM $tabla WHERE IdTratamiento = $codTratamiento");
+    if ($statement -> execute())
+    {
+      return "ok";
+    }
+    else
+    {
+      return "error";
+    }
+  }
+
+  //  Obtener el codigo del tratamiento
+  public static function mdlObtenerCodTratamiento($tabla, $codPaciente)
+  {
+    $statement = Conexion::conn()->prepare("SELECT tba_tratamiento.IdTratamiento FROM $tabla WHERE tba_tratamiento.IdPaciente = $codPaciente");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
 }

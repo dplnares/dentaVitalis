@@ -1,9 +1,9 @@
-//  Redirigir la vista para crear un nuevo gasto fijo
+//  Redirigir la vista para crear una nueva historia
 $("#btnNuevaHistoria").on("click", function(){
   window.location = "index.php?ruta=crearNuevaHistoria";
 });
 
-//  Redirigir la vista para editar un gasto fijo
+//  Redirigir la vista para editar una historia
 $(".table").on("click", ".btnEditarHistoria", function () {
   var codHistoria = $(this).attr("codHistoria");
   var codPaciente = $(this).attr("codPaciente");
@@ -13,12 +13,22 @@ $(".table").on("click", ".btnEditarHistoria", function () {
   }
 });
 
-//  Redirigir la vista para editar un gasto fijo
+//  Redirigir la vista para visualizar la historia
 $(".table").on("click", ".btnVisualizarHistoria", function () {
   var codHistoria = $(this).attr("codHistoria");
   if(codHistoria!=null)
   {
     window.location = "index.php?ruta=visualizarHistoria&codHistoria="+codHistoria;
+  }
+});
+
+//  Redirigir la vista para ver el plan de tratamiento
+$(".table").on("click", ".btnListarPlanTratamiento", function () {
+  var codHistoria = $(this).attr("codHistoria");
+  var codPaciente = $(this).attr("codPaciente");
+  if(codHistoria!=null && codPaciente!=null)
+  {
+    window.location = "index.php?ruta=planTratamiento&codHistoria="+codHistoria+"&codPaciente="+codPaciente;
   }
 });
 

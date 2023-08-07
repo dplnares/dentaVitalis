@@ -153,4 +153,12 @@ class ControllerPacientes
     $respuesta = ModelPacientes::mdlUpdateDatosPacienteEditar($tabla, $datosUpdatePaciente);
     return $respuesta;
   }
+
+  //  Mostrar datos generales del paciente
+  public static function ctrMostrarDatosTratamiento($codPaciente)
+  {
+    $tabla = "tba_paciente";
+    $datosPaciente = ModelPacientes::mdlMostrarDatosTratamiento($tabla, $codPaciente);
+    return $datosPaciente;
+  }
 }

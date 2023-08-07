@@ -39,13 +39,16 @@
           $_GET["ruta"] == "buscarCostos" ||
           $_GET["ruta"] == "reporteCostos" ||
           $_GET["ruta"] == "historiaClinica" ||
+          
           $_GET["ruta"] == "crearNuevaHistoria" ||
           $_GET["ruta"] == "editarHistoria" ||
+          $_GET["ruta"] == "planTratamiento" ||
+          $_GET["ruta"] == "pagosPendientes" ||
+          $_GET["ruta"] == "historialPagos" ||
 
-          
+
           $_GET["ruta"] == "visualizarHistoria" ||
           $_GET["ruta"] == "calendario" ||
-          $_GET["ruta"] == "historialPagos" ||
           $_GET["ruta"] == "signout" 
         )
         {
@@ -89,6 +92,8 @@
   <script src="js/procedimientos.js"></script>
   <script src="js/costos.js"></script>
   <script src="js/historias.js"></script>
+  <script src="js/tratamiento.js"></script>
+  <script src="js/pagos.js"></script>
 
   <script src="assets/chartCostoRango.js"></script>
   <script src="assets/chartCentroCosto.js"></script>

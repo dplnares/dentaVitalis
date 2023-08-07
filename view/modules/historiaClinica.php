@@ -50,8 +50,8 @@
                         <td>'.$value["FechaActualiza"].'</td>
                         <td>
                           <button class="btn btn-success btnVisualizarHistoria" id="btnVisualizarHistoria" codHistoria="'.$value["IdHistoriaClinica"].'"><i class="fa-solid fa-eye"></i></button>
-                          <button class="btn btn-warning btnEditarHistoria" id="btnEditarHistoria" codPaciente="'.$value["IdPaciente"].'"  codHistoria="'.$value["IdHistoriaClinica"].'"><i class="fa-solid fa-pencil"></i></button>
-                          <button class="btn btn-primary btnAsignarCita" id="btnAsignarCita" codHistoria="'.$value["IdHistoriaClinica"].'"><i class="fa-solid fa-calendar"></i></button>
+                          <button class="btn btn-warning btnEditarHistoria" id="btnEditarHistoria" codPaciente="'.$value["IdPaciente"].'" codHistoria="'.$value["IdHistoriaClinica"].'"><i class="fa-solid fa-pencil"></i></button>
+                          <button class="btn btn-primary btnListarPlanTratamiento" id="btnListarPlanTratamiento" codPaciente="'.$value["IdPaciente"].'" codHistoria="'.$value["IdHistoriaClinica"].'"><i class="fa fa-list"></i></button>
                           <button class="btn btn-danger btnEliminarHistoria" codHistoria="'.$value["IdHistoriaClinica"].'"><i class="fa-solid fa-trash"></i></button>
                         </td>
                       </tr>';

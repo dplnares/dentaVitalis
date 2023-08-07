@@ -15,6 +15,14 @@
               $datosCabecera = ControllerHistorias::ctrMostrarCabeceraHistoria($_GET["codHistoria"]);
               $datosDetalle = ControllerHistorias::ctrMostrarDetalleHistoria($_GET["codHistoria"]);
               $datosTratamiento = ControllerTratamiento::ctrMostrarTotalTratamiento($datosDetalle["IdTratamiento"]);
+              if($_GET["codPaciente"] && $_GET["codHistoria"])
+              {
+                echo 'Editar Historia De : '.$datosPaciente["NombrePaciente"].' '.$datosPaciente["ApellidoPaciente"];
+              }
+              else
+              {
+                echo 'No hay datos de la historia clínica';
+              }
             ?>  
           </h1>
         </div>
@@ -279,7 +287,6 @@
                           <!-- Descripción del procedimiento -->     
                           <div class="col-lg-5" style="padding-right:0px">
                             <div class="input-group">
-                              <span class="input-group-addon"><button type="button" class="btn btn-danger btn-xs quitarProcedimiento" codProcedimiento="'.$value["IdProcedimiento"].'"><i class="fa fa-times"></i></button></span>
                               <input type="text" class="form-control nuevoprocedimiento" codProcedimiento="'.$value["IdProcedimiento"].'" value="'.$value["NombreProcedimiento"].'" readonly>
                             </div>
                           </div>
@@ -313,7 +320,6 @@
                 </div>
 
                 <div class="container row g-3 p-3 justify-content-between">
-                  <input type="hidden" class="codPacienteEditar" name="codPacienteEditar" id="codPacienteEditar" value="<?php echo $_POST["codPaciente"]?>">
                   <button type="button" class="col-1 d-inline-flex-center p-2 btn btn-secondary cerrarHistoria">Cerrar</button>
                   <button type="submit" class="col-2 d-inline-flex-center p-2 btn btn-primary ">Editar Historia</button>
                 </div>

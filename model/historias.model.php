@@ -128,7 +128,6 @@ class ModelHistorias
     $statement = Conexion::conn()->prepare("UPDATE $tabla SET PresionArterial=:PresionArterial, Pulso=:Pulso, Temperatura=:Temperatura, FrecuenciaCardiaca=:FrecuenciaCardiaca, FrecuenciaRespiratoria=:FrecuenciaRespiratoria, ExamenOdonto=:ExamenOdonto, DiagnosticoPresuntivo=:DiagnosticoPresuntivo, DiagnosticoDefinitivo=:DiagnosticoDefinitivo, Pronostico=:Pronostico, TratamientoPaciente=:TratamientoPaciente, InformacionAlta=:InformacionAlta, UsuarioActualizado=:UsuarioActualizado, FechaActualiza=:FechaActualiza WHERE IdHistoriaClinica=:IdHistoriaClinica");
     $statement -> bindParam(":PresionArterial", $datosUpdate["PresionArterial"], PDO::PARAM_STR);
     $statement -> bindParam(":Pulso", $datosUpdate["Pulso"], PDO::PARAM_STR);
-    $statement -> bindParam(":DNIPaciente", $datosUpdate["DNIPaciente"], PDO::PARAM_STR);
     $statement -> bindParam(":Temperatura", $datosUpdate["Temperatura"], PDO::PARAM_STR);
     $statement -> bindParam(":FrecuenciaCardiaca", $datosUpdate["FrecuenciaCardiaca"], PDO::PARAM_STR);
     $statement -> bindParam(":FrecuenciaRespiratoria", $datosUpdate["FrecuenciaRespiratoria"], PDO::PARAM_STR);
