@@ -11,7 +11,7 @@
  Target Server Version : 100428
  File Encoding         : 65001
 
- Date: 08/08/2023 11:01:35
+ Date: 08/08/2023 17:26:14
 */
 
 SET NAMES utf8mb4;
@@ -170,24 +170,17 @@ CREATE TABLE `tba_detalletratamiento`  (
   `FechaProcedimiento` date NULL DEFAULT NULL,
   `ObservacionProcedimiento` varchar(150) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
   `PrecioProcedimiento` decimal(10, 2) NOT NULL,
-  `FechaCreado` datetime NOT NULL,
-  `FechaActualiza` datetime NOT NULL,
-  `UsuarioCreado` int NOT NULL,
-  `UsuarioActualizado` int NOT NULL,
   PRIMARY KEY (`IdDetalleTratamiento`) USING BTREE,
   INDEX `tba_detalletratamiento_fkDetalleTratamiento`(`IdTratamiento`) USING BTREE,
   INDEX `tba_detalletratamiento_fkProcedimiento`(`IdProcedimiento`) USING BTREE,
   CONSTRAINT `tba_detalletratamiento_fkDetalleTratamiento` FOREIGN KEY (`IdTratamiento`) REFERENCES `tba_tratamiento` (`IdTratamiento`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `tba_detalletratamiento_fkProcedimiento` FOREIGN KEY (`IdProcedimiento`) REFERENCES `tba_procedimiento` (`IdProcedimiento`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tba_detalletratamiento
 -- ----------------------------
-INSERT INTO `tba_detalletratamiento` VALUES (17, 7, 3, 1, NULL, NULL, 4444.00, '2023-08-07 09:49:05', '2023-08-07 09:49:05', 1, 1);
-INSERT INTO `tba_detalletratamiento` VALUES (24, 8, 4, 2, '2023-08-03', NULL, 777.00, '2023-08-07 13:13:37', '2023-08-07 13:13:37', 1, 1);
-INSERT INTO `tba_detalletratamiento` VALUES (25, 8, 3, 1, '2023-08-15', NULL, 4444.00, '2023-08-07 13:13:37', '2023-08-07 13:13:37', 1, 1);
-INSERT INTO `tba_detalletratamiento` VALUES (26, 8, 4, 1, NULL, NULL, 5555.00, '2023-08-07 13:13:38', '2023-08-07 13:13:38', 1, 1);
+INSERT INTO `tba_detalletratamiento` VALUES (27, 7, 3, 2, '0000-00-00', '', 4444.00);
 
 -- ----------------------------
 -- Table structure for tba_gasto
@@ -309,8 +302,8 @@ CREATE TABLE `tba_pago`  (
 INSERT INTO `tba_pago` VALUES (1, 1, 1, 1500.00, '2023-08-02', '2023-08-07 15:21:23', '2023-08-07 15:21:28');
 INSERT INTO `tba_pago` VALUES (2, 2, 1, 1500.00, '2023-08-07', '2023-08-07 15:21:23', '2023-08-07 15:21:28');
 INSERT INTO `tba_pago` VALUES (4, 2, 4, 555.00, '2023-08-03', '2023-08-08 17:41:31', '2023-08-08 17:41:31');
-INSERT INTO `tba_pago` VALUES (10, 2, 1, 1231.00, '2023-08-02', '2023-08-08 17:54:21', '2023-08-08 17:54:21');
-INSERT INTO `tba_pago` VALUES (11, 1, 3, 333.00, '2023-08-11', '2023-08-08 17:59:05', '2023-08-08 17:59:05');
+INSERT INTO `tba_pago` VALUES (10, 2, 5, 1231.00, '2023-08-02', '2023-08-08 17:54:21', '2023-08-08 12:07:31');
+INSERT INTO `tba_pago` VALUES (11, 1, 3, 333.00, '2023-08-11', '2023-08-08 17:59:05', '2023-08-08 12:07:17');
 
 -- ----------------------------
 -- Table structure for tba_perfilusuario
@@ -413,7 +406,7 @@ CREATE TABLE `tba_tipoidentificacion`  (
 -- ----------------------------
 INSERT INTO `tba_tipoidentificacion` VALUES (1, 'DNI');
 INSERT INTO `tba_tipoidentificacion` VALUES (2, 'RUC');
-INSERT INTO `tba_tipoidentificacion` VALUES (3, 'OTROS');
+INSERT INTO `tba_tipoidentificacion` VALUES (3, 'OTRO');
 
 -- ----------------------------
 -- Table structure for tba_tipoprocedimiento
@@ -471,7 +464,7 @@ CREATE TABLE `tba_tratamiento`  (
 -- ----------------------------
 -- Records of tba_tratamiento
 -- ----------------------------
-INSERT INTO `tba_tratamiento` VALUES (7, 13, 1, 5944.00, NULL, 1, 1, '2023-08-07 09:02:33', '2023-08-07 09:02:33');
+INSERT INTO `tba_tratamiento` VALUES (7, 13, 1, 4444.00, NULL, 1, 1, '2023-08-07 09:02:33', '2023-08-07 09:02:33');
 INSERT INTO `tba_tratamiento` VALUES (8, 14, 2, 10776.00, NULL, 1, 1, '2023-08-07 09:49:56', '2023-08-07 09:49:56');
 
 -- ----------------------------

@@ -43,7 +43,7 @@
                       <td>'.$value["DescripcionTipo"].'</td>
                       <td>'.$value["FechaPago"].'</td>
                       <td>
-                        <button class="btn btn-success btnDescargarPago" id="btnDescargarPago" codPago="'.$value["IdPago"].'"><i class="fa-solid fa-file-text"></i></button>
+                        <button class="btn btn-success btnDescargarPago" id="btnDescargarPago" codPago="'.$value["IdPago"].'"><i class="fa-solid fa fa-cloud-download"></i></button>
                         <button class="btn btn-warning btnEditarPago" id="btnEditarPago" codPago="'.$value["IdPago"].'" data-bs-toggle="modal" data-bs-target="#modalEditarPago"><i class="fa-solid fa-pencil"></i></button>
                         <button class="btn btn-danger btnEliminarPago" codPago="'.$value["IdPago"].'"><i class="fa-solid fa-trash"></i></button>
                       </td>

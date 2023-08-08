@@ -34,7 +34,11 @@
             <span class="border border-3 p-3">
               <div class="container row g-3">
 
-                <h3>Datos Paciente</h3>
+                <div class="container row g-3 p-3 justify-content-between">
+                  <h3 class="col-3 d-inline-flex-center">Datos Paciente</h3>
+                  <button class="col-3 d-inline-flex-center btn btn-success"><i class="fa fa-print" aria-hidden="true"></i>   Imprimir Historia Clinica</button>
+                </div>
+                
                 <!-- Seleccionar al paciente -->
                 <div class="form-group col-md-8">
                   <label for="nombrePaciente" class="form-label" style="font-weight: bold">Paciente:</label>
@@ -267,7 +271,7 @@
               <div class="container row g-3">
                 <h3>Plan de Tratamiento</h3>
                 <div class="d-inline-flex m-2">
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAgregarProcedimiento">Agregar Procedimiento</button>
+
                 </div>
 
                 <div class="row" style="font-weight: bold">
@@ -293,12 +297,12 @@
                   
                           <!-- Observacion -->
                           <div class="col-lg-5 observacionProcedimiento">
-                            <input type="text" class="form-control nuevaObservacionTratamiento" name="nuevaObservacionTratamiento" value="'.$value["ObservacionProcedimiento"].'">
+                            <input type="text" class="form-control nuevaObservacionTratamiento" name="nuevaObservacionTratamiento" value="'.$value["ObservacionProcedimiento"].'" readonly>
                           </div>
                   
                           <!-- Precio del procedimiento -->
                           <div class="col-lg-2 precioProcedimiento">
-                            <input type="number" class="form-control nuevoPrecioProcedimiento" name="nuevoPrecioProcedimiento" min="1.00" step="0.01" value="'.$value["PrecioProcedimiento"].'" required>
+                            <input type="number" class="form-control nuevoPrecioProcedimiento" name="nuevoPrecioProcedimiento" min="1.00" step="0.01" value="'.$value["PrecioProcedimiento"].'" readonly>
                           </div> 
                   
                         </div>
@@ -335,54 +339,3 @@
   $editarHistoriaClinica = new ControllerHistorias;
   $editarHistoriaClinica -> ctrEditarHistoria();
 ?>
-
-  
-<!-- Modal agregar nuevo procedimiento -->
-<div class="modal fade" id="modalAgregarProcedimiento" tabindex="-1" role="dialog" aria-labelledby="modalAgregarProcedimiento" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Listado de Gastos</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-      <!-- Cuerpo modal -->
-      <div class="modal-body">
-        <table class="table table-striped dt-responsive tablaProcedimientos" width="100%">
-          <thead>
-            <tr>
-              <th style ="width:10px">#</th>
-              <th>Descripción del Gasto</th>
-              <th>Acciones</th>           
-            </tr> 
-          </thead>
-          <tbody>
-            <?php
-              $listaProcedimientos = ControllerProcedimientos::ctrMostraProcedimientosHistoria();
-              foreach ($listaProcedimientos as $key => $value)
-              {
-                echo ' 
-                  <tr>
-                    <td>'.($key + 1).'</td>
-                    <td>'.$value["NombreProcedimiento"].'</td>
-                    <td>
-                      <div class="btn-group">
-                        <button class="btn btn-primary btnAgregarProcedimiento recuperarBoton" codProcedimiento="'.$value["IdProcedimiento"].'">Agregar</button> 
-                      </div>
-                    </td>
-                  </tr>'
-                ;
-              }
-            ?> 
-          </tbody>
-        </table>
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary pull-left" data-bs-dismiss="modal">Salir</button>
-      </div>
-    </div>
-  </div>
-</div>

@@ -13,15 +13,6 @@ $(".table").on("click", ".btnEditarHistoria", function () {
   }
 });
 
-//  Redirigir la vista para visualizar la historia
-$(".table").on("click", ".btnVisualizarHistoria", function () {
-  var codHistoria = $(this).attr("codHistoria");
-  if(codHistoria!=null)
-  {
-    window.location = "index.php?ruta=visualizarHistoria&codHistoria="+codHistoria;
-  }
-});
-
 //  Redirigir la vista para ver el plan de tratamiento
 $(".table").on("click", ".btnListarPlanTratamiento", function () {
   var codHistoria = $(this).attr("codHistoria");
@@ -133,7 +124,7 @@ $(".formularioHistoriaClinica").on("click", "button.quitarProcedimiento", functi
   sumaProcedimientos();
 });
 
-//  Actualizar al la observacion
+//  Actualizar al modificar la observacion
 $(".formularioHistoriaClinica").on("change", "input.nuevaObservacionTratamiento", function(){
   listarProcedimientos();
   sumaProcedimientos();

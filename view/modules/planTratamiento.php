@@ -27,12 +27,17 @@
         </div>
 
         <div class="container-fluid">
-          <form role="form" method="post" class="row g-3 m-2 formularioHistoriaClinica">
+          <form role="form" method="post" class="row g-3 m-2 formularioPlanTratamiento">
 
             <!-- Cabecera -->
             <span class="border border-3 p-3">
               <div class="container row g-3">
-                <h3>Datos Paciente</h3>
+
+                <div class="container row g-3 p-3 justify-content-between">
+                  <h3 class="col-3 d-inline-flex-center">Datos Paciente</h3>
+                  <button class="col-3 d-inline-flex-center btn btn-success"><i class="fa fa-print" aria-hidden="true"></i>   Imprimir Plan de Tratamiento</button>
+                </div>
+
                 <!-- Seleccionar al paciente -->
                 <div class="form-group col-md-8">
                   <label for="nombrePaciente" class="form-label" style="font-weight: bold">Paciente:</label>
@@ -112,8 +117,8 @@
 
                           <!-- Estado -->
                           <div class="col-lg-2 form-check form-switch estadoProcedimiento">
-                            <input  type="checkbox" class="form-check-input editarEstadoProcedimiento" id="editarEstadoProcedimiento" '.$estado.'>
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Intervencion Realizada</label>
+                            <input  type="checkbox" class="form-check-input editarEstadoProcedimiento" name="editarEstadoProcedimiento" id="editarEstadoProcedimiento" '.$estado.'>
+                            <label class="form-check-label" for="editarEstadoProcedimiento">Intervencion Realizada</label>
                           </div>
 
                           <!-- Fecha del Procedimiento -->
@@ -123,7 +128,7 @@
                   
                           <!-- Precio del procedimiento -->
                           <div class="col-lg-2 precioProcedimiento">
-                            <input type="number" class="form-control nuevoPrecioProcedimiento" name="nuevoPrecioProcedimiento" min="1.00" step="0.01" value="'.$value["PrecioProcedimiento"].'" required>
+                            <input type="number" class="form-control editarPrecioTratamiento" name="editarPrecioTratamiento" min="1.00" step="0.01" value="'.$value["PrecioProcedimiento"].'" required>
                           </div> 
                         </div>
                       ';
@@ -140,7 +145,7 @@
                 <h3>Costo Total</h3>
                 <div class="row" style="font-weight: bold">
                   <div class="col-lg-2"></div>
-                  <div class="col-lg-2"><span>Costo Total(S/.):</span></div><div class="col-lg-2"><input type="number" style="text-align: right;" class="form-control input-lg" id="nuevoTotalTratamiento" name="nuevoTotalTratamiento" placeholder="0.00" value="<?php echo $datosTratamiento["TotalTratamiento"]?>" readonly></div>
+                  <div class="col-lg-2"><span>Costo Total(S/.):</span></div><div class="col-lg-2"><input type="number" style="text-align: right;" class="form-control input-lg" id="editarTotalTratamiento" name="editarTotalTratamiento" placeholder="0.00" value="<?php echo $datosTratamiento["TotalTratamiento"]?>" readonly></div>
                 </div>
                 <div class="container row g-3 p-3 justify-content-between">
                   <button type="button" class="col-1 d-inline-flex-center p-2 btn btn-secondary cerrarHistoria">Cerrar</button>
@@ -173,7 +178,7 @@
 
       <!-- Cuerpo modal -->
       <div class="modal-body">
-        <table class="table table-striped dt-responsive tablaProcedimientos" width="100%">
+        <table class="table table-striped dt-responsive tablaProcedimientosEditar" width="100%">
           <thead>
             <tr>
               <th style ="width:10px">#</th>

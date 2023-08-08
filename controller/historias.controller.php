@@ -118,10 +118,6 @@ class ControllerHistorias
                   "ObservacionProcedimiento" => $value["ObservacionProcedimiento"],
                   "EstadoTratamiento" => "1",
                   "PrecioProcedimiento" => $value["PrecioProcedimiento"],
-                  "UsuarioCreado" => $_SESSION["idUsuario"],
-                  "UsuarioActualizado" => $_SESSION["idUsuario"],
-                  "FechaCreado" => date("Y-m-d\TH:i:sP"),
-                  "FechaActualiza" => date("Y-m-d\TH:i:sP"),
                 );
                 $respuestaDetalleTratamiento = ControllerTratamiento::ctrCrearDetalleTratamiento($datosDetalleTratamiento);
               }
@@ -318,87 +314,18 @@ class ControllerHistorias
           //  Actualizar el total del tratamiento
           if($respuestaDetalleHistoria == "ok")
           {
-            $totalTratamiento = $_POST["nuevoTotalTratamiento"];
-            $idTratamiento = ControllerTratamiento::ctrObtenerIdTratamiento($codPaciente);
-            $respuestaUpdateTratamiento = ControllerTratamiento::ctrUpdatePrecioTratamiento($idTratamiento["IdTratamiento"] ,$totalTratamiento);
-            
-            //  Actualizar el listado de los tratamientos
-            if ($respuestaUpdateTratamiento == "ok")
-            {
-              //  Eliminar todos los procedimientos del tratamiento actual o que se mantengan estos -> Depende de como quieren que se maneje los pagos por el tratamiento, es decir si quieren que el paciente vaya cancelando por cada tratamiento y llevar el costo por cada procedimiento que se vaya haciendo o llevar el costo total por todo el tratamiento como una suma general.
-              $listaProcedimientos = json_decode($_POST["listarProcedimientos"], true);
-              if($listaProcedimientos != null)
-              {
-                $eliminarListaProcedimientos = ControllerTratamiento::ctrEliminarTodoDetalle($idTratamiento["IdTratamiento"]);
-                if($eliminarListaProcedimientos == "ok")
-                {
-                  foreach($listaProcedimientos as $value)
-                  {
-                    $datosDetalleTratamiento = array(
-                      "IdTratamiento" => $idTratamiento["IdTratamiento"],
-                      "IdProcedimiento" => $value["CodProcedimiento"],
-                      "ObservacionProcedimiento" => $value["ObservacionProcedimiento"],
-                      "EstadoTratamiento" => "1",
-                      "PrecioProcedimiento" => $value["PrecioProcedimiento"],
-                      "UsuarioCreado" => $_SESSION["idUsuario"],
-                      "UsuarioActualizado" => $_SESSION["idUsuario"],
-                      "FechaCreado" => date("Y-m-d\TH:i:sP"),
-                      "FechaActualiza" => date("Y-m-d\TH:i:sP"),
-                    );
-                    $respuestaDetalleTratamiento = ControllerTratamiento::ctrCrearDetalleTratamiento($datosDetalleTratamiento);
-                  } 
-                }
-                else
-                {
-                  echo '
-                  <script>
-                    Swal.fire({
-                      icon: "error",
-                      title: "Error",
-                      text: "¡Error al eliminar el detalle de los procedimientos!",
-                    }).then(function(result){
-                      if(result.value){
-                        window.location = "historiaClinica";
-                      }
-                    });
-                  </script>';
-                }
-              }
-              else
-              {
-                $respuestaDetalleTratamiento = "ok";
-              }
-              if($respuestaDetalleTratamiento == "ok")
-              {
-                echo '
-                  <script>
-                    Swal.fire({
-                      icon: "success",
-                      title: "Correcto",
-                      text: "¡Historia Clínica editada correctamente!",
-                    }).then(function(result){
-                      if(result.value){
-                        window.location = "historiaClinica";
-                      }
-                    });
-                  </script>';
-              }
-            }
-            else
-            {
-              echo '
+            echo '
               <script>
                 Swal.fire({
-                  icon: "error",
-                  title: "Error",
-                  text: "¡Error al editar el total del procedimiento!",
+                  icon: "success",
+                  title: "Correcto",
+                  text: "¡Historia Clínica editada correctamente!",
                 }).then(function(result){
                   if(result.value){
                     window.location = "historiaClinica";
                   }
                 });
               </script>';
-            }
           }
           else
           {
