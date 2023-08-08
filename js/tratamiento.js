@@ -28,7 +28,7 @@ $(".formularioHistoriaClinica").on("click", "button.eliminarProcedimiento", func
       icon: 'error',
       title: 'Error',
       text: '¡No se puede eliminar un procedimiento que ya esté realizado!',
-    })
+    });
   }
 });
 
@@ -36,4 +36,4 @@ $(".formularioHistoriaClinica").on("click", "button.eliminarProcedimiento", func
 $(".formularioHistoriaClinica").on("click", "button.eliminarProcedimiento", function(){
   
 });
-estadoProcedimiento
+//estadoProcedimiento

@@ -11,7 +11,7 @@
  Target Server Version : 100428
  File Encoding         : 65001
 
- Date: 07/08/2023 17:17:36
+ Date: 08/08/2023 11:01:35
 */
 
 SET NAMES utf8mb4;
@@ -294,8 +294,6 @@ CREATE TABLE `tba_pago`  (
   `IdTipoPago` int NOT NULL,
   `TotalPago` decimal(10, 2) NOT NULL,
   `FechaPago` date NOT NULL,
-  `UsuarioCreado` int NOT NULL,
-  `UsuarioActualiza` int NOT NULL,
   `FechaCreacion` datetime NOT NULL,
   `FechaActualizacion` datetime NOT NULL,
   PRIMARY KEY (`IdPago`) USING BTREE,
@@ -303,13 +301,16 @@ CREATE TABLE `tba_pago`  (
   INDEX `tba_pago_fkTipoPago`(`IdTipoPago`) USING BTREE,
   CONSTRAINT `tba_pago_fkPaciente` FOREIGN KEY (`IdPaciente`) REFERENCES `tba_paciente` (`IdPaciente`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `tba_pago_fkTipoPago` FOREIGN KEY (`IdTipoPago`) REFERENCES `tba_tipodepago` (`IdTipoPago`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tba_pago
 -- ----------------------------
-INSERT INTO `tba_pago` VALUES (1, 1, 1, 1500.00, '2023-08-02', 1, 1, '2023-08-07 15:21:23', '2023-08-07 15:21:28');
-INSERT INTO `tba_pago` VALUES (2, 2, 1, 1500.00, '2023-08-07', 1, 1, '2023-08-07 15:21:23', '2023-08-07 15:21:28');
+INSERT INTO `tba_pago` VALUES (1, 1, 1, 1500.00, '2023-08-02', '2023-08-07 15:21:23', '2023-08-07 15:21:28');
+INSERT INTO `tba_pago` VALUES (2, 2, 1, 1500.00, '2023-08-07', '2023-08-07 15:21:23', '2023-08-07 15:21:28');
+INSERT INTO `tba_pago` VALUES (4, 2, 4, 555.00, '2023-08-03', '2023-08-08 17:41:31', '2023-08-08 17:41:31');
+INSERT INTO `tba_pago` VALUES (10, 2, 1, 1231.00, '2023-08-02', '2023-08-08 17:54:21', '2023-08-08 17:54:21');
+INSERT INTO `tba_pago` VALUES (11, 1, 3, 333.00, '2023-08-11', '2023-08-08 17:59:05', '2023-08-08 17:59:05');
 
 -- ----------------------------
 -- Table structure for tba_perfilusuario
@@ -495,6 +496,6 @@ CREATE TABLE `tba_usuario`  (
 -- ----------------------------
 -- Records of tba_usuario
 -- ----------------------------
-INSERT INTO `tba_usuario` VALUES (1, 1, 'Administrador', 'admin@gmail.com', '$2a$07$usesomesillystringforeh6tvwDNOAiEn9PYXfY79K3vDiKj6Ib6', 987654321, '2023-07-19 00:00:00', '2023-07-19 00:00:00', '2023-08-07 08:55:29');
+INSERT INTO `tba_usuario` VALUES (1, 1, 'Administrador', 'admin@gmail.com', '$2a$07$usesomesillystringforeh6tvwDNOAiEn9PYXfY79K3vDiKj6Ib6', 987654321, '2023-07-19 00:00:00', '2023-07-19 00:00:00', '2023-08-08 08:28:36');
 
 SET FOREIGN_KEY_CHECKS = 1;

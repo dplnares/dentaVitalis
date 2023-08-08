@@ -161,4 +161,12 @@ class ControllerPacientes
     $datosPaciente = ModelPacientes::mdlMostrarDatosTratamiento($tabla, $codPaciente);
     return $datosPaciente;
   }
+
+  //  Buscar paciente por DNI
+  public static function ctrBuscarPacienteDNI($numeroDNI)
+  {
+    $tabla = "tba_paciente";
+    $datosPaciente = ModelPacientes::mdlBuscarPacienteDNI($tabla, $numeroDNI);
+    return $datosPaciente;
+  }
 }
