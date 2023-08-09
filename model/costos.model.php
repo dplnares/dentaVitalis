@@ -255,7 +255,41 @@ class ModelCostos
   //  Mostrar costos por rango de meses
   public static function mldMostrarSumaCostosPorMeses($tabla, $fechaInicial, $fechaFinal)
   {
-    $statement = Conexion::conn()->prepare("SELECT cc.IdCentroCostos, cc.DescripcionCentro, SUM(c.TotalCosto) AS SumaTotalCosto FROM $tabla cc INNER JOIN tba_costo c ON cc.IdCentroCostos = c.IdCentroCostos WHERE c.FechaCreacion >= '$fechaInicial' AND c.FechaCreacion <= '$fechaFinal' GROUP BY cc.IdCentroCostos, cc.DescripcionCentro");
+    $statement = Conexion::conn()->prepare("SELECT
+    cc.IdCentroCostos, 
+    cc.DescripcionCentro, 
+    SUM(c.TotalCosto) AS SumaTotalCosto, 
+    tba_detallecosto.NumeroDocumento, 
+    tba_detallecosto.ObservacionGasto, 
+    tba_socio.NombreSocio, 
+    tba_detallecosto.FechaCosto, 
+    tba_gasto.NombreGasto, 
+	  tba_detallecosto.PrecioGasto
+  FROM
+    $tabla AS cc
+    INNER JOIN
+    tba_costo AS c
+    ON 
+      cc.IdCentroCostos = c.IdCentroCostos
+    INNER JOIN
+    tba_detallecosto
+    ON 
+      c.IdCosto = tba_detallecosto.IdCosto
+    INNER JOIN
+    tba_socio
+    ON 
+      tba_detallecosto.IdSocio = tba_socio.IdSocio
+    INNER JOIN
+    tba_gasto
+    ON 
+      cc.IdCentroCostos = tba_gasto.IdCentroCostos AND
+      tba_detallecosto.IdGasto = tba_gasto.IdGasto
+  WHERE
+    c.FechaCreacion >= '$fechaInicial' AND
+    c.FechaCreacion <= '$fechaFinal'
+  GROUP BY
+    cc.IdCentroCostos, 
+    cc.DescripcionCentro");
     $statement -> execute();
     return $statement -> fetchAll();
   }

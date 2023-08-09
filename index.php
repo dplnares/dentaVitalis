@@ -2,6 +2,7 @@
 date_default_timezone_set('America/Lima');
 //  Librerias
 require_once "library/PHPExcel/Classes/PHPExcel.php";
+//  require_once "library/FPDF/fpdf.php";
 
 //  Controllers
 require_once "controller/plantilla.controller.php";

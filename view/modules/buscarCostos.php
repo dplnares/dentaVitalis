@@ -28,13 +28,13 @@
         </h1>
 
         <div class="d-inline-flex m-2">
-          <div class="p-1">
-            <button type="button" class="btn btn-warning" id="dateRangeCosto">
-              <i class="fa fa-calendar"></i> Rango de fecha<i class="fa fa-caret-down"></i>
+          <div class="p-1 rangoFechas">
+            <button type="button" class="btn btn-warning dateRangeCosto" id="dateRangeCosto">
+              <i class="fa fa-calendar calendarioPicker"></i> Rango de fecha <i class="fa fa-caret-down"></i>
             </button>
           </div>
           <div class="p-1">
-            <button class="btn btn-success" id="descargarFiltro" disabled>
+            <button class="btn btn-success btnDescargarFiltro" id="btnDescargarFiltro" >
               Descargar Excel
             </button>
           </div>

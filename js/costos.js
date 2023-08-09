@@ -357,6 +357,9 @@ $('#dateRangeCosto').daterangepicker({
 $('#dateRangeCosto').on('apply.daterangepicker', function(ev, picker) {
   var fechaInicial = picker.startDate.format('YYYY-MM-DD');
   var fechaFinal = picker.endDate.format('YYYY-MM-DD');
+  
+  sessionStorage.setItem('fechaInicial', fechaInicial);
+  sessionStorage.setItem('fechaFinal', fechaFinal);
 
   var datos = new FormData();
   datos.append("FechaInicial", fechaInicial);
@@ -384,10 +387,28 @@ $('#dateRangeCosto').on('apply.daterangepicker', function(ev, picker) {
           '</tr>'
         );
       });
-      $("#descargarFiltro").val('<a href=view/modules/descargar-reporte.php?&fechaInicial='+fechaInicial+'&fechaFinal='+fechaFinal+'</a>');
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.log("Error en la solicitud AJAX: ", textStatus, errorThrown);
     } 
   });
+});
+
+$("#btnDescargarFiltro").on("click", function(){
+  
+  fechaInicial = sessionStorage.getItem('fechaInicial');
+  fechaFinal = sessionStorage.getItem('fechaFinal');
+  
+  if(fechaInicial != null || fechaInicial != undefined || fechaInicial != '')
+  {
+    window.location = "view/modules/descargar-reporte.php?&fechaInicial="+fechaInicial+"&fechaFinal="+fechaFinal;
+  }
+  else
+  {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: '¡Intruduzca la Fecha Inicial y Fecha Final!',
+    });
+  }
 });

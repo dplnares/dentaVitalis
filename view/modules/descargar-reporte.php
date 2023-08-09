@@ -19,7 +19,7 @@ require_once "../../model/usuarios.model.php";
 
 
 //  Exportar reporte por fechas de la vista FiltrarCostos
-if(isset($_GET["reporteStockFiltroCosto"]))
+if(isset($_GET["fechaInicial"]) && isset($_GET["fechaFinal"]))
 {
 	$reporteStockTienda = new ControllerReportes();
 	$reporteStockTienda -> ctrDescargarReportePorFechas();

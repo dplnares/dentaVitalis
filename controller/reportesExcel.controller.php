@@ -33,6 +33,7 @@ class ControllerReportes
           <th style='width:10%'>Observacion de Costo</th>
           <th style='width:10%'>Numero de Documento</th>
           <th style='width:10%'>Fecha de Costo</th>
+          <th style='width:10%'>Fecha de Costo</th>
         </tr> 
       </thead>");
   
@@ -46,7 +47,8 @@ class ControllerReportes
           <td style="width:10%">'.$value["NombreGasto"].'</td>
           <td style="width:10%">'.$value["ObservacionGasto"].'</td>
           <td style="width:10%">'.$value["NumeroDocumento"].'</td>
-          <td style="width:10%">'.$value["PrecioCosto"].'</td>
+          <td style="width:10%">'.$value["PrecioGasto"].'</td>
+          <td style="width:10%">'.$value["FechaCosto"].'</td>
         </tr>');
       }
       echo "</table>";
