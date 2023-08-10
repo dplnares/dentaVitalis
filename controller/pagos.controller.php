@@ -22,7 +22,13 @@ class ControllerPagos
   public static function ctrGenerarNuevoPago($datosCreate)
   {
     $tabla = "tba_pago";
-    $respuesta = ModelPagos::mdlIngresarNuevoPago($tabla, $datosCreate);
+    $respuestaPago = ModelPagos::mdlIngresarNuevoPago($tabla, $datosCreate);
+    if($respuestaPago == "ok")
+    {
+      $totalPagadoActual = ControllerTratamiento::ctrObtenerTotalPagado($datosCreate["IdPaciente"]);
+      $nuevoTotal = $datosCreate["TotalPago"] + $totalPagadoActual["TotalPagado"];
+      $respuesta = ControllerTratamiento::ctrActualizarTotal($nuevoTotal, $datosCreate["IdPaciente"]);
+    }
     return $respuesta;
   }
 
@@ -107,5 +113,21 @@ class ControllerPagos
         </script>';
       }
     }
+  }
+
+  //  Mostrar todos los costos por el tratamiento por cada paciente
+  public static function ctrMostrarTotalPorPaciente()
+  {
+    $tabla = "tba_pago";
+    $listaCostoTratamientos = ModelPagos::mdlMostrarTotalPorPaciente($tabla);
+    return $listaCostoTratamientos;
+  }
+
+  //  Mostrar todos los pagos de un paciente
+  public static function ctrMostrarPagosPorPaciente($codPaciente)
+  {
+    $tabla = "tba_pago";
+    $listaPagosPaciente = ModelPagos::mdlMostrarPagosPorPaciente($tabla, $codPaciente);
+    return $listaPagosPaciente;
   }
 }

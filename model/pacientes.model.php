@@ -179,4 +179,69 @@ class ModelPacientes
     $statement -> execute();
     return $statement -> fetch();
   }
+
+  //  Mostrar los datos del paciente basicos 
+  public static function mdlMostrarDatosBasicos($tabla, $codPaciente)
+  {
+    $statement = Conexion::conn()->prepare("SELECT tba_paciente.IdPaciente, tba_paciente.NombrePaciente, tba_paciente.ApellidoPaciente, tba_paciente.DNIPaciente FROM $tabla WHERE tba_paciente.IdPaciente = $codPaciente");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
+
+  //  Obtener los datos de la historia clinica para imprimir en pdf
+  public static function mdlObtenerDatosHistoriaPdf($tabla, $codHistoria)
+  {
+    $statement = Conexion::conn()->prepare("SELECT
+    tba_paciente.NombrePaciente, 
+    tba_paciente.ApellidoPaciente, 
+    tba_paciente.DNIPaciente, 
+    tba_paciente.SexoPaciente, 
+    tba_paciente.EdadPaciente, 
+    tba_paciente.FechaNacimiento, 
+    tba_paciente.CelularPaciente, 
+    tba_paciente.DomicilioPaciente, 
+    tba_paciente.LugarProcedencia, 
+    tba_paciente.LugarNacimiento, 
+    tba_paciente.GradoInstruccion, 
+    tba_paciente.RazaPaciente, 
+    tba_paciente.OcupacionPaciente, 
+    tba_paciente.ReligionPaciente, 
+    tba_paciente.EstadoCivil, 
+    tba_paciente.NumeroContactoPaciente, 
+    tba_paciente.NombreContactoPaciente, 
+    tba_historiaclinica.AlergiasEncontradas, 
+    tba_historiaclinica.MotivoConsulta, 
+    tba_historiaclinica.DatosInformante, 
+    tba_historiaclinica.TiempoEnfermedad, 
+    tba_historiaclinica.SignosSintomas, 
+    tba_historiaclinica.RelatoCronologico, 
+    tba_historiaclinica.FuncionesBiologicas, 
+    tba_historiaclinica.AntecedentesFamiliares, 
+    tba_historiaclinica.AntecedentesPersonales, 
+    tba_detallehistoriaclinica.PresionArterial, 
+    tba_detallehistoriaclinica.Pulso, 
+    tba_detallehistoriaclinica.Temperatura, 
+    tba_detallehistoriaclinica.FrecuenciaCardiaca, 
+    tba_detallehistoriaclinica.FrecuenciaRespiratoria, 
+    tba_detallehistoriaclinica.ExamenOdonto, 
+    tba_detallehistoriaclinica.DiagnosticoPresuntivo, 
+    tba_detallehistoriaclinica.DiagnosticoDefinitivo, 
+    tba_detallehistoriaclinica.Pronostico, 
+    tba_detallehistoriaclinica.TratamientoPaciente, 
+    tba_detallehistoriaclinica.InformacionAlta
+  FROM
+    $tabla
+    INNER JOIN
+    tba_historiaclinica
+    ON 
+      tba_paciente.IdPaciente = tba_historiaclinica.IdPaciente
+    INNER JOIN
+    tba_detallehistoriaclinica
+    ON 
+      tba_historiaclinica.IdHistoriaClinica = tba_detallehistoriaclinica.IdHistoriaClinica
+  WHERE
+    tba_historiaclinica.IdHistoriaClinica = $codHistoria");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
 }

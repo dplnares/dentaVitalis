@@ -1,6 +1,6 @@
 <?php
 
-class ControllerReportes
+class ControllerReportesExcel
 {
   //  Descargar reporte del filtro de costos por fecha en excel
   public static function ctrDescargarReportePorFechas()

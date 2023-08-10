@@ -377,7 +377,7 @@ class ControllerHistorias
     }
   }
 
-  //  Eliminar historia clinica
+  //  Eliminar historia clinica ->>> FALA AÑADIR
   public static function ctrEliminarHistoria()
   {
     

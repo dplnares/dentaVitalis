@@ -191,4 +191,36 @@ class ModelTratamiento
       return "error";
     }
   }
+
+  //  Obtener el monto pagado actualmente
+  public static function mdlObtenerTotalPagado($tabla, $codPaciente)
+  {
+    $statement = Conexion::conn()->prepare("SELECT tba_tratamiento.TotalPagado FROM $tabla WHERE tba_tratamiento.IdPaciente = $codPaciente");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
+
+  //  Actualizar el nuevo total pagado
+  public static function mldActualizarTotal($tabla, $nuevoTotal, $codPaciente)
+  {
+    $statement = Conexion::conn()->prepare("UPDATE $tabla SET TotalPagado=:TotalPagado WHERE IdPaciente=:IdPaciente");
+    $statement -> bindParam(":TotalPagado", $nuevoTotal, PDO::PARAM_STR);
+    $statement -> bindParam(":IdPaciente", $codPaciente, PDO::PARAM_STR);
+    if($statement -> execute())
+    {
+      return "ok";
+    }
+    else
+    {
+      return "error";
+    }
+  }
+
+  //  Obtener totales del tratamiento 
+  public static function mdlObtenerTotalesTratamiento($tabla, $codPaciente)
+  {
+    $statement = Conexion::conn()->prepare("SELECT tba_tratamiento.TotalTratamiento, tba_tratamiento.TotalPagado, (TotalTratamiento - TotalPagado) AS DeudaActual FROM $tabla WHERE tba_tratamiento.IdPaciente = $codPaciente");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
 }

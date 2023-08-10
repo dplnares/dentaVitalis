@@ -174,4 +174,28 @@ class ControllerTratamiento
       }
     }
   }
+
+  //  Obtener el monto pagado actualmente
+  public static function ctrObtenerTotalPagado($codPaciente)
+  {
+    $tabla = "tba_tratamiento";
+    $totalPagado = ModelTratamiento::mdlObtenerTotalPagado($tabla, $codPaciente);
+    return $totalPagado;
+  }
+
+  //  Actualizar el nuevo total pagado
+  public static function ctrActualizarTotal($nuevoTotal, $codPaciente)
+  {
+    $tabla = "tba_tratamiento";
+    $respuesta = ModelTratamiento::mldActualizarTotal($tabla, $nuevoTotal, $codPaciente);
+    return $respuesta;
+  }
+
+  //  Obtener el monto pagado y el total del tratamiento
+  public static function ctrObtenerTotalesTratamiento($codPaciente)
+  {
+    $tabla = "tba_tratamiento";
+    $respuesta = ModelTratamiento::mdlObtenerTotalesTratamiento($tabla, $codPaciente);
+    return $respuesta;
+  }
 }

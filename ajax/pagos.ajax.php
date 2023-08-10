@@ -2,7 +2,8 @@
 
 require_once "../controller/pagos.controller.php";
 require_once "../model/pagos.model.php";
-
+require_once "../controller/tratamiento.controller.php";
+require_once "../model/tratamiento.model.php";
 
 class AjaxPagos
 {

@@ -395,7 +395,6 @@ $('#dateRangeCosto').on('apply.daterangepicker', function(ev, picker) {
 });
 
 $("#btnDescargarFiltro").on("click", function(){
-  
   fechaInicial = sessionStorage.getItem('fechaInicial');
   fechaFinal = sessionStorage.getItem('fechaFinal');
   

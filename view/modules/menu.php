@@ -25,7 +25,7 @@
   <div class="collapse" id="listaHistoria" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
     <nav class="sb-sidenav-menu-nested nav">
       <a class="nav-link" href="historiaClinica">Historias Clinica</a>
-      <a class="nav-link" href="calendario">Calendario Citas</a>
+      <!-- <a class="nav-link" href="calendario">Calendario Citas</a> -->
     </nav>
   </div>
 

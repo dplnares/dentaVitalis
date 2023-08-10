@@ -36,7 +36,7 @@
 
                 <div class="container row g-3 p-3 justify-content-between">
                   <h3 class="col-3 d-inline-flex-center">Datos Paciente</h3>
-                  <button class="col-3 d-inline-flex-center btn btn-success"><i class="fa fa-print" aria-hidden="true"></i>   Imprimir Historia Clinica</button>
+                  <button type="button" class="col-3 d-inline-flex-center btn btn-success btnDescargarHistoria" id="btnDescargarHistoria" codHistoria="<?php echo $_GET["codHistoria"] ?>"><i class="fa fa-print" aria-hidden="true"></i>   Imprimir Historia Clinica</button>
                 </div>
                 
                 <!-- Seleccionar al paciente -->

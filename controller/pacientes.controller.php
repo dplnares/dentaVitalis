@@ -169,4 +169,20 @@ class ControllerPacientes
     $datosPaciente = ModelPacientes::mdlBuscarPacienteDNI($tabla, $numeroDNI);
     return $datosPaciente;
   }
+
+  //  Mostrar los datos del paciente en visualiar pagos
+  public static function ctrMostrarDatosBasicos($codPaciente)
+  {
+    $tabla = "tba_paciente";
+    $datosPaciente = ModelPacientes::mdlMostrarDatosBasicos($tabla, $codPaciente);
+    return $datosPaciente;
+  }
+
+  //  Mostrar datos para imprimir historia clinica
+  public static function ctrObtenerDatosHistoriaPdf($codHistoria)
+  {
+    $tabla = "tba_paciente";
+    $datosHistoria = ModelPacientes::mdlObtenerDatosHistoriaPdf($tabla, $codHistoria);
+    return $datosHistoria;
+  }
 }

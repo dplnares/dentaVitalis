@@ -39,15 +39,14 @@
           $_GET["ruta"] == "buscarCostos" ||
           $_GET["ruta"] == "reporteCostos" ||
           $_GET["ruta"] == "historiaClinica" ||
-          
           $_GET["ruta"] == "crearNuevaHistoria" ||
           $_GET["ruta"] == "editarHistoria" ||
           $_GET["ruta"] == "planTratamiento" ||
           $_GET["ruta"] == "pagosPendientes" ||
           $_GET["ruta"] == "historialPagos" ||
 
+          $_GET["ruta"] == "visualizarPagos" ||
 
-          $_GET["ruta"] == "visualizarHistoria" ||
           $_GET["ruta"] == "calendario" ||
           $_GET["ruta"] == "signout" 
         )
