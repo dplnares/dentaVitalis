@@ -1,9 +1,11 @@
 <?php
 //  Controladores
 require_once('../../controller/pacientes.controller.php');
+require_once('../../controller/tratamiento.controller.php');
 
 //  Modelos
 require_once('../../model/pacientes.model.php');
+require_once('../../model/tratamiento.model.php');
 
 require('tfpdf.php');
 
@@ -43,11 +45,42 @@ class PDFHistoriaClinica extends TFPDF
     $this->Cell(0, 8, 'Página ' . $this->PageNo() . '/{nb}', 0, 0, 'L');
     $this->Cell(0, 8, 'Colegio Odontológico del Perú', 0, 0, 'R');
   }
+
+  //  Imprimir plan de tratamiento
+  function TablaProcedimientos($header, $listaTratamiento)
+  {
+    $this->SetFont('Arial', 'B', 10);
+    $this->Cell(70,7,$header[0],1,0,'C'); 
+    $this->Cell(60,7,$header[1],1,0,'C'); 
+    $this->Cell(25,7,$header[2],1,0,'C'); 
+    $this->Cell(25,7,$header[3],1,0,'C'); 
+    
+    foreach($listaTratamiento as $dato)
+    {
+      $this->SetFont('DejaVu', '', 10);
+      if($dato["EstadoTratamiento"] != '1'){
+        $estado = "Realizado";
+      } else {
+        $estado = "No Realizado";
+      }
+      if($dato["FechaProcedimiento"] == '0000-00-00'){
+        $fecha = "Sin Asignar";
+      } else {
+        $fecha = $dato["FechaProcedimiento"];
+      }
+      $this->Ln();
+      $this->Cell(70,5,$dato["NombreProcedimiento"],1);
+      $this->Cell(60,5,$dato["ObservacionProcedimiento"],1);
+      $this->Cell(25,5,$estado,1);
+      $this->Cell(25,5,$fecha,1);
+    }
+  }
 }
 
 //  Obtener el codigo del paciente para recoger sus datos 
 $codHistoria = $_GET["codHistoria"];
 $datosHistoriaClinica = ControllerPacientes::ctrObtenerDatosHistoriaPdf($codHistoria);
+$planTratamiento = ControllerTratamiento::ctrMostrarDetalleTratamientoCompleto($codHistoria);
 
 // Creacion de los datos de la historia clínica
 $pdf = new PDFHistoriaClinica();
@@ -310,9 +343,23 @@ $pdf->Ln(12);
 $pdf->SetFont('DejaVu', '', 10);
 $pdf->Cell(20,10,'_________________________________________',0);
 
+/**
+ * PLAN DE TRATAMIENTO DEL PACIENTE EN UNA NUEVA HOJA
+ */
+$pdf->AddPage();
+$pdf->SetFont('Arial','B',14);
+$pdf->Cell(80,10,'Lista de Procedimientos',0,'L');
+
+$pdf->Ln(8);
+
+//Títulos de las columnas
+$header=array('Descripcion','Observacion','Estado','Fecha');
+$pdf->AliasNbPages();
+
+//$pdf->AddPage();
+$pdf->TablaProcedimientos($header, $planTratamiento);
 
 /**
  * MANDAR EL PDF A UNA NUEVA VENTANA
  */
 $pdf->Output();
-

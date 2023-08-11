@@ -179,3 +179,21 @@ function sumaProcedimientos()
 
   $("#editarTotalTratamiento").val(sumaTotalTratamiento.toFixed(2));
 }
+
+$("#btnDescargarTratamiento").on("click", function(){
+  codHistoria = $(this).attr('codHistoria');
+  codPaciente = $(this).attr('codPaciente');
+  if(codHistoria != null || codHistoria != undefined || codHistoria != '')
+  {
+    window.open("library/FPDF/printPlanTratamiento.php?&codHistoria="+codHistoria+'&codPaciente='+codPaciente, "_blank");
+  }
+  else
+  {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: '¡No se encontró una Historia Clínica!',
+    });
+  }
+});
+

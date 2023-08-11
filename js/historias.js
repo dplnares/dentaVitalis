@@ -1,6 +1,53 @@
 //  Redirigir la vista para crear una nueva historia
 $("#btnNuevaHistoria").on("click", function(){
-  window.location = "index.php?ruta=crearNuevaHistoria";
+  Swal.fire({
+    title: 'Ingrese el número de DNI del Paciente',
+    input: 'text',
+    inputAttributes: {
+      autocapitalize: 'off'
+    },
+    showCancelButton: true,
+    confirmButtonText: 'Confirmar',
+  }).then((result) => {
+    if (result.value)
+    {
+      var datos = new FormData();
+      numeroDNIBuscar = result.value;
+      datos.append("numeroDNIBuscar", numeroDNIBuscar);
+      
+      $.ajax({
+        url: "ajax/pacientes.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "json",
+        success: function (respuesta) {
+          if (respuesta == "ok") {
+            window.location = "index.php?ruta=crearNuevaHistoria";
+          } else {
+            if (respuesta == "historia") {
+              Swal.fire(
+                'Error',
+                'Este Paciente ya tiene una historia creada',
+                'error'
+              );
+            } else {
+              Swal.fire(
+                'Error',
+                'Número de DNI no registrado',
+                'warning'
+              );
+            }
+          }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.log("Error en la solicitud AJAX: ", textStatus, errorThrown);
+        } 
+      });
+    }
+  })
 });
 
 //  Redirigir la vista para editar una historia
@@ -182,9 +229,9 @@ function sumaProcedimientos()
   $("#nuevoTotalTratamiento").val(sumaTotalTratamiento.toFixed(2));
 }
 
+//  Descargar solo la historia clínica
 $("#btnDescargarHistoria").on("click", function(){
   codHistoria = $(this).attr('codHistoria');
-  console.log(codHistoria)
   if(codHistoria != null || codHistoria != undefined || codHistoria != '')
   {
     window.open("library/FPDF/printHistoriaClinica.php?&codHistoria=" + codHistoria, "_blank");
@@ -199,3 +246,19 @@ $("#btnDescargarHistoria").on("click", function(){
   }
 });
 
+//  Descargar la historia clínica completa con el detalle de los procedimientos más
+$(".table").on("click", ".btnImprimirHistoria", function () {
+  codHistoria = $(this).attr('codHistoria');
+  if(codHistoria != null || codHistoria != undefined || codHistoria != '')
+  {
+    window.open("library/FPDF/printHistoriaCompleta.php?&codHistoria=" + codHistoria, "_blank");
+  }
+  else
+  {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: '¡No se encontró una Historia Clínica!',
+    });
+  }
+});

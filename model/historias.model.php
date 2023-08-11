@@ -149,4 +149,20 @@ class ModelHistorias
       return "error";
     }
   }
+
+  //  Buscar Historia por numero de DNI
+  public static function mdlBuscarHistoriaDNI($tabla, $numeroDNI)
+  {
+    $statement = Conexion::conn()->prepare("SELECT COUNT(*) AS Contador FROM $tabla INNER JOIN tba_paciente ON tba_historiaclinica.IdPaciente = tba_paciente.IdPaciente WHERE tba_paciente.DNIPaciente = $numeroDNI");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
+
+  //  Obtener el codigo de la historia por el codigo del paciente
+  public static function mdlObtenerCodHistoria($tabla, $codPaciente)
+  {
+    $statement = Conexion::conn()->prepare("SELECT tba_historiaclinica.IdHistoriaClinica FROM $tabla WHERE tba_historiaclinica.IdPaciente = $codPaciente");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
 }

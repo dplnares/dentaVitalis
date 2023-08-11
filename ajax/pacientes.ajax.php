@@ -2,6 +2,8 @@
 
 require_once "../controller/pacientes.controller.php";
 require_once "../model/pacientes.model.php";
+require_once "../controller/historias.controller.php";
+require_once "../model/historias.model.php";
 
 class AjaxPacientes
 {
@@ -31,6 +33,14 @@ class AjaxPacientes
     $respuesta = ControllerPacientes::ctrBuscarPacienteDNI($numeroDNI);
     echo json_encode($respuesta);
   }
+
+  public $numeroDNIBuscar;
+  public function ajaxBuscarPacienteDNI()
+  {
+    $numeroDNIBuscar = $this->numeroDNIBuscar;
+    $respuesta = ControllerPacientes::ctrVerificarNumeroDNI($numeroDNIBuscar);
+    echo json_encode($respuesta);
+  }
 }
 
 //  Editar socio
@@ -52,4 +62,11 @@ if(isset($_POST["numeroDNI"])){
 	$mostrarDatos = new AjaxPacientes();
 	$mostrarDatos -> numeroDNI = $_POST["numeroDNI"];
 	$mostrarDatos -> ajaxBuscarDNI();
+}
+
+//  Buscar al paciente por el número del DNI para crear una nueva historia
+if(isset($_POST["numeroDNIBuscar"])){
+	$verificarDNI = new AjaxPacientes();
+	$verificarDNI -> numeroDNIBuscar = $_POST["numeroDNIBuscar"];
+	$verificarDNI -> ajaxBuscarPacienteDNI();
 }

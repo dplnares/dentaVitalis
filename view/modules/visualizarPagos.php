@@ -118,10 +118,11 @@
                 <h3>Pagos Realizados</h3>
 
                 <div class="row" style="font-weight: bold">
-                  <div class="col-lg-3">Tipo Pago</div>
-                  <div class="col-lg-3">Total Pagado</div>
-                  <div class="col-lg-3">Fecha de Pago</div>
-                  <div class="col-lg-3">Comprobante de Pago</div>
+                  <div class="col-lg-2">Tipo Pago</div>
+                  <div class="col-lg-2">Total Pagado</div>
+                  <div class="col-lg-2">Fecha de Pago</div>
+                  <div class="col-lg-4">Observacion</div>
+                  <div class="col-lg-2">Comprobante</div>
                 </div>
 
                 <div class="form-group row nuevoProcedimientoAgregar">
@@ -133,22 +134,27 @@
                         <div class="row" style="padding:5px 15px">
 
                           <!-- Tipo de pago realizado -->     
-                          <div class="col-lg-3 descripcionTipoPago">
+                          <div class="col-lg-2 descripcionTipoPago">
                             <input type="text" class="form-control" value="'.$value["DescripcionTipo"].'" readonly>
                           </div>
                   
                           <!-- Total de pago realizado -->
-                          <div class="col-lg-3 totalPagado">
+                          <div class="col-lg-2 totalPagado">
                             <input type="text" class="form-control" value="'.$value["TotalPago"].'" readonly>
                           </div>
 
                           <!-- Fecha del pago -->
-                          <div class="col-lg-3 fechaPago">
+                          <div class="col-lg-2 fechaPago">
                             <input type="date" class="form-control" value="'.$value["FechaPago"].'" readonly>
                           </div>
 
+                          <!-- Fecha del pago -->
+                          <div class="col-lg-4 observacionPago">
+                            <input type="text" class="form-control" value="'.$value["ObservacionPago"].'" readonly>
+                          </div>
+
                           <!-- Descargar Comprobante de pago -->
-                          <div class="col-lg-3 d-flex justify-content-center descargarPlano">
+                          <div class="col-lg-2 d-flex justify-content-center descargarPlano">
                             <button class="btn btn-success btnDescargarPago" id="btnDescargarPago" codPago="'.$value["IdPago"].'"><i class="fa-solid fa fa-cloud-download"></i></button>
                           </div>
                         </div>

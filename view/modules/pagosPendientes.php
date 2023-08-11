@@ -42,7 +42,7 @@
                         <td>'.$value["TotalPagado"].'</td>
                         <td>'.$deudaActual.'</td>
                         <td>
-                          <button class="btn btn-success btnDescargarPagosPendientes" id="btnDescargarPagosPendientes" codPaciente="'.$value["IdPaciente"].'"><i class="fa-solid fa-file-text"></i></button>
+                          <button class="btn btn-success btnFichaPagos" id="btnFichaPagos" codPaciente="'.$value["IdPaciente"].'"><i class="fa-solid fa fa-print"></i></button>
                           <button class="btn btn-primary btnVisualizarPagos" id="btnVisualizarPagos" codPaciente="'.$value["IdPaciente"].'" codHistoria="'.$value["IdHistoriaClinica"].'"><i class="fa fa-eye"></i></button>
                         </td>
                       </tr>';

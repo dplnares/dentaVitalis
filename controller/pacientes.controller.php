@@ -185,4 +185,40 @@ class ControllerPacientes
     $datosHistoria = ModelPacientes::mdlObtenerDatosHistoriaPdf($tabla, $codHistoria);
     return $datosHistoria;
   }
+
+  //  Mostrar los datos básicos del paciente para imprimir en pdf
+  public static function ctrMostrarDatosImprimir($codPaciente)
+  {
+    $tabla = "tba_paciente";
+    $datosHistoria = ModelPacientes::mdlMostrarDatosImprimir($tabla, $codPaciente);
+    return $datosHistoria;
+  }
+
+  //  Verificar el numero de DNI para ver si se encuentra dentro de la base de datos
+  public static function ctrVerificarNumeroDNI($numeroDNIBuscar)
+  {
+    $tabla = "tba_paciente";
+    $respuesta = "ok";
+    $nombrePaciente = ModelPacientes::mdlVerificarPacienteDNI($tabla, $numeroDNIBuscar);
+    $historiaPaciente = ControllerHistorias::ctrBuscarHistoriaDNI($numeroDNIBuscar);
+
+    //  Si me devuelve un valor, significa que tiene una historia y no puede crear otra
+    if($historiaPaciente["Contador"] == '1')
+    {
+      $respuesta = "historia";
+    }
+    else
+    {
+      //  Si nos devuelve un valor null, significa que no esta registrado y falta registrarlo
+      if($nombrePaciente["Contador"] == '1')
+      {
+        $respuesta = "ok";
+      }
+      else
+      {
+        $respuesta = "paciente";
+      }
+    }
+    return $respuesta;
+  }
 }

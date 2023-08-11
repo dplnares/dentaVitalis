@@ -241,3 +241,20 @@ $(".cerrarVisualizar").on("click", function(){
   window.location = "index.php?ruta=pagosPendientes";
 });
 
+//  Descargar la historia clínica completa con el detalle de los procedimientos más
+$(".table").on("click", ".btnFichaPagos", function () {
+  codPaciente = $(this).attr('codPaciente');
+  if(codPaciente != null || codPaciente != undefined || codPaciente != '')
+  {
+    window.open("library/FPDF/printFichaPago.php?&codPaciente=" + codPaciente, "_blank");
+  }
+  else
+  {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: '¡No se encontró una Ficha de Pagos!',
+    });
+  }
+});
+

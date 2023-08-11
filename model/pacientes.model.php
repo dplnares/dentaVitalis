@@ -244,4 +244,20 @@ class ModelPacientes
     $statement -> execute();
     return $statement -> fetch();
   }
+
+  //  Mostrar datos básicos del paciente para imprimir
+  public static function mdlMostrarDatosImprimir($tabla, $codPaciente)
+  {
+    $statement = Conexion::conn()->prepare("SELECT tba_paciente.NombrePaciente, tba_paciente.ApellidoPaciente, tba_paciente.DNIPaciente, tba_paciente.EdadPaciente, tba_paciente.SexoPaciente, tba_paciente.FechaNacimiento, tba_paciente.CelularPaciente FROM $tabla WHERE tba_paciente.IdPaciente = $codPaciente");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
+
+  //  Verificar si un paciente está registrado o no, según su DNI
+  public static function mdlVerificarPacienteDNI($tabla, $numeroDNI)
+  {
+    $statement = Conexion::conn()->prepare("SELECT COUNT(*) AS Contador FROM $tabla WHERE tba_paciente.DNIPaciente = $numeroDNI");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
 }

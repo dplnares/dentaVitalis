@@ -377,9 +377,28 @@ class ControllerHistorias
     }
   }
 
+  //  Buscar historia por numero de deni
+  public static function ctrBuscarHistoriaDNI($numeroDNI)
+  {
+    $tabla = "tba_historiaclinica";
+    $respuesta = ModelHistorias::mdlBuscarHistoriaDNI($tabla, $numeroDNI);
+    return $respuesta;
+  }
+
   //  Eliminar historia clinica ->>> FALA AÑADIR
   public static function ctrEliminarHistoria()
   {
-    
+    if(isset($_POST["codHistoria"]))
+    {
+      
+    }
+  }
+
+  //  Buscar Historia por codigo de paciente
+  public static function ctrObtenerCodHistoria($codPaciente)
+  {
+    $tabla = "tba_historiaclinica";
+    $respuesta  = ModelHistorias::mdlObtenerCodHistoria($tabla, $codPaciente);
+    return $respuesta;
   }
 }

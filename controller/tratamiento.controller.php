@@ -79,51 +79,76 @@ class ControllerTratamiento
   {
     if(isset($_POST["listarNuevaListaProcedimientos"]))
     {
-      $codPaciente = $_GET["codPaciente"];
-      $tablaDetalleTratamiento = "tba_detalletratamiento";
-      
-      $listaProcedimientos = json_decode($_POST["listarNuevaListaProcedimientos"], true);
-      $idTratamiento = self::ctrObtenerIdTratamiento($codPaciente);
-
-      //  Eliminamos el tratamiento actual para crear una nueva con todas las características que se quiera
-      $respuestaEliminarDetalle = ModelTratamiento::mdlEliminarDetalleActual($tablaDetalleTratamiento, $idTratamiento["IdTratamiento"]);
-      
-      if($respuestaEliminarDetalle == "ok")
+      if($_POST["listarNuevaListaProcedimientos"] != '')
       {
-        $totalTratamiento = $_POST["editarTotalTratamiento"];
-        $respuestaUpdateTratamiento = ControllerTratamiento::ctrUpdatePrecioTratamiento($idTratamiento["IdTratamiento"] ,$totalTratamiento);
-        if($respuestaUpdateTratamiento == "ok")
+        $codPaciente = $_GET["codPaciente"];
+        $tablaDetalleTratamiento = "tba_detalletratamiento";
+        
+        $listaProcedimientos = json_decode($_POST["listarNuevaListaProcedimientos"], true);
+        $idTratamiento = self::ctrObtenerIdTratamiento($codPaciente);
+  
+        //  Eliminamos el tratamiento actual para crear una nueva con todas las características que se quiera
+        $respuestaEliminarDetalle = ModelTratamiento::mdlEliminarDetalleActual($tablaDetalleTratamiento, $idTratamiento["IdTratamiento"]);
+        
+        if($respuestaEliminarDetalle == "ok")
         {
-          foreach($listaProcedimientos as $value)
+          $totalTratamiento = $_POST["editarTotalTratamiento"];
+          $respuestaUpdateTratamiento = ControllerTratamiento::ctrUpdatePrecioTratamiento($idTratamiento["IdTratamiento"] ,$totalTratamiento);
+          if($respuestaUpdateTratamiento == "ok")
           {
-            //  Si el estado es true, colocamos 2, sino colocamos 1 -> 1 es realizado y 2 no realizado
-            $value["EstadoProcedimiento"] = true  ? $estado = "2" : $estado="1";
-
-            $datosDetalleTratamiento = array(
-              "IdTratamiento" => $idTratamiento["IdTratamiento"],
-              "IdProcedimiento" => $value["CodProcedimiento"],
-              "ObservacionProcedimiento" => $value["ObservacionProcedimiento"],
-              "EstadoTratamiento" => $estado,
-              "FechaProcedimiento" => $value["FechaProcedimiento"],
-              "PrecioProcedimiento" => $value["PrecioProcedimiento"],
-            );
-            $respuestaDetalleTratamiento = ModelTratamiento::mdlCrearEditadoDetalleTratamiento($tablaDetalleTratamiento, $datosDetalleTratamiento);
-          }
-
-          if($respuestaDetalleTratamiento == "ok")
-          {
-            echo '
-              <script>
-                Swal.fire({
-                  icon: "success",
-                  title: "Correcto",
-                  text: "¡Plan de Tratamiento Actualizado Correctamente!",
-                }).then(function(result){
-                  if(result.value){
-                    window.location = "historiaClinica";
-                  }
-                });
-              </script>';
+            foreach($listaProcedimientos as $value)
+            {
+              //  Si el estado es true, colocamos 2, sino colocamos 1 -> 1 es realizado y 2 no realizado
+              if($value["EstadoProcedimiento"] == true)
+              {
+                $estado = '2';
+              }
+              else
+              {
+                $estado = '1';
+              }
+  
+              $datosDetalleTratamiento = array(
+                "IdTratamiento" => $idTratamiento["IdTratamiento"],
+                "IdProcedimiento" => $value["CodProcedimiento"],
+                "ObservacionProcedimiento" => $value["ObservacionProcedimiento"],
+                "EstadoTratamiento" => $estado,
+                "FechaProcedimiento" => $value["FechaProcedimiento"],
+                "PrecioProcedimiento" => $value["PrecioProcedimiento"],
+              );
+              $respuestaDetalleTratamiento = ModelTratamiento::mdlCrearEditadoDetalleTratamiento($tablaDetalleTratamiento, $datosDetalleTratamiento);
+            }
+  
+            if($respuestaDetalleTratamiento == "ok")
+            {
+              echo '
+                <script>
+                  Swal.fire({
+                    icon: "success",
+                    title: "Correcto",
+                    text: "¡Plan de Tratamiento Actualizado Correctamente!",
+                  }).then(function(result){
+                    if(result.value){
+                      window.location = "historiaClinica";
+                    }
+                  });
+                </script>';
+            }
+            else
+            {
+              echo '
+                <script>
+                  Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "¡Error al actualizar el detalle del tratamiento!",
+                  }).then(function(result){
+                    if(result.value){
+                      window.location = "historiaClinica";
+                    }
+                  });
+                </script>';
+            }
           }
           else
           {
@@ -132,7 +157,7 @@ class ControllerTratamiento
                 Swal.fire({
                   icon: "error",
                   title: "Error",
-                  text: "¡Error al actualizar el detalle del tratamiento!",
+                  text: "¡Error al actualizar el total del plan de tratamiento!",
                 }).then(function(result){
                   if(result.value){
                     window.location = "historiaClinica";
@@ -148,7 +173,7 @@ class ControllerTratamiento
               Swal.fire({
                 icon: "error",
                 title: "Error",
-                text: "¡Error al actualizar el total del plan de tratamiento!",
+                text: "¡Error eliminar los procedimientos!",
               }).then(function(result){
                 if(result.value){
                   window.location = "historiaClinica";
@@ -162,9 +187,9 @@ class ControllerTratamiento
         echo '
           <script>
             Swal.fire({
-              icon: "error",
-              title: "Error",
-              text: "¡Error eliminar los procedimientos!",
+              icon: "warning",
+              title: "Sin Modificaciones",
+              text: "¡No se Modificaron los datos!",
             }).then(function(result){
               if(result.value){
                 window.location = "historiaClinica";
