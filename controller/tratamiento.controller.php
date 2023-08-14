@@ -223,4 +223,12 @@ class ControllerTratamiento
     $respuesta = ModelTratamiento::mdlObtenerTotalesTratamiento($tabla, $codPaciente);
     return $respuesta;
   }
+
+  //  Obtener el monto que suma actualmente los procedimientos que estan con estado de realizado para el paciente
+  public static function ctrObtenerTotalRealizado($codHistoria)
+  {
+    $tabla = "tba_detalletratamiento";
+    $respuesta = ModelTratamiento::mdlObtenerTotalRealizado($tabla, $codHistoria);
+    return $respuesta;
+  }
 }

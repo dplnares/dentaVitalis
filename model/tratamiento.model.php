@@ -195,7 +195,7 @@ class ModelTratamiento
   //  Obtener el monto pagado actualmente
   public static function mdlObtenerTotalPagado($tabla, $codPaciente)
   {
-    $statement = Conexion::conn()->prepare("SELECT tba_tratamiento.TotalPagado FROM $tabla WHERE tba_tratamiento.IdPaciente = $codPaciente");
+    $statement = Conexion::conn()->prepare("SELECT tba_tratamiento.IdTratamiento, tba_tratamiento.TotalPagado FROM $tabla WHERE tba_tratamiento.IdPaciente = $codPaciente");
     $statement -> execute();
     return $statement -> fetch();
   }
@@ -220,6 +220,14 @@ class ModelTratamiento
   public static function mdlObtenerTotalesTratamiento($tabla, $codPaciente)
   {
     $statement = Conexion::conn()->prepare("SELECT tba_tratamiento.TotalTratamiento, tba_tratamiento.TotalPagado, (TotalTratamiento - TotalPagado) AS DeudaActual FROM $tabla WHERE tba_tratamiento.IdPaciente = $codPaciente");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
+
+  //  Obtener el costo total de los procedimientos realizdos hastas ahora
+  public static function mdlObtenerTotalRealizado($tabla, $codHistoria)
+  {
+    $statement = Conexion::conn()->prepare("SELECT SUM(PrecioProcedimiento) AS TotalRealizado FROM $tabla INNER JOIN tba_tratamiento ON tba_detalletratamiento.IdTratamiento = tba_tratamiento.IdTratamiento WHERE tba_tratamiento.IdHistoriaClinica = $codHistoria AND EstadoTratamiento = 2");
     $statement -> execute();
     return $statement -> fetch();
   }

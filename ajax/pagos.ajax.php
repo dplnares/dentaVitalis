@@ -12,6 +12,7 @@ class AjaxPagos
   public $tipoPago;
   public $montoDePago;
   public $fechaPago;
+  public $observacionPago;
 
   public function ajaxAgregarNuevoPago()
   {
@@ -19,11 +20,13 @@ class AjaxPagos
     $tipoPago = $this->tipoPago;
     $montoDePago = $this->montoDePago;
     $fechaPago = $this->fechaPago;
+    $observacionPago = $this->observacionPago;
     $datosCreate = array(
       "IdPaciente" => $codPaciente,
       "IdTipoPago" => $tipoPago,
       "TotalPago" => $montoDePago,
       "FechaPago" => $fechaPago,
+      "ObservacionPago" => $observacionPago,
       "FechaCreacion" => date("Y-m-d\TH:i:sP"),
       "FechaActualizacion" => date("Y-m-d\TH:i:sP"),
     );
@@ -40,6 +43,18 @@ class AjaxPagos
     $respuesta = ControllerPagos::ctrMostrarDatosEditar($codPagoEditar);
     echo json_encode($respuesta);
   }
+
+  public $codPagoDescargar;
+  public function ajaxDescargarPago()
+  {
+    $codPagoDescargar = $this->codPagoDescargar;
+    $respuesta = ControllerPagos::ctrDescargarPago($codPagoDescargar);
+    $devolver = array(
+      "archivo" => $respuesta["archivo"],
+      "ruta" => $respuesta["ruta"]
+    );
+    echo json_encode($devolver);
+  }
 }
 
 //  Agregar nuevo pago
@@ -49,6 +64,7 @@ if(isset($_POST["codPaciente"])){
   $agregarPago -> tipoPago = $_POST["tipoPago"];
   $agregarPago -> montoDePago = $_POST["montoDePago"];
   $agregarPago -> fechaPago = $_POST["fechaPago"];
+  $agregarPago -> observacionPago = $_POST["observacionPago"]; 
 	$agregarPago -> ajaxAgregarNuevoPago();
 }
 
@@ -59,3 +75,9 @@ if(isset($_POST["codPagoEditar"])){
   $editarPago -> ajaxEditarPago();
 }
 
+//  Descargar un comprobante
+if(isset($_POST["codPagoDescargar"])){
+  $descargarPago = new AjaxPagos();
+  $descargarPago -> codPagoDescargar = $_POST["codPagoDescargar"];
+  $descargarPago -> ajaxDescargarPago();
+}

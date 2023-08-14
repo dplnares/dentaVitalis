@@ -18,8 +18,9 @@
                 $datosPaciente = ControllerPacientes::ctrMostrarDatosBasicos($codPaciente);
                 $detalleTratamiento = ControllerTratamiento::ctrMostrarDetalleTratamientoCompleto($codHistoria);
                 $totalesTratamiento = ControllerTratamiento::ctrObtenerTotalesTratamiento($codPaciente);
+                $totalRealizado = ControllerTratamiento::ctrObtenerTotalRealizado($codHistoria);
 
-                echo' Pagos Pendientes Paciente :'.$datosPaciente["NombrePaciente"].' '.$datosPaciente["ApellidoPaciente"];
+                echo' Pagos Pendientes Paciente : '.$datosPaciente["NombrePaciente"].' '.$datosPaciente["ApellidoPaciente"];
               }
               else
               {
@@ -38,13 +39,13 @@
                 <!-- Nombre del paciente -->
                 <div class="col-md-8">
                   <label for="visualizarNombre" class="form-label" style="font-weight: bold">Paciente: </label>
-                  <input type="text" class="form-control" id="visualizarNombre" name="visualizarNombre" value="<?php echo $datosPaciente["NombrePaciente"].' '.$datosPaciente["ApellidoPaciente"] ?>" readonly>
+                  <input type="text" class="form-control border-0" id="visualizarNombre" name="visualizarNombre" value="<?php echo $datosPaciente["NombrePaciente"].' '.$datosPaciente["ApellidoPaciente"] ?>" readonly>
                 </div>
 
                 <!-- Numero de DNI -->
                 <div class="col-md-4">
                   <label for="visualizarDNI" class="form-label" style="font-weight: bold">DNI: </label>
-                  <input type="text" class="form-control" id="visualizarDNI" name="visualizarDNI" value="<?php echo $datosPaciente["DNIPaciente"] ?>" readonly>
+                  <input type="text" class="form-control border-0" id="visualizarDNI" name="visualizarDNI" value="<?php echo $datosPaciente["DNIPaciente"] ?>" readonly>
                 </div>
 
               </div>
@@ -169,30 +170,39 @@
             <span class="border border-3 p-3">
               <div class="container row g-3 p-3">
                 <h3>Costos Totales</h3>
-                <div class="row" style="font-weight: bold">
+                <div class="row p-2" style="font-weight: bold">
                   <div class="col-lg-3">
-                    <span>Costo Tratamiento(S/.):</span>
+                    <span>Total Tratamiento(S/.):</span>
                   </div>
                   <div class="col-lg-2">
-                    <input type="text" style="text-align: right;" class="form-control input-lg" value="<?php echo $totalesTratamiento["TotalTratamiento"] ?>" readonly>
+                    <input type="text" style="text-align: right;" class="form-control input-lg border-0" value="<?php echo $totalesTratamiento["TotalTratamiento"] ?>" readonly>
                   </div>
                 </div>
 
-                <div class="row" style="font-weight: bold">
+                <div class="row p-2" style="font-weight: bold">
+                  <div class="col-lg-3">
+                    <span>Procedimientos Realizados(S/.):</span>
+                  </div>
+                  <div class="col-lg-2">
+                    <input type="text" style="text-align: right;" class="form-control input-lg border-0" value="<?php echo $totalRealizado["TotalRealizado"] ?>" readonly>
+                  </div>
+                </div>
+
+                <div class="row p-2" style="font-weight: bold">
                   <div class="col-lg-3">
                     <span>Total Pagado(S/.):</span>
                   </div>
                   <div class="col-lg-2">
-                    <input type="text" style="text-align: right;" class="form-control input-lg" value="<?php echo $totalesTratamiento["TotalPagado"] ?>" readonly>
+                    <input type="text" style="text-align: right;" class="form-control input-lg border-0" value="<?php echo $totalesTratamiento["TotalPagado"] ?>" readonly>
                   </div>
                 </div>
 
-                <div class="row" style="font-weight: bold">
+                <div class="row p-2" style="font-weight: bold">
                   <div class="col-lg-3">
                     <span>Deuda Actual(S/.):</span>
                   </div>
                   <div class="col-lg-2">
-                    <input type="text" style="text-align: right;" class="form-control input-lg" value="<?php echo $totalesTratamiento["DeudaActual"] ?>" readonly>
+                    <input type="text" style="text-align: right;" class="form-control input-lg border-0" value="<?php echo $totalesTratamiento["DeudaActual"] ?>" readonly>
                   </div>
                 </div>
 

@@ -70,7 +70,7 @@
       </div>
       <!-- Cuerpo modal -->
       <div class="modal-body">
-        <form role="form" method="post" class="formularioGenerarPago">
+        <form role="form" method="post" class="formularioGenerarPago" enctype="multipart/form-data">
           <!-- DNI Paciente -->
           <div class="form-group">
             <label for="dniPacientePago" class="col-form-label">Buscar Por DNI</label>
@@ -115,6 +115,12 @@
             <input type="date" class="form-control" id="fechaPago" name="fechaPago" required>
           </div>
 
+          <!-- Observacion -->
+          <div class="form-group">
+            <label for="observacionPago" class="col-form-label">Observaciones:</label>
+            <input type="text" class="form-control" id="observacionPago" name="observacionPago">
+          </div>
+
           <!-- Subir archivo-->
           <div class="form-group">
             <label for="comprobantePago" class="col-form-label">Subir Archivo:</label>
@@ -122,6 +128,7 @@
               <label class="input-group-btn">
                 <span class="btn-file">
                   <input accept=".jpg,.png,.jpeg,.pdf" class="hidden" name="comprobantePago" type="file" id="comprobantePago">
+                  <p class="help-block">Solo formato JPG, JPEG, PNG y PDF. Máximo de 2 mb</p>
                 </span>
               </label>
             </div>
@@ -149,7 +156,7 @@
       </div>
       <!-- Cuerpo modal -->
       <div class="modal-body">
-        <form role="form" method="post" class="formularioEditarPago">
+        <form role="form" method="post" class="formularioEditarPago" enctype="multipart/form-data">
           <!-- DNI Paciente -->
           <div class="form-group">
             <label for="editarDNIPaciente" class="col-form-label">Buscar Por DNI</label>
@@ -187,13 +194,19 @@
           <!-- Monto a Pagar -->
           <div class="form-group">
             <label for="editarMontoPago" class="col-form-label">Monto a Cancelar:</label>
-            <input type="text" class="form-control" id="editarMontoPago" name="editarMontoPago" required>
+            <input type="number" class="form-control" id="editarMontoPago" name="editarMontoPago" required>
           </div>
           
           <!-- Fecha de Pago -->
           <div class="form-group">
             <label for="editarFechaPago" class="col-form-label">Fecha de pago:</label>
             <input type="date" class="form-control" id="editarFechaPago" name="editarFechaPago" required>
+          </div>
+          
+          <!-- Observacion -->
+          <div class="form-group">
+            <label for="editarObservacion" class="col-form-label">Observaciones:</label>
+            <input type="text" class="form-control" id="editarObservacion" name="editarObservacion">
           </div>
 
           <!-- Subir archivo-->
@@ -210,7 +223,7 @@
 
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary btnEditarPago" id="btnEditarPago">Generar Pago</button>
+            <button type="submit" class="btn btn-primary btnEditarPago" id="btnEditarPago">Editar Pago</button>
           </div>
           <?php
               $editarPago = new ControllerPagos();
