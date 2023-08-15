@@ -175,56 +175,56 @@ $pdf->SetFont('Arial','B',10);
 $pdf->Cell(20,8,'Riesgo de Alergia:',0);
 $pdf->Ln(8);
 $pdf->SetFont('DejaVu', '', 10);
-$pdf->MultiCell(25,8,$datosHistoriaClinica["AlergiasEncontradas"],0);
+$pdf->MultiCell(190,8,$datosHistoriaClinica["AlergiasEncontradas"],0);
 
-
+$pdf->Cell(190,8,'___________________________________________________________________________________________________________________',0);
 /**
  * ENFERMEDAD ACTUAL
  */
-$pdf->Ln(10);
+$pdf->Ln(8);
 
 $pdf->SetFont('Arial','B',14);
 $pdf->Cell(80,10,'Enfermedad Actual',0,'L');
 
 $pdf->SetFont('Arial','B',10);
-$pdf->Cell(20,8,'Datos del informante:',0);
+$pdf->Cell(38,8,'Datos del informante:',0);
 $pdf->SetFont('DejaVu', '', 10);
-$pdf->Cell(25,8,$datosHistoriaClinica["DatosInformante"],0);
+$pdf->Cell(152,8,$datosHistoriaClinica["DatosInformante"],0);
 
 $pdf->Ln(8);
 
 $pdf->SetFont('Arial','B',10);
-$pdf->Cell(20,8,'Motivo de consulta:',0);
+$pdf->Cell(35,8,'Motivo de consulta:',0);
 $pdf->SetFont('DejaVu', '', 10);
-$pdf->Cell(25,8,$datosHistoriaClinica["MotivoConsulta"],0);
+$pdf->Cell(155,8,$datosHistoriaClinica["MotivoConsulta"],0);
 
 $pdf->Ln(8);
 
 $pdf->SetFont('Arial','B',10);
-$pdf->Cell(20,8,'Tiempo de enfermedad:',0);
+$pdf->Cell(42,8,'Tiempo de enfermedad:',0);
 $pdf->SetFont('DejaVu', '', 10);
-$pdf->Cell(25,8,$datosHistoriaClinica["TiempoEnfermedad"],0);
+$pdf->Cell(148,8,$datosHistoriaClinica["TiempoEnfermedad"],0);
 
 $pdf->Ln(8);
 
 $pdf->SetFont('Arial','B',10);
-$pdf->Cell(20,8,utf8_decode('Signos y síntomas principales:'),0);
+$pdf->Cell(53,8,utf8_decode('Signos y síntomas principales:'),0);
 $pdf->SetFont('DejaVu', '', 10);
-$pdf->Cell(25,8,$datosHistoriaClinica["SignosSintomas"],0);
+$pdf->Cell(137,8,$datosHistoriaClinica["SignosSintomas"],0);
 
 $pdf->Ln(8);
 
 $pdf->SetFont('Arial','B',10);
-$pdf->Cell(20,8,utf8_decode('Relato cronológico:'),0);
+$pdf->Cell(35,8,utf8_decode('Relato cronológico:'),0);
 $pdf->SetFont('DejaVu', '', 10);
-$pdf->Cell(25,8,$datosHistoriaClinica["RelatoCronologico"],0);
+$pdf->Cell(155,8,$datosHistoriaClinica["RelatoCronologico"],0);
 
 $pdf->Ln(8);
 
 $pdf->SetFont('Arial','B',10);
-$pdf->Cell(20,8,utf8_decode('Funciones biológicas:'),0);
+$pdf->Cell(38,8,utf8_decode('Funciones biológicas:'),0);
 $pdf->SetFont('DejaVu', '', 10);
-$pdf->Cell(25,8,$datosHistoriaClinica["FuncionesBiologicas"],0);
+$pdf->Cell(152,8,$datosHistoriaClinica["FuncionesBiologicas"],0);
 
 /**
  * ANTECEDENTES
@@ -235,23 +235,23 @@ $pdf->SetFont('Arial','B',14);
 $pdf->Cell(80,8,'Antecedentes',0,'L');
 
 $pdf->SetFont('Arial','B',10);
-$pdf->Cell(20,8,'Antecendetes Familiares:',0);
+$pdf->Cell(8,8,'Antecendetes Familiares:',0);
 $pdf->Ln(8);
 $pdf->SetFont('DejaVu', '', 10);
-$pdf->MultiCell(190,14,$datosHistoriaClinica["AntecedentesFamiliares"],0);
+$pdf->MultiCell(190,8,$datosHistoriaClinica["AntecedentesFamiliares"],0);
 
-$pdf->Ln(8);
+$pdf->Ln(4);
 
 $pdf->SetFont('Arial','B',10);
 $pdf->Cell(8,8,'Antecendetes Personales:',0);
 $pdf->Ln(8);
 $pdf->SetFont('DejaVu', '', 10);
-$pdf->MultiCell(190,14,$datosHistoriaClinica["AntecedentesPersonales"],0);
+$pdf->MultiCell(190,8,$datosHistoriaClinica["AntecedentesPersonales"],0);
 
 /**
  * EXPLORACION FISICA
  */
-$pdf->Ln(10);
+$pdf->Ln(8);
 
 $pdf->SetFont('Arial','B',14);
 $pdf->Cell(80,8,utf8_decode('Exploración Física'),0,'L');
@@ -259,15 +259,15 @@ $pdf->Cell(80,8,utf8_decode('Exploración Física'),0,'L');
 $pdf->SetFont('Arial','B',10);
 $pdf->Cell(30,8,'Signos Vitales',0);
 $pdf->Ln(8);
-$pdf->Cell(10,8,'P.A.:',0);
+$pdf->Cell(10,8,'P.A.',0);
 $pdf->SetFont('DejaVu', '', 10);
 $pdf->Cell(20,8,$datosHistoriaClinica["PresionArterial"],0);
 $pdf->SetFont('Arial','B',10);
-$pdf->Cell(10,8,'Pulso',0);
+$pdf->Cell(12,8,'Pulso:',0);
 $pdf->SetFont('DejaVu', '', 10);
 $pdf->Cell(20,8,$datosHistoriaClinica["Pulso"],0);
 $pdf->SetFont('Arial','B',10);
-$pdf->Cell(10,8,'Temp.',0);
+$pdf->Cell(12,8,'Temp.',0);
 $pdf->SetFont('DejaVu', '', 10);
 $pdf->Cell(20,8,$datosHistoriaClinica["Temperatura"],0);
 $pdf->SetFont('Arial','B',10);
@@ -275,7 +275,7 @@ $pdf->Cell(10,8,'F.C.',0);
 $pdf->SetFont('DejaVu', '', 10);
 $pdf->Cell(20,8,$datosHistoriaClinica["FrecuenciaCardiaca"],0);
 $pdf->SetFont('Arial','B',10);
-$pdf->Cell(10,8,'Frec. Resp.',0);
+$pdf->Cell(20,8,'Frec. Resp.',0);
 $pdf->SetFont('DejaVu', '', 10);
 $pdf->Cell(20,8,$datosHistoriaClinica["FrecuenciaRespiratoria"],0);
 
@@ -285,7 +285,7 @@ $pdf->SetFont('Arial','B',10);
 $pdf->Cell(10,8,utf8_decode('Examen Odontoestomatológico:'),0);
 $pdf->Ln(8);
 $pdf->SetFont('DejaVu', '', 10);
-$pdf->MultiCell(190,20,$datosHistoriaClinica["ExamenOdonto"],0);
+$pdf->MultiCell(190,8,$datosHistoriaClinica["ExamenOdonto"],0);
 
 /**
  * DIAGNOSTICO 
@@ -293,52 +293,51 @@ $pdf->MultiCell(190,20,$datosHistoriaClinica["ExamenOdonto"],0);
 $pdf->Ln(8);
 
 $pdf->SetFont('Arial','B',14);
-$pdf->Cell(80,10,utf8_decode('Diagnóstico (CIE 10)'),0,'L');
+$pdf->Cell(80,8,utf8_decode('Diagnóstico (CIE 10)'),0,'L');
 
 $pdf->SetFont('Arial','B',10);
-$pdf->Cell(30,8,utf8_decode('Diagnóstico Presuntivo'),0);
+$pdf->Cell(42,8,utf8_decode('Diagnóstico Presuntivo'),0);
 $pdf->SetFont('DejaVu', '', 10);
-$pdf->Cell(20,8,$datosHistoriaClinica["DiagnosticoPresuntivo"],0);
+$pdf->Cell(148,8,$datosHistoriaClinica["DiagnosticoPresuntivo"],0);
 $pdf->Ln(8);
 $pdf->SetFont('Arial','B',10);
-$pdf->Cell(30,8,utf8_decode('Diagnóstico Definitivo'),0);
+$pdf->Cell(42,8,utf8_decode('Diagnóstico Definitivo'),0);
 $pdf->SetFont('DejaVu', '', 10);
-$pdf->Cell(20,8,$datosHistoriaClinica["DiagnosticoDefinitivo"],0);
+$pdf->Cell(148,8,$datosHistoriaClinica["DiagnosticoDefinitivo"],0);
 
 /**
  * PRONOSTICO / TRATAMIENTO / ALTA DEL PACIENTE
  */
-$pdf->Ln(10);
+$pdf->Ln(8);
 
 $pdf->SetFont('Arial','B',10);
 $pdf->Cell(10,8,utf8_decode('Pronóstico:'),0);
 $pdf->Ln(8);
 $pdf->SetFont('DejaVu', '', 10);
-$pdf->MultiCell(190,12,$datosHistoriaClinica["Pronostico"],0);
+$pdf->MultiCell(190,8,$datosHistoriaClinica["Pronostico"],0);
 
 $pdf->Ln(8);
 
 $pdf->SetFont('Arial','B',10);
-$pdf->Cell(10,10,'Tratamiento / Recomendaciones:',0);
+$pdf->Cell(50,4,'Tratamiento / Recomendaciones:',0);
 $pdf->SetFont('Arial','B',8);
-$pdf->Ln(10);
-$pdf->MultiCell(190,5,utf8_decode('(Nombre genérico del medicamente, dosis, vía de administración, tiempo de administración, cuidados, medidas higiénico-dietéticas, preventivas)'),0);
-$pdf->Ln(10);
+$pdf->Ln(4);
+$pdf->MultiCell(190,8,utf8_decode('(Nombre genérico del medicamente, dosis, vía de administración, tiempo de administración, cuidados, medidas higiénico-dietéticas, preventivas)'),0);
 $pdf->SetFont('DejaVu', '', 10);
-$pdf->MultiCell(190,16,$datosHistoriaClinica["TratamientoPaciente"],0);
+$pdf->MultiCell(190,8,$datosHistoriaClinica["TratamientoPaciente"],0);
 
-$pdf->Ln(8);
+$pdf->Ln(4);
 
 $pdf->SetFont('Arial','B',10);
-$pdf->Cell(10,8,utf8_decode('Alta del Paciente:'),0);
+$pdf->Cell(30,8,utf8_decode('Alta del Paciente:'),0);
 $pdf->Ln(8);
 $pdf->SetFont('DejaVu', '', 10);
-$pdf->MultiCell(190,12,$datosHistoriaClinica["InformacionAlta"],0);
+$pdf->MultiCell(190,8,$datosHistoriaClinica["InformacionAlta"],0);
 
-$pdf->Ln(15);
+$pdf->Ln(20);
 
 $pdf->SetFont('Arial','B',10);
-$pdf->Cell(10,10,utf8_decode('Nombres y Apellidos del Profesional:'),0);
+$pdf->Cell(10,10,utf8_decode('Nombres y Apellidos del Profesional'),0);
 $pdf->Ln(12);
 $pdf->SetFont('DejaVu', '', 10);
 $pdf->Cell(20,10,'_________________________________________',0);

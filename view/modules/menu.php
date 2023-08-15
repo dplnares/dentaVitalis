@@ -16,10 +16,10 @@
   </a> -->
 
 <!-- Historias Clinica -->
-<div class="sb-sidenav-menu-heading">Pacientes</div>
+<div class="sb-sidenav-menu-heading">Historias</div>
   <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#listaHistoria" aria-expanded="false" aria-controls="collapseLayouts">
     <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
-    Pacientes
+    Historias
     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
   </a>
   <div class="collapse" id="listaHistoria" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">

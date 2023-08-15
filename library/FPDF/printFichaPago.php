@@ -49,8 +49,8 @@ class PDFHistoriaClinica extends TFPDF
     $this->Cell(0, 8, 'Página ' . $this->PageNo() . '/{nb}', 0, 0, 'L');
   }
 
-  //  Imprimir plan de tratamiento
-  function TablaProcedimientos($header, $listaTratamiento)
+  //  Imprimir procedimientos realizados
+  function TablaProcedimientosRealizados($header, $listaTratamiento)
   {
     $this->SetFont('Arial', 'B', 10);
     $this->Cell(60,7,$header[0],1,0,'C'); 
@@ -62,11 +62,35 @@ class PDFHistoriaClinica extends TFPDF
     foreach($listaTratamiento as $dato)
     {
       $this->SetFont('DejaVu', '', 10);
-      if($dato["EstadoTratamiento"] != '1'){
-        $estado = "Realizado";
+      $estado = "Realizado";
+      if($dato["FechaProcedimiento"] == '0000-00-00'){
+        $fecha = "Sin Asignar";
       } else {
-        $estado = "No Realizado";
+        $fecha = $dato["FechaProcedimiento"];
       }
+      $this->Ln();
+      $this->Cell(60,5,$dato["NombreProcedimiento"],1);
+      $this->Cell(50,5,$dato["ObservacionProcedimiento"],1);
+      $this->Cell(25,5,$estado,1);
+      $this->Cell(25,5,$fecha,1);
+      $this->Cell(25,5,'(S/.) '.$dato["PrecioProcedimiento"],1);
+    }
+  }
+
+  //  Imprimir procedimientos faltantes
+  function TablaProcedimientosFaltantes($header, $listaTratamiento)
+  {
+    $this->SetFont('Arial', 'B', 10);
+    $this->Cell(60,7,$header[0],1,0,'C'); 
+    $this->Cell(50,7,$header[1],1,0,'C'); 
+    $this->Cell(25,7,$header[2],1,0,'C'); 
+    $this->Cell(25,7,$header[3],1,0,'C'); 
+    $this->Cell(25,7,$header[4],1,0,'C'); 
+    
+    foreach($listaTratamiento as $dato)
+    {
+      $this->SetFont('DejaVu', '', 10);
+      $estado = "No Realizado";
       if($dato["FechaProcedimiento"] == '0000-00-00'){
         $fecha = "Sin Asignar";
       } else {
@@ -110,9 +134,6 @@ $codPaciente = $_GET["codPaciente"];
 $datosPaciente = ControllerPacientes::ctrMostrarDatosImprimir($codPaciente);
 $codHistoria = ControllerHistorias::ctrObtenerCodHistoria($codPaciente);
 
-//  Plan de Tratamiento
-$planTratamiento = ControllerTratamiento::ctrMostrarDetalleTratamientoCompleto($codHistoria["IdHistoriaClinica"]);
-
 //  Pagos realizados
 $listaPagos = ControllerPagos::ctrMostrarPagosPorPaciente($codPaciente);
 
@@ -153,20 +174,84 @@ $pdf->Cell(10,8,'Edad:',0);
 $pdf->SetFont('DejaVu', '', 10);
 $pdf->Cell(10,8,$datosPaciente["EdadPaciente"],0);
 
+$pdf->Ln(5);
+$pdf->Cell(10,8,'____________________________________________________________________________________________________________________',0);
+$pdf->Ln(10);
+
+/**
+ * COSTOS ACTUALES
+ */
+$totalesTratamiento = ControllerTratamiento::ctrObtenerTotalesTratamiento($codPaciente);
+$totalRealizado = ControllerTratamiento::ctrObtenerTotalRealizado($codHistoria["IdHistoriaClinica"]);
+$deudaRealizados = number_format($totalRealizado["TotalRealizado"]-$totalesTratamiento["TotalPagado"], 2);
+
+$pdf->SetFont('Arial','B',10);
+$pdf->Cell(40,8,'Total Tratamiento:',0);
+$pdf->SetFont('DejaVu', '', 10);
+$pdf->Cell(70,8,'S/. '.number_format($totalesTratamiento["TotalTratamiento"],2),0);
+$pdf->SetFont('Arial','B',10);
+$pdf->Cell(40,8,'Total Realizados:',0);
+$pdf->SetFont('DejaVu', '', 10);
+$pdf->Cell(30,8,'S/. '.number_format($totalRealizado["TotalRealizado"],2),0);
+
+$pdf->Ln(5);
+
+$pdf->SetFont('Arial','B',10);
+$pdf->Cell(40,8,'Total Pagado:',0);
+$pdf->SetFont('DejaVu', '', 10);
+$pdf->Cell(70,8,'S/. '.number_format($totalesTratamiento["TotalPagado"],2),0);
+$pdf->SetFont('Arial','B',10);
+$pdf->Cell(40,8,'Total Pagado:',0);
+$pdf->SetFont('DejaVu', '', 10);
+$pdf->Cell(30,8,'S/. '.number_format($totalesTratamiento["TotalPagado"],2),0);
+
+$pdf->Ln(5);
+
+$pdf->SetFont('Arial','B',10);
+$pdf->Cell(40,8,'Deuda Total:',0);
+$pdf->SetFont('DejaVu', '', 10);
+$pdf->Cell(70,8,'S/. '.number_format($totalesTratamiento["DeudaActual"],2),0);
+$pdf->SetFont('Arial','B',10);
+$pdf->Cell(40,8,'Deuda Realizados:',0);
+$pdf->SetFont('DejaVu', '', 10);
+$pdf->Cell(30,8,'S/. '.$deudaRealizados,0);
+
 $pdf->Ln(10);
 
 /**
  * PLAN DE TRATAMIENTO DEL PACIENTE
  */
+//  Plan de Tratamiento
+$planTratamiento = ControllerTratamiento::ctrMostrarDetalleTratamientoRealizado($codHistoria["IdHistoriaClinica"]);
+
 $pdf->SetFont('Arial','B',14);
-$pdf->Cell(80,10,'Lista de Procedimientos',0,'L');
+$pdf->Cell(80,10,'Lista de Procedimientos Realizados',0,'L');
 
 //Títulos de las columnas
 $header=array('Descripcion','Observacion','Estado','Fecha','Precio');
 $pdf->AliasNbPages();
 
 //$pdf->AddPage();
-$pdf->TablaProcedimientos($header, $planTratamiento);
+$pdf->TablaProcedimientosRealizados($header, $planTratamiento);
+
+$pdf->Ln(10);
+
+
+/**
+ * PLAN DE TRATAMIENTO DEL PACIENTE
+ */
+//  Plan de Tratamiento
+$planTratamiento = ControllerTratamiento::ctrMostrarDetalleTratamientoFaltante($codHistoria["IdHistoriaClinica"]);
+
+$pdf->SetFont('Arial','B',14);
+$pdf->Cell(80,10,'Lista de Procedimientos Faltantes',0,'L');
+
+//Títulos de las columnas
+$header=array('Descripcion','Observacion','Estado','Fecha','Precio');
+$pdf->AliasNbPages();
+
+//$pdf->AddPage();
+$pdf->TablaProcedimientosFaltantes($header, $planTratamiento);
 
 $pdf->Ln(10);
 

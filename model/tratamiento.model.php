@@ -133,6 +133,7 @@ class ModelTratamiento
     return $statement -> fetchAll();
   }
 
+  //  Mostrar el detalle del tratamiento en su totalidad
   public static function mdlMostrarDetalleTratamientoCompleto($tabla, $codHistoria)
   {
     $statement = Conexion::conn()->prepare("SELECT
@@ -158,6 +159,36 @@ class ModelTratamiento
       tba_detalletratamiento.IdProcedimiento = tba_procedimiento.IdProcedimiento
   WHERE
     tba_historiaclinica.IdHistoriaClinica = $codHistoria");
+    $statement -> execute();
+    return $statement -> fetchAll();
+  }
+
+  //  Mostrar el plan de tratamiento de los procedimientos segun el estado del procedimiento
+  public static function mdlMostrarDetalleTratamientoEstado($tabla, $codHistoria, $estado)
+  {
+    $statement = Conexion::conn()->prepare("SELECT
+    tba_procedimiento.NombreProcedimiento, 
+    tba_detalletratamiento.PrecioProcedimiento, 
+    tba_detalletratamiento.ObservacionProcedimiento,
+    tba_detalletratamiento.EstadoTratamiento,
+    tba_detalletratamiento.FechaProcedimiento, 
+    tba_procedimiento.IdProcedimiento
+  FROM
+    $tabla
+    INNER JOIN
+    tba_tratamiento
+    ON 
+      tba_detalletratamiento.IdTratamiento = tba_tratamiento.IdTratamiento
+    INNER JOIN
+    tba_historiaclinica
+    ON 
+      tba_tratamiento.IdHistoriaClinica = tba_historiaclinica.IdHistoriaClinica
+    INNER JOIN
+    tba_procedimiento
+    ON 
+      tba_detalletratamiento.IdProcedimiento = tba_procedimiento.IdProcedimiento
+  WHERE
+    tba_historiaclinica.IdHistoriaClinica = $codHistoria AND tba_detalletratamiento.EstadoTratamiento = $estado");
     $statement -> execute();
     return $statement -> fetchAll();
   }
@@ -230,5 +261,19 @@ class ModelTratamiento
     $statement = Conexion::conn()->prepare("SELECT SUM(PrecioProcedimiento) AS TotalRealizado FROM $tabla INNER JOIN tba_tratamiento ON tba_detalletratamiento.IdTratamiento = tba_tratamiento.IdTratamiento WHERE tba_tratamiento.IdHistoriaClinica = $codHistoria AND EstadoTratamiento = 2");
     $statement -> execute();
     return $statement -> fetch();
+  }
+
+  //  Eliminar detalle de tratamiento
+  public static function mdlEliminarTratamiento($tabla, $codTratamiento)
+  {
+    $statement = Conexion::conn()->prepare("DELETE FROM $tabla WHERE IdTratamiento = $codTratamiento");
+    if($statement -> execute())
+    {
+      return "ok";
+    }
+    else
+    {
+      return "error";
+    }
   }
 }

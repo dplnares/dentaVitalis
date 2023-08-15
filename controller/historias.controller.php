@@ -21,7 +21,7 @@ class ControllerHistorias
       
       //  Actualizar los datos del paciente
       $datosUpdatePaciente = array(
-        "IdPaciente" => $_POST["nombrePaciente"],
+        "IdPaciente" => $_GET["codPaciente"],
         "DNIPaciente" => $_POST["numeroDNI"],
         "SexoPaciente" => $_POST["sexoPaciente"],
         "EdadPaciente" => $_POST["edadPaciente"],
@@ -46,7 +46,7 @@ class ControllerHistorias
       if($respuestaPaciente == "ok")
       {
         $datosCreateHistoria = array(
-          "IdPaciente" => $_POST["nombrePaciente"],
+          "IdPaciente" => $_GET["codPaciente"],
           //  Solo el doctor creará la historia clínica con su usuario, o puede crearla otra persona???? -> ver si puedo poner ese valor en un campo extra para que pue cambiar de medico o no
           "IdSocio" => $_SESSION["idUsuario"],
           "AlergiasEncontradas" => $_POST["riesgoAlergia"],
@@ -72,7 +72,7 @@ class ControllerHistorias
           $ultimaHistoria = ModelHistorias::mdlObtenerUltimaHistoria($tablaHistoria);
           $datosCreateTratamiento = array(
             "IdHistoriaClinica" => $ultimaHistoria["Id"],
-            "IdPaciente" => $_POST["nombrePaciente"],
+            "IdPaciente" => $_GET["codPaciente"],
             "UsuarioCreado" => $_SESSION["idUsuario"],
             "UsuarioActualiza" => $_SESSION["idUsuario"],
             "FechaCreacion" => date("Y-m-d\TH:i:sP"),
@@ -107,7 +107,7 @@ class ControllerHistorias
             if($respuestaDetalleHistoria == "ok")
             {
               //  Obtener el tratamiento de este paciente en específico
-              $idTratamiento = ControllerTratamiento::ctrObtenerIdTratamiento($_POST["nombrePaciente"]);
+              $idTratamiento = ControllerTratamiento::ctrObtenerIdTratamiento($_GET["codPaciente"]);
               //  Obtener la lista de procedimientos que se agregaron 
               $listaProcedimientos = json_decode($_POST["listarProcedimientos"], true);
               foreach($listaProcedimientos as $value)
@@ -385,13 +385,115 @@ class ControllerHistorias
     return $respuesta;
   }
 
-  //  Eliminar historia clinica ->>> FALA AÑADIR
+  //  Eliminar historia clinica -> Solo se eliminará la historia clínica de este paciente, pero no el tratamiento, ni plan de tratamiento, ni los pagos relacionados a estos
   public static function ctrEliminarHistoria()
   {
-    if(isset($_POST["codHistoria"]))
+    if(isset($_GET["codHistoria"]))
     {
-      
+      //  Primero verificamos si tiene algún tratamiento realizado, de ser el caso no se podrá eliminar la historia, se podría cambiar de estado para evitar mostrar estas historias que estén en otro estado (SUGERENCIA)
+      $codHistoria = $_GET["codHistoria"];
+      $codPaciente = $_GET["codPaciente"];
+      $listaProcedimientosRealizados = ControllerTratamiento::ctrMostrarDetalleTratamientoRealizado($codHistoria);
+      if (count($listaProcedimientosRealizados) > 0 )
+      {
+        echo '
+          <script>
+            Swal.fire({
+              icon: "error",
+              title: "Error",
+              text: "¡No se puede eliminar la historia! La historia tiene uno o más procedimientos realizados",
+            }).then(function(result){
+              if(result.value){
+                window.location = "historiaClinica";
+              }
+            });
+          </script>';
+      }
+      else
+      {
+        $tablaHistoria = "tba_historiaclinica";
+        //  En el caso que no se tenga procedimientos realizados en su plan de tratamiento, si se podrá eliminar la historia clínica
+        $eliminarDetalleHistoria = self::ctrEliminarDetalleHistoria($codHistoria);
+        if($eliminarDetalleHistoria == "ok")
+        {
+          //  Ahora eliminamos el tratamiento y el detalle de tratamiento, pasando el id de tratamiento
+          $codTratamiento = ControllerTratamiento::ctrObtenerCodigoTratamiento($codPaciente);
+          $eliminarTratamiento = ControllerTratamiento::ctrEliminarTratamiento($codTratamiento["IdTratamiento"]);
+          if($eliminarTratamiento == "ok")
+          {
+            $eliminarHistoria = ModelHistorias::mdlEliminarHistoria($tablaHistoria, $codHistoria);
+            if($eliminarHistoria == "ok")
+            {
+              echo '
+              <script>
+                Swal.fire({
+                  icon: "success",
+                  title: "Correcto",
+                  text: "¡La historia clínica ha sido eliminada correctamente!",
+                }).then(function(result){
+                  if(result.value){
+                    window.location = "historiaClinica";
+                  }
+                });
+              </script>';
+            }
+            else
+            {
+              echo '
+              <script>
+                Swal.fire({
+                  icon: "error",
+                  title: "Error",
+                  text: "¡Error al tratar de eliminar la historia clínica!",
+                }).then(function(result){
+                  if(result.value){
+                    window.location = "historiaClinica";
+                  }
+                });
+              </script>';
+            }
+          }
+          else
+          {
+            echo '
+            <script>
+              Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "¡Error al tratar de eliminar el plan de tratamiento!",
+              }).then(function(result){
+                if(result.value){
+                  window.location = "historiaClinica";
+                }
+              });
+            </script>';
+          }
+        }
+        else
+        {
+          echo '
+          <script>
+            Swal.fire({
+              icon: "error",
+              title: "Error",
+              text: "¡Error al eliminar el detalle de la historia!",
+            }).then(function(result){
+              if(result.value){
+                window.location = "historiaClinica";
+              }
+            });
+          </script>';
+        }
+      }
     }
+  }
+
+  //  Eliminar el detalle de la historia clínica
+  public static function ctrEliminarDetalleHistoria($codHistoria)
+  {
+    $tabla = "tba_detallehistoriaclinica";
+    $respuesta = ModelHistorias::mdlEliminarHistoria($tabla, $codHistoria);
+    return $respuesta;
   }
 
   //  Buscar Historia por codigo de paciente
@@ -401,4 +503,64 @@ class ControllerHistorias
     $respuesta  = ModelHistorias::mdlObtenerCodHistoria($tabla, $codPaciente);
     return $respuesta;
   }
+
+  //  Subir odontograma
+  public static function ctrSubirOdontograma($codHistoria)
+  {
+    if(isset($_FILES["nuevoOdontograma"]))
+    {
+      if($_FILES["nuevoOdontograma"]["type"] == "image/jpeg" || $_FILES["nuevoOdontograma"]["type"] == "image/jpg" || $_FILES["nuevoOdontograma"]["type"] == "image/png" || $_FILES["nuevoOdontograma"]["type"] == "application/pdf")
+      {
+        $datosHistoria = ControllerPacientes::ctrObtenerNombresPaciente($codHistoria);
+        $formato = explode('/', $_FILES["nuevoOdontograma"]["type"]);            
+        $date = date("Y-m-d");
+        $nombreArchivo = $datosHistoria["NombrePaciente"].'_'.$datosHistoria["ApellidoPaciente"].'_'.$_POST["codSubirImg"].'_'.$date.'.'.$formato[1];
+        $ruta = "../image/odontograma/$nombreArchivo";
+        $resultado = move_uploaded_file($_FILES["nuevoOdontograma"]["tmp_name"], $ruta);
+
+        $actualizarRuta = self::ctrActualizarRuta($nombreArchivo, $codHistoria);
+        if($resultado == true && $actualizarRuta == "ok")
+        {
+          $respuesta = "ok";
+        }
+        else
+        {
+          $respuesta = "error";
+        }
+      }
+      else
+      {
+        $respuesta = "errorFormato";
+      }
+    }
+    else
+    {
+      $respuesta = "error";
+    }
+    return $respuesta;
+  }
+
+  //  Actualizar la ruta del odontograma
+  public static function ctrActualizarRuta($nombreArchivo, $codHistoria)
+  {
+    $tabla = "tba_historiaclinica";
+    $respuesta = ModelHistorias::mdlActualizarRuta($tabla, $nombreArchivo, $codHistoria);
+    return $respuesta;
+  }
+
+  //  Descargar Odontograma
+  public static function ctrDescargarOdontograma($codHistoria)
+  {
+    $tabla = "tba_historiaclinica";
+    $rutaOdontograma = ModelHistorias::mdlDescargarOdontograma($tabla, $codHistoria);
+    $archivo = $rutaOdontograma["RutaOdontograma"];
+    $ruta = "image/odontograma/".$archivo;
+    
+    $respuesta = array("archivo" => $archivo,
+        "ruta" => $ruta
+        );
+    
+    return $respuesta;
+  }
+
 }

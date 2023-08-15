@@ -66,6 +66,22 @@ class ControllerTratamiento
     return $respuesta;
   }
 
+  //  Mostrar lista de procedimientos realizados 
+  public static function ctrMostrarDetalleTratamientoRealizado($codHistoria)
+  {
+    $tabla = "tba_detalletratamiento";
+    $respuesta = ModelTratamiento::mdlMostrarDetalleTratamientoEstado($tabla, $codHistoria, 2);
+    return $respuesta;
+  }
+
+  //  Mostrar lista de procedimientos realizados 
+  public static function ctrMostrarDetalleTratamientoFaltante($codHistoria)
+  {
+    $tabla = "tba_detalletratamiento";
+    $respuesta = ModelTratamiento::mdlMostrarDetalleTratamientoEstado($tabla, $codHistoria, 1);
+    return $respuesta;
+  }
+  
   //  Obtener el codigo del tratamiento
   public static function ctrObtenerCodigoTratamiento($codPaciente)
   {
@@ -229,6 +245,25 @@ class ControllerTratamiento
   {
     $tabla = "tba_detalletratamiento";
     $respuesta = ModelTratamiento::mdlObtenerTotalRealizado($tabla, $codHistoria);
+    return $respuesta;
+  }
+
+  //  Eliminar todo el tratamiento
+  public static function ctrEliminarTratamiento($codTratamiento)
+  {
+    $tablaTratamiento = "tba_tratamiento";
+    $tablaDetalleTratamiento = "tba_detalletratamiento";
+
+    //  Primero le pasamos la tabla de detalle de tratamiento y luego la tabla de tratamiento para eliminar los registros que tengan el codigo de tratamiento en ambas tablas
+    $confirmarDetalle = ModelTratamiento::mdlEliminarTratamiento($tablaDetalleTratamiento, $codTratamiento);
+    if($confirmarDetalle == "ok")
+    {
+      $respuesta = ModelTratamiento::mdlEliminarTratamiento($tablaTratamiento, $codTratamiento);
+    }
+    else
+    {
+      $respuesta = "errorDetalle";
+    }
     return $respuesta;
   }
 }

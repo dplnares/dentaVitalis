@@ -19,8 +19,8 @@ $(".formularioPlanTratamiento").on("click", "button.eliminarProcedimiento", func
     }).then((result) => {
       if (result.isConfirmed) {
         $(this).parent().parent().parent().parent().remove();
-        listarProcedimientos();
-        sumaProcedimientos();
+        listarProcedimientosTratamiento();
+        sumaProcedimientosTratamiento();
       }
     });
   }
@@ -36,8 +36,8 @@ $(".formularioPlanTratamiento").on("click", "button.eliminarProcedimiento", func
 
 //  Actualizar al modificar la observacion
 $(".formularioPlanTratamiento").on("change", "input.editarObservacionProcedimiento", function(){
-  listarProcedimientos();
-  sumaProcedimientos();
+  listarProcedimientosTratamiento();
+  sumaProcedimientosTratamiento();
 });
 
 //  Actualizar al modificar el estado, revisamos la propiedad checked si la tiene o no y en base a eso desactivamos el boton que permita eliminar un procedimiento o no
@@ -54,20 +54,20 @@ $(".formularioPlanTratamiento").on("change", "input.editarEstadoProcedimiento", 
     console.log(estadoCheckBox);
   }
   
-  listarProcedimientos();
-  sumaProcedimientos();
+  listarProcedimientosTratamiento();
+  sumaProcedimientosTratamiento();
 });
 
 //  Actualizar al modificar la fecha de intervencion
 $(".formularioPlanTratamiento").on("change", "input.editarFechaIntervencion", function(){
-  listarProcedimientos();
-  sumaProcedimientos();
+  listarProcedimientosTratamiento();
+  sumaProcedimientosTratamiento();
 });
 
 //  Actualizar al modificar el precio
 $(".formularioPlanTratamiento").on("change", "input.editarPrecioTratamiento", function(){
-  listarProcedimientos();
-  sumaProcedimientos();
+  listarProcedimientosTratamiento();
+  sumaProcedimientosTratamiento();
 });
 
 //  Agregar nuevos procedimientos al plan de tratamiento
@@ -124,8 +124,8 @@ $(".tablaProcedimientosEditar").on("click", ".btnAgregarProcedimiento", function
 
       '</div>'
       );
-      listarProcedimientos();
-      sumaProcedimientos();
+      listarProcedimientosTratamiento();
+      sumaProcedimientosTratamiento();
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.log("Error en la solicitud AJAX: ", textStatus, errorThrown);
@@ -135,7 +135,7 @@ $(".tablaProcedimientosEditar").on("click", ".btnAgregarProcedimiento", function
 
 
 //  FUNCIONES PARA SUMAR Y LISTAR LOS PROCEDIMIENTOS
-function listarProcedimientos()
+function listarProcedimientosTratamiento()
 {
   var listarProcedimientos = [];
   var procedimiento = $(".editarProcedimiento");
@@ -157,7 +157,7 @@ function listarProcedimientos()
   $("#listarNuevaListaProcedimientos").val(JSON.stringify(listarProcedimientos));
 }
 
-function sumaProcedimientos()
+function sumaProcedimientosTratamiento()
 {
   var precioTratamiento = $(".editarPrecioTratamiento");
   var arraySumaPrecio = []; 

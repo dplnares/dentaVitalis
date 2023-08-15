@@ -9,7 +9,36 @@
     <div id="layoutSidenav_content">
       <main class="bg">
         <div class="container-fluid px-4">
-          <h1 class="mt-4">Nueva Historia Clínica</h1>
+          <h1 class="mt-4">
+            <?php
+              $codPaciente = $_GET["codPaciente"];
+              if($codPaciente != null || $codPaciente != '')
+              {
+                $datosPaciente = ControllerPacientes::ctrMostrarDatosBasicos($codPaciente);
+                if($datosPaciente != false)
+                {
+                  echo 'Nueva Historia Clínica :'.$datosPaciente["NombrePaciente"].' '.$datosPaciente["ApellidoPaciente"];
+                }
+                else
+                {
+                  echo'
+                    <script>
+                      window.location = "index.php?ruta=historiaClinica";
+                    </script>
+                ';
+                }
+              }
+              else
+              {
+                echo'
+                  <script>
+                    window.location = "index.php?ruta=historiaClinica";
+                  </script>
+                ';
+              }
+            ?>
+            
+          </h1>
         </div>
 
         <div class="container-fluid">
@@ -23,21 +52,13 @@
                 <!-- Seleccionar al paciente -->
                 <div class="form-group col-md-8">
                   <label for="nombrePaciente" class="form-label" style="font-weight: bold">Paciente:</label>
-                  <select class="form-control nombrePaciente" name="nombrePaciente">
-                    <?php
-                      $listaPacientes = ControllerPacientes::ctrMostrarPacientesHistoria();
-                      foreach ($listaPacientes as $value)
-                      {
-                        echo '<option value="'.$value["IdPaciente"].'">'.$value["NombrePaciente"].' '.$value["ApellidoPaciente"].'</option>';
-                      }
-                    ?>
-                  </select>
+                  <input type="text" class="form-control" id="nombrePaciente" name="nombrePaciente" value="<?php echo $datosPaciente["NombrePaciente"].' '.$datosPaciente["ApellidoPaciente"] ?>" readonly>
                 </div>
 
                 <!-- Numero de DNI -->
                 <div class="col-md-4">
                   <label for="numeroDNI" class="form-label" style="font-weight: bold">DNI: </label>
-                  <input type="text" class="form-control" id="numeroDNI" name="numeroDNI">
+                  <input type="text" class="form-control" id="numeroDNI" name="numeroDNI" value="<?php echo $datosPaciente["DNIPaciente"]?>" readonly>
                 </div>
 
                 <!-- Sexo -->
@@ -109,7 +130,7 @@
                 <!-- Telefono Celular -->
                 <div class="col-md-3">
                   <label for="celularPaciente" class="form-label" style="font-weight: bold">Telefono / Celular: </label>
-                  <input type="text" class="form-control" id="celularPaciente" name="celularPaciente">
+                  <input type="text" class="form-control" id="celularPaciente" name="celularPaciente" value="<?php echo $datosPaciente["CelularPaciente"]?>">
                 </div>
 
                 <!-- Persona Contacto Celular -->

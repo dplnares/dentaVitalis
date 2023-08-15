@@ -165,4 +165,42 @@ class ModelHistorias
     $statement -> execute();
     return $statement -> fetch();
   }
+
+  //  Actualizar la ruta del odontograma
+  public static function mdlActualizarRuta($tabla, $nombreArchivo, $codHistoria)
+  {
+    $statement = Conexion::conn()->prepare("UPDATE $tabla SET RutaOdontograma=:RutaOdontograma WHERE IdHistoriaClinica=:IdHistoriaClinica");
+    $statement -> bindParam(":RutaOdontograma", $nombreArchivo, PDO::PARAM_STR);
+    $statement -> bindParam(":IdHistoriaClinica", $codHistoria, PDO::PARAM_STR);
+    if($statement -> execute())
+    {
+      return "ok";
+    }
+    else
+    {
+      return "error";
+    }
+  }
+
+  //  Descargar ruta de odontograma
+  public static function mdlDescargarOdontograma($tabla, $codHistoria)
+  {
+    $statement = Conexion::conn()->prepare("SELECT tba_historiaclinica.RutaOdontograma FROM $tabla WHERE tba_historiaclinica.IdHistoriaClinica = $codHistoria");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
+
+  //  Eliminar detalle de la historia clínica
+  public static function mdlEliminarHistoria($tabla, $codHistoria)
+  {
+    $statement = Conexion::conn()->prepare("DELETE FROM $tabla WHERE IdHistoriaClinica = $codHistoria");
+    if($statement -> execute())
+    {
+      return "ok";
+    }
+    else
+    {
+      return "error";
+    }
+  }
 }

@@ -16,15 +16,6 @@ class AjaxPacientes
     echo json_encode($respuesta);
   }
 
-  //  Devolver los datos del paciente parar mostrar en el formulario de la historia
-  public $codPacienteHistoria;
-  public function ajaxMostrarDatosPaciente()
-  {
-    $codPacienteHistoria = $this->codPacienteHistoria;
-    $respuesta = ControllerPacientes::ctrMostrarDatosUnPaciente($codPacienteHistoria);
-    echo json_encode($respuesta);
-  }
-
   //  Buscar al paciente por el número del DNI
   public $numeroDNI;
   public function ajaxBuscarDNI()
@@ -48,13 +39,6 @@ if(isset($_POST["codPaciente"])){
 	$editarSocio = new AjaxPacientes();
 	$editarSocio -> codPaciente = $_POST["codPaciente"];
 	$editarSocio -> ajaxEditarPaciente();
-}
-
-//  Mostrar datos paciente
-if(isset($_POST["codPacienteHistoria"])){
-	$mostrarDatos = new AjaxPacientes();
-	$mostrarDatos -> codPacienteHistoria = $_POST["codPacienteHistoria"];
-	$mostrarDatos -> ajaxMostrarDatosPaciente();
 }
 
 //  Buscar al paciente por el número del DNI

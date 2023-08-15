@@ -84,14 +84,6 @@ class ModelPacientes
     $statement -> execute();
     return $statement -> fetchAll();
   }
-
-  //  Mostrar los datos de un paciente al momento de seleccionarlo en la historia
-  public static function mdlMostrarDatosPacienteHistoria($tabla, $codPaciente)
-  {
-    $statement = Conexion::conn()->prepare("SELECT tba_paciente.IdPaciente, tba_paciente.NombrePaciente, tba_paciente.ApellidoPaciente, tba_paciente.DNIPaciente, tba_paciente.FechaNacimiento, tba_paciente.CelularPaciente, tba_paciente.DomicilioPaciente, tba_paciente.LugarNacimiento, tba_paciente.GradoInstruccion, tba_paciente.RazaPaciente, tba_paciente.OcupacionPaciente, tba_paciente.ReligionPaciente, tba_paciente.EstadoCivil, tba_paciente.NumeroContactopaciente, tba_paciente.NombreContactoPaciente FROM $tabla WHERE idPaciente = $codPaciente");
-    $statement -> execute();
-    return $statement -> fetch();
-  }
   
   //  Update de los datos del paciente en la historia clínica
   public static function mdlUpdateDatospaciente($tabla, $datosUpdatePaciente)
@@ -183,7 +175,7 @@ class ModelPacientes
   //  Mostrar los datos del paciente basicos 
   public static function mdlMostrarDatosBasicos($tabla, $codPaciente)
   {
-    $statement = Conexion::conn()->prepare("SELECT tba_paciente.IdPaciente, tba_paciente.NombrePaciente, tba_paciente.ApellidoPaciente, tba_paciente.DNIPaciente FROM $tabla WHERE tba_paciente.IdPaciente = $codPaciente");
+    $statement = Conexion::conn()->prepare("SELECT tba_paciente.IdPaciente, tba_paciente.NombrePaciente, tba_paciente.ApellidoPaciente, tba_paciente.DNIPaciente, tba_paciente.CelularPaciente FROM $tabla WHERE tba_paciente.IdPaciente = $codPaciente");
     $statement -> execute();
     return $statement -> fetch();
   }
@@ -257,6 +249,14 @@ class ModelPacientes
   public static function mdlVerificarPacienteDNI($tabla, $numeroDNI)
   {
     $statement = Conexion::conn()->prepare("SELECT COUNT(*) AS Contador FROM $tabla WHERE tba_paciente.DNIPaciente = $numeroDNI");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
+
+  //  Obtener los nombres del paciente
+  public static function mdlObtenerNombresPaciente($tabla, $codHistoria)
+  {
+    $statement = Conexion::conn()->prepare("SELECT tba_paciente.NombrePaciente, tba_paciente.ApellidoPaciente FROM $tabla INNER JOIN tba_historiaclinica ON  tba_paciente.IdPaciente = tba_historiaclinica.IdPaciente WHERE tba_historiaclinica.IdHistoriaClinica = $codHistoria");
     $statement -> execute();
     return $statement -> fetch();
   }

@@ -24,10 +24,10 @@ $("#btnNuevaHistoria").on("click", function(){
         processData: false,
         dataType: "json",
         success: function (respuesta) {
-          if (respuesta == "ok") {
-            window.location = "index.php?ruta=crearNuevaHistoria";
+          if (respuesta["respuesta"] == "ok") {
+            window.location = "index.php?ruta=crearNuevaHistoria&codPaciente="+respuesta["codPaciente"];
           } else {
-            if (respuesta == "historia") {
+            if (respuesta["respuesta"] == "historia") {
               Swal.fire(
                 'Error',
                 'Este Paciente ya tiene una historia creada',
@@ -70,12 +70,13 @@ $(".table").on("click", ".btnListarPlanTratamiento", function () {
   }
 });
 
-//  Alerta para eliminar un gasto Fijo
+//  Alerta para eliminar una historia
 $(".table").on("click", ".btnEliminarHistoria", function () {
   var codHistoria = $(this).attr("codHistoria");
+  var codPaciente = $(this).attr("codPaciente");
   swal.fire({
     title: '¿Está seguro de borrar la Historia Clínica?',
-    text: "¡No podrá revertir el cambio!",
+    text: "¡No podrá revertir el cambio! Se borrarán todos los datos de la historia clínica",
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
@@ -84,29 +85,7 @@ $(".table").on("click", ".btnEliminarHistoria", function () {
     confirmButtonText: 'Si, borrar historia!'
   }).then((result) => {
     if (result.isConfirmed) {
-      window.location = "index.php?ruta=historiaClinica&codHistoria="+codHistoria;
-    }
-  });
-});
-
-//  Mostrar los datos en los campos de la historia, según select.
-$(".formularioHistoriaClinica").on("change", ".nombrePaciente", function () {
-  var codPacienteHistoria = $(this).val();
-  var datos = new FormData();
-
-  datos.append("codPacienteHistoria", codPacienteHistoria);
-  $.ajax({
-    url: "ajax/pacientes.ajax.php",
-    method: "POST",
-    data: datos,
-    cache: false,
-    contentType: false,
-    processData: false,
-    dataType: "json",
-
-    success: function (respuesta) {
-      $("#numeroDNI").val(respuesta["DNIPaciente"]);
-      $("#celularPaciente").val(respuesta["CelularPaciente"]);
+      window.location = "index.php?ruta=historiaClinica&codHistoria="+codHistoria+"&codPaciente="+codPaciente;
     }
   });
 });
@@ -261,4 +240,148 @@ $(".table").on("click", ".btnImprimirHistoria", function () {
       text: '¡No se encontró una Historia Clínica!',
     });
   }
+});
+
+//  Descargar solo la historia clínica
+$("#btnSubirOdontograma").on("click", function(){
+  codHistoria = $(this).attr('codHistoria');
+  if(codHistoria != null || codHistoria != undefined || codHistoria != '')
+  {
+    window.open("library/FPDF/printHistoriaClinica.php?&codHistoria=" + codHistoria, "_blank");
+  }
+  else
+  {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: '¡No se encontró una Historia Clínica!',
+    });
+  }
+});
+
+//  Subir un archivo
+$("#nuevoOdontograma").on("change", function(){
+  var codHistoria = $(this).attr('codHistoria');
+  var files = $(this)[0].files[0];
+  var datos = new FormData();
+  datos.append("codSubirImg", codHistoria);
+  datos.append("nuevoOdontograma", files);
+  $.ajax({
+    url: "ajax/historias.ajax.php",
+    method: "POST",
+    data: datos,
+    cache: false,
+    contentType: false,
+    processData: false,
+    dataType: "json",
+    success: function (respuesta) {
+      valor = respuesta;
+      console.log(valor);
+      if(respuesta == "ok")
+      {
+        Swal.fire({
+          icon: 'success',
+          title: 'Correcto',
+          text: '¡Pago Registrado Exitosamente!',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            location.reload();
+          }
+        });
+      } else if(respuesta == "errorFormato"){
+        Swal.fire({
+          icon: 'warning',
+          title: 'Correcto',
+          text: '¡El odontograma no se registró correctamente. Solo se aceptan formatos JPG, JPEG, PNG y PDF!',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            location.reload();
+          }
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: '¡Error al registrar el odontograma, vuelva a ingresar los datos!',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            location.reload();
+          }
+        });
+      }
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("Error en la solicitud AJAX: ", textStatus, errorThrown);
+    } 
+  });
+});
+
+//  Descargar el comprobante
+$(".formularioHistoriaClinica").on("click", ".btnDescargarOdontograma", function () {
+  codHistoria = $(this).attr('codHistoria');
+  var datos = new FormData();
+  datos.append('codHistoriaDescargar', codHistoria);
+  $.ajax({
+    url:"ajax/historias.ajax.php",
+    method: "POST",
+    data: datos,
+    cache: false,
+    contentType: false,
+    processData: false,
+    dataType: "json",
+    success: function(devolver)
+    {
+      archivo = devolver["archivo"];
+      ruta = devolver["ruta"];
+      if(archivo!==null)
+      {
+        $.get(ruta).done(function(){
+            window.open(ruta, '_blank'); 
+        });
+      }
+      else
+      {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: '¡No se encontró un documento guardado!',
+        });
+      }
+    }
+  });
+});
+
+//  Descargar odontograma
+$(".table").on("click", ".btnDescargarOdontograma", function () {
+  codHistoria = $(this).attr('codHistoria');
+  var datos = new FormData();
+  datos.append('codHistoriaDescargar', codHistoria);
+  $.ajax({
+    url:"ajax/historias.ajax.php",
+    method: "POST",
+    data: datos,
+    cache: false,
+    contentType: false,
+    processData: false,
+    dataType: "json",
+    success: function(devolver)
+    {
+      archivo = devolver["archivo"];
+      ruta = devolver["ruta"];
+      if(archivo!==null)
+      {
+        $.get(ruta).done(function(){
+            window.open(ruta, '_blank'); 
+        });
+      }
+      else
+      {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: '¡No se encontró un documento guardado!',
+        });
+      }
+    }
+  });
 });

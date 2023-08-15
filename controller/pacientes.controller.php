@@ -27,8 +27,8 @@ class ControllerPacientes
       $datosCreate = array(
         "NombrePaciente" => $_POST["nombrePaciente"],
         "ApellidoPaciente" => $_POST["apellidoPaciente"],
-        "DNIPaciente" => $_POST["celularPaciente"],
-        "CelularPaciente" => $_POST["numeroDNI"],
+        "DNIPaciente" => $_POST["numeroDNI"],
+        "CelularPaciente" => $_POST["celularPaciente"],
         "UsuarioCreado"=>$_SESSION["idUsuario"],
         "UsuarioActualiza"=>$_SESSION["idUsuario"],
         "FechaCreacion"=>date("Y-m-d\TH:i:sP"),
@@ -114,20 +114,12 @@ class ControllerPacientes
     }
   }
 
-  //  Mostrar los pacientes para la historia clínica
+  //  Mostrar los pacientes para la historia clínica --> REVISAR ASDASDASda
   public static function ctrMostrarPacientesHistoria()
   {
     $tabla = "tba_paciente";
     $listaPacientes = ModelPacientes::mdlMostrarPacientesHistoria($tabla);
     return $listaPacientes;
-  }
-
-  //  Devolver los datos de un paciente para llenar datos de la historia
-  public static function ctrMostrarDatosUnPaciente($codPaciente)
-  {
-    $tabla = "tba_paciente";
-    $datosPaciente = ModelPacientes::mdlMostrarDatosPacienteHistoria($tabla, $codPaciente);
-    return $datosPaciente;
   }
 
   //  Update datos del paciente en la historia clínica
@@ -201,24 +193,38 @@ class ControllerPacientes
     $respuesta = "ok";
     $nombrePaciente = ModelPacientes::mdlVerificarPacienteDNI($tabla, $numeroDNIBuscar);
     $historiaPaciente = ControllerHistorias::ctrBuscarHistoriaDNI($numeroDNIBuscar);
+    $respuesta = array(
+      "respuesta" => "error",
+      "codPaciente" => '',
+    );
 
     //  Si me devuelve un valor, significa que tiene una historia y no puede crear otra
     if($historiaPaciente["Contador"] == '1')
     {
-      $respuesta = "historia";
+      $respuesta["respuesta"] = "historia";
     }
     else
     {
-      //  Si nos devuelve un valor null, significa que no esta registrado y falta registrarlo
+      //  Si nos devuelve valor de 1, significa que el paciente existe por lo cual lo busco para mandarlo junto con la respuesta
       if($nombrePaciente["Contador"] == '1')
       {
-        $respuesta = "ok";
+        $codPaciente = self::ctrBuscarPacienteDNI($numeroDNIBuscar);
+        $respuesta["codPaciente"] = $codPaciente["IdPaciente"];
+        $respuesta["respuesta"] = "ok";
       }
       else
       {
-        $respuesta = "paciente";
+        $respuesta["respuesta"] = "paciente";
       }
     }
     return $respuesta;
+  }
+
+  //  Obtener los nombres del paciente por el codigo de historia
+  public static function ctrObtenerNombresPaciente($codHistoria)
+  {
+    $tabla = "tba_paciente";
+    $nombresPaciente = ModelPacientes::mdlObtenerNombresPaciente($tabla, $codHistoria);
+    return $nombresPaciente;
   }
 }

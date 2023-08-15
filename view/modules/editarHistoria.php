@@ -21,7 +21,11 @@
               }
               else
               {
-                echo 'No hay datos de la historia clínica';
+                echo'
+                  <script>
+                    window.location = "index.php?ruta=historiaClinica";
+                  </script>
+                ';
               }
             ?>  
           </h1>
@@ -36,7 +40,14 @@
 
                 <div class="container row g-3 p-3 justify-content-between">
                   <h3 class="col-3 d-inline-flex-center">Datos Paciente</h3>
-                  <button type="button" class="col-3 d-inline-flex-center btn btn-success btnDescargarHistoria" id="btnDescargarHistoria" codHistoria="<?php echo $_GET["codHistoria"] ?>"><i class="fa fa-print" aria-hidden="true"></i>   Imprimir Historia Clinica</button>
+                  <div class="col-9 d-flex justify-content-end">
+                    <label class="btn btn-info btnSubirOdontograma ms-2">
+                      <i class="fa fa-cloud-upload" aria-hidden="true"></i>   Subir Odontograma
+                      <input type="file" name="nuevoOdontograma" id="nuevoOdontograma" codHistoria="<?php echo $_GET["codHistoria"]?>" style="display:none;">
+                    </label>
+                    <button type="button" class="btn btn-warning btnDescargarOdontograma ms-2" id="btnDescargarOdontograma" codHistoria="<?php echo $_GET["codHistoria"] ?>"><i class="fa fa-cloud-download" aria-hidden="true"></i>   Descargar Odontograma</button>
+                    <button type="button" class="btn btn-success btnDescargarHistoria ms-2" id="btnDescargarHistoria" codHistoria="<?php echo $_GET["codHistoria"] ?>"><i class="fa fa-print" aria-hidden="true"></i>   Imprimir Historia Clinica</button>
+                  </div>
                 </div>
                 
                 <!-- Seleccionar al paciente -->
@@ -291,18 +302,18 @@
                           <!-- Descripción del procedimiento -->     
                           <div class="col-lg-5" style="padding-right:0px">
                             <div class="input-group">
-                              <input type="text" class="form-control nuevoprocedimiento" codProcedimiento="'.$value["IdProcedimiento"].'" value="'.$value["NombreProcedimiento"].'" readonly>
+                              <input type="text" class="form-control nuevoprocedimiento border-0" codProcedimiento="'.$value["IdProcedimiento"].'" value="'.$value["NombreProcedimiento"].'" readonly>
                             </div>
                           </div>
                   
                           <!-- Observacion -->
                           <div class="col-lg-5 observacionProcedimiento">
-                            <input type="text" class="form-control nuevaObservacionTratamiento" name="nuevaObservacionTratamiento" value="'.$value["ObservacionProcedimiento"].'" readonly>
+                            <input type="text" class="form-control nuevaObservacionTratamiento border-0" name="nuevaObservacionTratamiento" value="'.$value["ObservacionProcedimiento"].'" readonly>
                           </div>
                   
                           <!-- Precio del procedimiento -->
                           <div class="col-lg-2 precioProcedimiento">
-                            <input type="number" class="form-control nuevoPrecioProcedimiento" name="nuevoPrecioProcedimiento" min="1.00" step="0.01" value="'.$value["PrecioProcedimiento"].'" readonly>
+                            <input type="number" class="form-control nuevoPrecioProcedimiento border-0" name="nuevoPrecioProcedimiento" min="1.00" step="0.01" value="'.$value["PrecioProcedimiento"].'" readonly>
                           </div> 
                   
                         </div>
