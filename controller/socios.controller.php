@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set('America/Lima');
 class ControllerSocios
 {
   //  Mostrar todos los socios creados
@@ -133,6 +133,14 @@ class ControllerSocios
   {
     $tabla = "tba_socio";
     $listaSocios = ModelSocios::mdlMostrarSociosGastos($tabla);
+    return $listaSocios;
+  }
+  
+  //  Mostrar socios por el tipo de socio que es
+  public static function ctrMostrarSociosPorTipo($codTipoSocio)
+  {
+    $tabla = "tba_socio";
+    $listaSocios = ModelSocios::mdlMostrarSociosPorTipo($tabla, $codTipoSocio);
     return $listaSocios;
   }
 }

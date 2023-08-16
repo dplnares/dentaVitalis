@@ -98,4 +98,12 @@ class ModelSocios
     $statement -> execute();
     return $statement -> fetchAll();
   }
+
+  //  Mostrar los socios por el tipo de socio
+  public static function mdlMostrarSociosPorTipo($tabla, $codTipoSocio)
+  {
+    $statement = Conexion::conn()->prepare("SELECT tba_socio.IdSocio, tba_socio.NombreSocio FROM $tabla WHERE tba_socio.IdTipoSocio = $codTipoSocio");
+    $statement -> execute();
+    return $statement -> fetchAll();
+  }
 }

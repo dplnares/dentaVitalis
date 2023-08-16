@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set('America/Lima');
 class ControllerReportesExcel
 {
   //  Descargar reporte del filtro de costos por fecha en excel

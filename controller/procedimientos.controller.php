@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set('America/Lima');
 class ControllerProcedimientos
 {
   //  Mostrar todos los procedimientos en el modulo de procedimientos

@@ -167,7 +167,7 @@ class ModelPacientes
   //  Buscar al paciente por el número de DNI
   public static function mdlBuscarPacienteDNI($tabla, $numeroDNI)
   {
-    $statement = Conexion::conn()->prepare("SELECT tba_paciente.IdPaciente, tba_paciente.NombrePaciente, tba_paciente.ApellidoPaciente FROM $tabla WHERE tba_paciente.DNIPaciente = $numeroDNI");
+    $statement = Conexion::conn()->prepare("SELECT tba_paciente.IdPaciente, tba_paciente.NombrePaciente, tba_paciente.ApellidoPaciente, tba_paciente.DNIPaciente, tba_paciente.CelularPaciente FROM $tabla WHERE tba_paciente.DNIPaciente = $numeroDNI");
     $statement -> execute();
     return $statement -> fetch();
   }

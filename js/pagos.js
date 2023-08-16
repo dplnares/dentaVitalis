@@ -80,7 +80,17 @@ $(".formularioGenerarPago").on("click", ".btnGenerarPago", function () {
   var observacionPago = $('#observacionPago').val();
   var files = $('#comprobantePago')[0].files[0];
   
-  //  Falta considerar si se podrá subir archivos o no, de ser el caso aquí se trabajaría el documento a subir
+  //  Falta considerar si se podrá subir archivos o no, de ser el caso aquí se trabajaría el documento a subir 
+
+  /**
+   * > SE CREAN REGISTROS EN BLANCO
+   * > SE CREAN REGISTROS EN BLANCO
+   * > SE CREAN REGISTROS EN BLANCO
+   * > SE CREAN REGISTROS EN BLANCO
+   * > SE CREAN REGISTROS EN BLANCO
+   * > SE CREAN REGISTROS EN BLANCO
+   * > SE CREAN REGISTROS EN BLANCO
+   */
   var datos = new FormData();
   datos.append("codPaciente", codPaciente);
   datos.append("tipoPago", tipoPago);
@@ -273,7 +283,6 @@ $(".table").on("click", ".btnFichaPagos", function () {
   }
 });
 
-
 //  Descargar el comprobante
 $(".table").on("click", ".btnDescargarPago", function () {
   codPago = $(this).attr('codPago');
@@ -291,7 +300,7 @@ $(".table").on("click", ".btnDescargarPago", function () {
     {
       archivo = devolver["archivo"];
       ruta = devolver["ruta"];
-      if(archivo!==null)
+      if(archivo!=null)
       {
         $.get(ruta).done(function(){
             window.open(ruta, '_blank'); 

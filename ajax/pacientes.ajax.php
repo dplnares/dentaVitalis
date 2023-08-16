@@ -32,6 +32,14 @@ class AjaxPacientes
     $respuesta = ControllerPacientes::ctrVerificarNumeroDNI($numeroDNIBuscar);
     echo json_encode($respuesta);
   }
+
+  public $numeroDNICita;
+  public function ajaxBuscarPacienteDNICita()
+  {
+    $numeroDNICita = $this->numeroDNICita;
+    $respuesta = ControllerPacientes::ctrBuscarPacienteDNI($numeroDNICita);
+    echo json_encode($respuesta);
+  }
 }
 
 //  Editar socio
@@ -53,4 +61,11 @@ if(isset($_POST["numeroDNIBuscar"])){
 	$verificarDNI = new AjaxPacientes();
 	$verificarDNI -> numeroDNIBuscar = $_POST["numeroDNIBuscar"];
 	$verificarDNI -> ajaxBuscarPacienteDNI();
+}
+
+//  Buscar al paciente por el número del DNI para crear una nueva cita
+if(isset($_POST["numeroDNICita"])){
+	$verificarDNICita = new AjaxPacientes();
+	$verificarDNICita -> numeroDNICita = $_POST["numeroDNICita"];
+	$verificarDNICita -> ajaxBuscarPacienteDNICita();
 }

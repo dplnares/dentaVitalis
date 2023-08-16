@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set('America/Lima');
 class ControllerUsuarios
 {
   //  Verificar los valores para iniciar sesión  

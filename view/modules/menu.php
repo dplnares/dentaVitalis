@@ -6,26 +6,17 @@
   Inicio
 </a>
 
-<!-- Definir las vistas de los modulos de cada usuario -->
-
-<!-- Calendario 
-<div class="sb-sidenav-menu-heading">Calendario</div>
-  <a class="nav-link" href="calendario">
-    <div class="sb-nav-link-icon"><i class="fas fa-calendar"></i></div>
-    Calendario Citas
-  </a> -->
-
 <!-- Historias Clinica -->
-<div class="sb-sidenav-menu-heading">Historias</div>
+<div class="sb-sidenav-menu-heading">Pacientes</div>
   <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#listaHistoria" aria-expanded="false" aria-controls="collapseLayouts">
     <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
-    Historias
+    Pacientes
     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
   </a>
   <div class="collapse" id="listaHistoria" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
     <nav class="sb-sidenav-menu-nested nav">
-      <a class="nav-link" href="historiaClinica">Historias Clinica</a>
-      <!-- <a class="nav-link" href="calendario">Calendario Citas</a> -->
+      <a class="nav-link" href="historiaClinica">Historias Clinicas</a>
+      <a class="nav-link" href="programacionCitas">Programación Citas</a>
     </nav>
   </div>
 

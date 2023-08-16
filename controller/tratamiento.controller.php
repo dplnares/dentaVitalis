@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set('America/Lima');
 class ControllerTratamiento
 {
   //  Crear un nuevo tratamiento

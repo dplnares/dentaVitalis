@@ -16,6 +16,7 @@ require_once "controller/historias.controller.php";
 require_once "controller/reportesExcel.controller.php";
 require_once "controller/tratamiento.controller.php";
 require_once "controller/pagos.controller.php";
+require_once "controller/citas.controller.php";
 
 //  Models
 require_once "model/usuarios.model.php";
@@ -27,6 +28,7 @@ require_once "model/costos.model.php";
 require_once "model/historias.model.php";
 require_once "model/tratamiento.model.php";
 require_once "model/pagos.model.php";
+require_once "model/citas.model.php";
 
 $plantilla = new ControllerPlantilla();
 $plantilla -> ctrPlantilla();

@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set('America/Lima');
 class ControllerPagos
 {
   //  Mostrar todo los pagos realizados hasta el momento

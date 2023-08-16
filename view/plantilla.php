@@ -45,8 +45,7 @@
           $_GET["ruta"] == "pagosPendientes" ||
           $_GET["ruta"] == "historialPagos" ||
           $_GET["ruta"] == "visualizarPagos" ||
-
-          $_GET["ruta"] == "calendario" ||
+          $_GET["ruta"] == "programacionCitas" ||
           $_GET["ruta"] == "signout" 
         )
         {
@@ -83,7 +82,6 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
   <script src="js/usuario.js"></script>
-  <script src="js/calendario.js"></script>
   <script src="js/gastos.js"></script>
   <script src="js/socios.js"></script>
   <script src="js/pacientes.js"></script>
@@ -92,6 +90,7 @@
   <script src="js/historias.js"></script>
   <script src="js/tratamiento.js"></script>
   <script src="js/pagos.js"></script>
+  <script src="js/citas.js"></script>
 
   <script src="assets/chartCostoRango.js"></script>
   <script src="assets/chartCentroCosto.js"></script>
