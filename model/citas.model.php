@@ -72,4 +72,13 @@ class ModelCitas
       return "error";
     }
   }
+
+  //  Mostrar la cantidad de citas que tengo para hoy
+  public static function mdlContarCitasHoy($tabla, $fechaHoy)
+  {
+    $statement = Conexion::conn()->prepare("SELECT COUNT(IdCita) AS TotalCitas FROM $tabla WHERE DATE_FORMAT(FechaProgramada, '%Y-%m-%d') = $fechaHoy");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
+  
 }

@@ -9,7 +9,7 @@
 <!-- Historias Clinica -->
 <div class="sb-sidenav-menu-heading">Pacientes</div>
   <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#listaHistoria" aria-expanded="false" aria-controls="collapseLayouts">
-    <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
+    <div class="sb-nav-link-icon"><i class="fa fa-users"></i></div>
     Pacientes
     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
   </a>
@@ -23,7 +23,7 @@
 <!-- Historias Pagos -->
 <div class="sb-sidenav-menu-heading">Pagos</div>
   <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#listaPagos" aria-expanded="false" aria-controls="collapseLayouts">
-    <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
+    <div class="sb-nav-link-icon"><i class="fa fa-credit-card"></i></div>
     Pagos
     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
   </a>
@@ -37,7 +37,7 @@
 <!-- Costos  -->
 <div class="sb-sidenav-menu-heading">Costos</div>
   <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#listaCostos" aria-expanded="false" aria-controls="collapseLayouts">
-    <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
+    <div class="sb-nav-link-icon"><i class="fa fa-line-chart"></i></div>
     Costos
     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
   </a>

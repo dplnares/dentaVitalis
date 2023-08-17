@@ -563,4 +563,11 @@ class ControllerHistorias
     return $respuesta;
   }
 
+  //  Contar las historias que tenemos creadas
+  public static function ctrContarHistoriasCreadas()
+  {
+    $tabla = "tba_historiaclinica";
+    $sumaHistorias = ModelHistorias::mdlContarHistoriasCreadas($tabla);
+    return $sumaHistorias;
+  }
 }

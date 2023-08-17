@@ -106,7 +106,7 @@
 
                 <!-- Religión -->
                 <div class="col-md-3">
-                  <label for="editarReligionPaciente" class="form-label" style="font-weight: bold">Religion: </label>
+                  <label for="editarReligionPaciente" class="form-label" style="font-weight: bold">Religión: </label>
                   <input type="text" class="form-control" id="editarReligionPaciente" name="editarReligionPaciente" value="<?php echo $datosPaciente["ReligionPaciente"]?>">
                 </div>
 
@@ -142,7 +142,7 @@
 
                 <!-- Telefono Celular -->
                 <div class="col-md-3">
-                  <label for="editarNumeroContacto" class="form-label" style="font-weight: bold">Numero de Contacto: </label>
+                  <label for="editarNumeroContacto" class="form-label" style="font-weight: bold">Número de Contacto: </label>
                   <input type="text" class="form-control" id="editarNumeroContacto" name="editarNumeroContacto" value="<?php echo $datosPaciente["NumeroContactoPaciente"]?>">
                 </div>
 
@@ -179,7 +179,7 @@
 
                 <!-- Signos y síntomas principales -->
                 <div class="col-md-12">
-                  <label for="editarSignosSintomas" class="form-label" style="font-weight: bold">Singos y síntomas principales: </label>
+                  <label for="editarSignosSintomas" class="form-label" style="font-weight: bold">Signos y síntomas principales: </label>
                   <input type="text" class="form-control" id="editarSignosSintomas" name="editarSignosSintomas" value="<?php echo $datosCabecera["SignosSintomas"]?>">
                 </div>
 
@@ -287,7 +287,7 @@
 
                 <div class="row" style="font-weight: bold">
                   <div class="col-lg-5">Descripción</div>
-                  <div class="col-lg-5">Observacion</div>
+                  <div class="col-lg-5">Observación</div>
                   <div class="col-lg-2">Precio(S/.)</div>
                 </div>
 

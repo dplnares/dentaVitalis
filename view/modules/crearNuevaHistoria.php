@@ -105,7 +105,7 @@
 
                 <!-- Religión -->
                 <div class="col-md-3">
-                  <label for="religionPaciente" class="form-label" style="font-weight: bold">Religion: </label>
+                  <label for="religionPaciente" class="form-label" style="font-weight: bold">Religión: </label>
                   <input type="text" class="form-control" id="religionPaciente" name="religionPaciente">
                 </div>
 
@@ -129,7 +129,7 @@
 
                 <!-- Telefono Celular -->
                 <div class="col-md-3">
-                  <label for="celularPaciente" class="form-label" style="font-weight: bold">Telefono / Celular: </label>
+                  <label for="celularPaciente" class="form-label" style="font-weight: bold">Teléfono / Celular: </label>
                   <input type="text" class="form-control" id="celularPaciente" name="celularPaciente" value="<?php echo $datosPaciente["CelularPaciente"]?>">
                 </div>
 
@@ -141,7 +141,7 @@
 
                 <!-- Telefono Celular -->
                 <div class="col-md-3">
-                  <label for="numeroContacto" class="form-label" style="font-weight: bold">Numero de Contacto: </label>
+                  <label for="numeroContacto" class="form-label" style="font-weight: bold">Número de Contacto: </label>
                   <input type="text" class="form-control" id="numeroContacto" name="numeroContacto">
                 </div>
 
@@ -178,7 +178,7 @@
 
                 <!-- Signos y síntomas principales -->
                 <div class="col-md-12">
-                  <label for="signosySintomas" class="form-label" style="font-weight: bold">Singos y síntomas principales: </label>
+                  <label for="signosySintomas" class="form-label" style="font-weight: bold">Signos y síntomas principales: </label>
                   <input type="text" class="form-control" id="signosySintomas" name="signosySintomas">
                 </div>
 
@@ -286,7 +286,7 @@
 
                 <div class="row" style="font-weight: bold">
                   <div class="col-lg-5">Descripción</div>
-                  <div class="col-lg-5">Observacion</div>
+                  <div class="col-lg-5">Observación</div>
                   <div class="col-lg-2">Precio(S/.)</div>
                 </div>
 

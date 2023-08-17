@@ -42,7 +42,7 @@ var ctx = document.getElementById("charCentroCosto");
 var chartCentrCostos = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: ["January", "February", "March", "April", "May", "June"],
+    labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio"],
     datasets: [{
       label: "Gasto Total (S/.)",
       backgroundColor: "rgba(2,117,216,0.8)",

@@ -260,4 +260,12 @@ class ModelPacientes
     $statement -> execute();
     return $statement -> fetch();
   }
+
+  //  Mostrar la cantidad de pacientes creados
+  public static function mdlContarPacientes($tabla)
+  {
+    $statement = Conexion::conn()->prepare("SELECT COUNT(IdPaciente) AS TotalPacientes FROM $tabla");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
 }

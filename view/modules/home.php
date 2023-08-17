@@ -17,90 +17,66 @@
         <div class="row">
           <div class="col-xl-3 col-md-6">
             <div class="card bg-primary text-white mb-4">
-              <div class="card-body">Pacientes Registrados</div>
+              <div class="card-body">
+                <?php 
+                  $TotalPacientes = ControllerPacientes::ctrContarPacientes();
+                  echo 'Pacientes Registrados :       '.$TotalPacientes["TotalPacientes"];
+                ?>
+              </div>
               <div class="card-footer d-flex align-items-center justify-content-between">
-                <a class="small text-white stretched-link" href="#">View Details</a>
+                <a class="small text-white stretched-link" href="pacientes">Ver Detalles</a>
                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
               </div>
             </div>
           </div>
           <div class="col-xl-3 col-md-6">
             <div class="card bg-warning text-white mb-4">
-              <div class="card-body">Gastos de laboratorio</div>
+              <div class="card-body">
+                <?php
+                  $mayorCostoMes = ControllerCostos::ctrSumarCostosMesActual();
+                  echo 'Costo Total del Mes (S/.) : '.$mayorCostoMes["suma_mes"];
+                ?>
+              </div>
               <div class="card-footer d-flex align-items-center justify-content-between">
-                <a class="small text-white stretched-link" href="#">View Details</a>
+                <a class="small text-white stretched-link" href="allCostos">Ver Detalles</a>
                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
               </div>
             </div>
           </div>
           <div class="col-xl-3 col-md-6">
             <div class="card bg-success text-white mb-4">
-              <div class="card-body">Citas Registradas</div>
+              <div class="card-body">
+                <?php
+                  $citasRegistradas = ControllerCitas::ctrSumarCitasHoy();
+                  echo 'Citas Registradas hoy : '.$citasRegistradas["TotalCitas"];
+                ?>
+              </div>
               <div class="card-footer d-flex align-items-center justify-content-between">
-                <a class="small text-white stretched-link" href="#">View Details</a>
+                <a class="small text-white stretched-link" href="programacionCitas">Ver Detalles</a>
                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
               </div>
             </div>
           </div>
           <div class="col-xl-3 col-md-6">
             <div class="card bg-danger text-white mb-4">
-              <div class="card-body">Historias Clinicas Registradas</div>
+              <div class="card-body">
+              <?php
+                  $totalHistorias = ControllerHistorias::ctrContarHistoriasCreadas();
+                  echo 'Historias Clinicas Registradas : '.$totalHistorias["TotalHistorias"];
+                ?>
+              </div>
               <div class="card-footer d-flex align-items-center justify-content-between">
-                <a class="small text-white stretched-link" href="#">View Details</a>
+                <a class="small text-white stretched-link" href="historiaClinica">Ver Detalles</a>
                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
               </div>
             </div>
           </div>
         </div>
         <div class="row">
-          <!-- <div class="col-xl-6">
-            <div class="card mb-4">
-              <div class="card-header">
-                <i class="fas fa-chart-area me-1"></i>
-                Area Chart Example
-              </div>
-              <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
-            </div>
-          </div>
-          <div class="col-xl-6">
-            <div class="card mb-4">
-              <div class="card-header">
-                <i class="fas fa-chart-bar me-1"></i>
-                Bar Chart Example
-              </div>
-              <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
-            </div>
-          </div> -->
+          
         </div>
         <div class="card mb-4">
-          <!-- <div class="card-header">
-            <i class="fas fa-table me-1"></i>
-            DataTable Example
-          </div>
-          <div class="card-body">
-            <table id="datatablesSimple">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Position</th>
-                  <th>Office</th>
-                  <th>Age</th>
-                  <th>Start date</th>
-                  <th>Salary</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Tiger Nixon</td>
-                  <td>System Architect</td>
-                  <td>Edinburgh</td>
-                  <td>61</td>
-                  <td>2011/04/25</td>
-                  <td>$320,800</td>
-                </tr>
-              </tbody>
-            </table>
-          </div> -->
+          
         </div>
       </div>
     </main>

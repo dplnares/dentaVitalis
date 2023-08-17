@@ -203,4 +203,12 @@ class ModelHistorias
       return "error";
     }
   }
+
+  //  Contar las historias creadas
+  public static function mdlContarHistoriasCreadas($tabla)
+  {
+    $statement = Conexion::conn()->prepare("SELECT COUNT(IdHistoriaClinica) AS TotalHistorias FROM $tabla");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
 }

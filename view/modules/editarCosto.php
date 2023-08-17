@@ -56,7 +56,7 @@
               <div class="container row g-3">
                 <h3>Datos Detalle</h3>
                 <div class="d-inline-flex m-2">
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAgregarGasto">Agregar Item</button>
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAgregarGastoEditar">Agregar Item</button>
                 </div>
 
                 <div class="row" style="font-weight: bold">
@@ -161,7 +161,7 @@
   $crearCosto -> ctrEditarCosto();
 ?>
 
-<div class="modal fade" id="modalAgregarGasto" tabindex="-1" role="dialog" aria-labelledby="modalAgregarGasto" aria-hidden="true">
+<div class="modal fade" id="modalAgregarGastoEditar" tabindex="-1" role="dialog" aria-labelledby="modalAgregarGastoEditar" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -181,7 +181,22 @@
             </tr> 
           </thead>
           <tbody class="nuevaListaGastos">
-            
+            <?php
+              $listaGastos = ControllerGastos::ctrMostrarGastosPorTipo($cabeceraIngreso["IdCentroCostos"]);
+              foreach($listaCostos as $gasto)
+              {
+                echo '
+                <tr id="nuevoRecurso">
+                  <td>'.$gasto["NombreGasto"].'</td>
+                  <td>
+                    <div class="btn-group">
+                      <button class="btn btn-primary btnAgregarGasto recuperarBoton" codGasto="'.$gasto["IdGasto"].'">Agregar</button>
+                    </div>
+                  </td>
+                </tr
+                ';
+              }
+            ?>
           </tbody>
         </table>
       </div>

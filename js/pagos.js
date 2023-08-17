@@ -71,8 +71,7 @@ $(".formularioGenerarPago").on("click", ".btnBuscarPorDNI", function () {
 
 //  Registrar el pago en la base de datos, no se puede registrar si no se tiene el numero del DNI.
 $(".formularioGenerarPago").on("click", ".btnGenerarPago", function () {
-  var nombrePaciente = $('#nombrePaciente').val();
-  
+  var nombrePaciente = $('#nombrePaciente').val();  
   var codPaciente = $('#codPaciente').val();
   var tipoPago = $('#tipoDePago').val();
   var montoDePago = $('#montoDePago').val();
@@ -81,16 +80,6 @@ $(".formularioGenerarPago").on("click", ".btnGenerarPago", function () {
   var files = $('#comprobantePago')[0].files[0];
   
   //  Falta considerar si se podrá subir archivos o no, de ser el caso aquí se trabajaría el documento a subir 
-
-  /**
-   * > SE CREAN REGISTROS EN BLANCO
-   * > SE CREAN REGISTROS EN BLANCO
-   * > SE CREAN REGISTROS EN BLANCO
-   * > SE CREAN REGISTROS EN BLANCO
-   * > SE CREAN REGISTROS EN BLANCO
-   * > SE CREAN REGISTROS EN BLANCO
-   * > SE CREAN REGISTROS EN BLANCO
-   */
   var datos = new FormData();
   datos.append("codPaciente", codPaciente);
   datos.append("tipoPago", tipoPago);
@@ -99,7 +88,7 @@ $(".formularioGenerarPago").on("click", ".btnGenerarPago", function () {
   datos.append("observacionPago", observacionPago);
   datos.append("comprobantePago", files);
 
-  if(nombrePaciente != "")
+  if(nombrePaciente != '' && montoDePago != ''&& fechaPago != '')
   {
     $.ajax({
       url: "ajax/pagos.ajax.php",
@@ -156,7 +145,7 @@ $(".formularioGenerarPago").on("click", ".btnGenerarPago", function () {
     Swal.fire({
       icon: 'error',
       title: 'Error',
-      text: '¡No se puede registrar la acción, falta el paciente!',
+      text: '¡No se puede registrar la acción, faltan datos!',
     }).then(
       $("#dniPacientePago").val(''),
     );

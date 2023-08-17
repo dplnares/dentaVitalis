@@ -227,4 +227,12 @@ class ControllerPacientes
     $nombresPaciente = ModelPacientes::mdlObtenerNombresPaciente($tabla, $codHistoria);
     return $nombresPaciente;
   }
+
+  //  Contar los pacientes registrados
+  public static function ctrContarPacientes()
+  {
+    $table = "tba_paciente";
+    $totalPacientes = ModelPacientes::mdlContarPacientes($table);
+    return $totalPacientes;
+  }
 }

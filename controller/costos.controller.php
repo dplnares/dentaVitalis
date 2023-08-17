@@ -264,7 +264,7 @@ class ControllerCostos
       $listaDetalle = json_decode($_POST["listarGastos"], true);
 
       //  Recoge la lista de la vista editar, si no se modificó ningún dato del detalle, enviará un null, por lo cual si es null, no será necesario eliminar y luego agregar un nuevo detalle. En caso si tenga datos la lista, se eliminara la lista existente y creará un nuevo detalle
-      if($listaDetalle != null)
+      if($listaDetalle != null )
       {
         $eliminarDetalle = ModelCostos::mdlEliminarDetalleCosto($tablaDetalle, $codCosto);
       }
@@ -296,7 +296,6 @@ class ControllerCostos
       {
         $datosCabecera = array(
           "IdCosto" => $codCosto,
-          "IdCentroCostos" => $_POST["centroDeCostos"],
           "MesCosto" => $_POST["editarMesGasto"],
           "TotalCosto" => $_POST["nuevoTotalGasto"],
           "UsuarioActualiza" => $_SESSION["idUsuario"],

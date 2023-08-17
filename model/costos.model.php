@@ -134,7 +134,7 @@ class ModelCostos
   //  Obtener cabecera del costo
   public static function mdlObtenerCabeceraCosto($tabla, $codCosto)
   {
-    $statement = Conexion::conn()->prepare("SELECT tba_costo.IdCosto, tba_costo.IdCentroCostos, tba_costo.MesCosto, tba_costo.TotalCosto, tba_centrocostos.DescripcionCentro FROM $tabla INNER JOIN tba_centrocostos ON tba_costo.IdCentroCostos = tba_centrocostos.IdCentroCostos WHERE tba_costo.IdCosto = $codCosto");
+    $statement = Conexion::conn()->prepare("SELECT tba_costo.IdCosto, tba_costo.IdCentroCostos, tba_costo.MesCosto, tba_costo.TotalCosto, tba_centrocostos.DescripcionCentro, tba_costo.EstadoCosto FROM $tabla INNER JOIN tba_centrocostos ON tba_costo.IdCentroCostos = tba_centrocostos.IdCentroCostos WHERE tba_costo.IdCosto = $codCosto");
     $statement -> execute();
     return $statement -> fetch();
   }
@@ -164,8 +164,7 @@ class ModelCostos
   //  Editar la cabecera del costo
   public static function mdlEditarCabeceraCosto($tabla, $datosCabecera)
   {
-    $statement = Conexion::conn()->prepare("UPDATE $tabla SET IdCentroCostos=:IdCentroCostos, MesCosto=:MesCosto, TotalCosto=:TotalCosto, UsuarioActualiza=:UsuarioActualiza, FechaActualizacion=:FechaActualizacion WHERE tba_costo.IdCosto=:IdCosto");
-    $statement -> bindParam(":IdCentroCostos", $datosCabecera["IdCentroCostos"], PDO::PARAM_STR);
+    $statement = Conexion::conn()->prepare("UPDATE $tabla SET MesCosto=:MesCosto, TotalCosto=:TotalCosto, UsuarioActualiza=:UsuarioActualiza, FechaActualizacion=:FechaActualizacion WHERE tba_costo.IdCosto=:IdCosto");
     $statement -> bindParam(":MesCosto", $datosCabecera["MesCosto"], PDO::PARAM_STR);
     $statement -> bindParam(":TotalCosto", $datosCabecera["TotalCosto"], PDO::PARAM_STR);
     $statement -> bindParam(":UsuarioActualiza", $datosCabecera["UsuarioActualiza"], PDO::PARAM_STR);

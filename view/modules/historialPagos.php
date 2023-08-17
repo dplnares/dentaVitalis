@@ -106,7 +106,7 @@
           <!-- Monto a Pagar -->
           <div class="form-group">
             <label for="montoDePago" class="col-form-label">Monto a Cancelar:</label>
-            <input type="text" class="form-control" id="montoDePago" name="montoDePago" required>
+            <input type="number" class="form-control" id="montoDePago" name="montoDePago" required>
           </div>
           
           <!-- Fecha de Pago -->

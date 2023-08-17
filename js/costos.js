@@ -274,13 +274,13 @@ $("#centroDeCostos").change(function(){
       respuesta.forEach(elemento => {
         $(".nuevaListaGastos").append(
           '<tr id="nuevoRecurso">'+
-          '<td>'+elemento["NombreGasto"]+'</td>'+
-          '<td>'+
-            '<div class="btn-group">'+
-              '<button class="btn btn-primary btnAgregarGasto recuperarBoton" codGasto="'+elemento["IdGasto"]+'">Agregar</button>'+
-            '</div>'+
-          '</td>'+
-        '</tr>'
+            '<td>'+elemento["NombreGasto"]+'</td>'+
+            '<td>'+
+              '<div class="btn-group">'+
+                '<button class="btn btn-primary btnAgregarGasto recuperarBoton" codGasto="'+elemento["IdGasto"]+'">Agregar</button>'+
+              '</div>'+
+            '</td>'+
+          '</tr>'
         );
       });
     },
@@ -408,6 +408,23 @@ $("#btnDescargarFiltro").on("click", function(){
       icon: 'error',
       title: 'Error',
       text: '¡Intruduzca la Fecha Inicial y Fecha Final!',
+    });
+  }
+});
+
+//  Imprimir un costo en específico
+$(".table").on("click", ".btnImprimirGasto", function () {
+  var codCosto = $(this).attr("codCosto");
+  if(codCosto != null || codCosto != undefined || codCosto != '')
+  {
+    window.open("library/FPDF/printCostoSelect.php?&codCosto=" + codCosto, "_blank");
+  }
+  else
+  {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: '¡No se encontró un código asociado!',
     });
   }
 });

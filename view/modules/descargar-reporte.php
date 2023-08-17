@@ -6,7 +6,6 @@ require_once "../../controller/historias.controller.php";
 require_once "../../controller/pacientes.controller.php";
 require_once "../../controller/procedimientos.controller.php";
 require_once "../../controller/reportesExcel.controller.php";
-require_once "../../controller/reportesPDF.controller.php";
 require_once "../../controller/socios.controller.php";
 require_once "../../controller/usuarios.controller.php";
 

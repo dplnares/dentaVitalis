@@ -201,4 +201,12 @@ class ControllerCitas
     }
   }
 
+  //  Contar las citas registradas para hoy
+  public static function ctrSumarCitasHoy()
+  {
+    $tabla = "tba_cita";
+    $fechaHoy = date("Y-m-d");
+    $sumaCitasHoy = ModelCitas::mdlContarCitasHoy($tabla, $fechaHoy);
+    return $sumaCitasHoy;
+  }
 }
