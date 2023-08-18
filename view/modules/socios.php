@@ -14,6 +14,9 @@
             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregarSocio">
               Agregar Socio
             </button>
+            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalAgregarTipoSocio">
+              Nuevo Tipo de Socio
+            </button>
           </div>
           <div class="card mb-4">
             <div class="card-header">
@@ -196,6 +199,40 @@
     </div>
   </div>
 </div>
+
+<!-- Modal Agregar Tipo de Socio -->
+<div class="modal fade" id="modalAgregarTipoSocio" tabindex="-1" aria-labelledby="modalAgregarTipoSocio" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Agregar Nuevo Tipo de Socio</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form role="form" method="post">
+        <div class="modal-body">
+          <div class="box-body">
+            
+            <!-- Tipo de Socio-->
+            <div class="form-group">
+              <label for="nombreTipoSocio" class="col-form-label">Nombre Tipo de Socio:</label>
+              <input type="text" class="form-control" id="nombreTipoSocio" name="nombreTipoSocio">
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-primary">Crear Tipo de Socio</button>
+            </div>
+            <?php
+              $agregarTipoSocio = new ControllerSocios();
+              $agregarTipoSocio -> ctrCrearTipoSocio();
+            ?>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 
 <?php
   $eliminarSocio = new ControllerSocios();

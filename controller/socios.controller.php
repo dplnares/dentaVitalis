@@ -143,4 +143,65 @@ class ControllerSocios
     $listaSocios = ModelSocios::mdlMostrarSociosPorTipo($tabla, $codTipoSocio);
     return $listaSocios;
   }
+
+  //  Crear tipo de socio
+  public static function ctrCrearTipoSocio()
+  {
+    if(isset($_POST["nombreTipoSocio"]))
+    {
+      if($_POST["nombreTipoSocio"] != '')
+      {
+        $tabla = "tba_tiposocio";
+        $datosCreate = array(
+          "NombreTipoSocio" => $_POST["nombreTipoSocio"]
+        );
+        $respuesta = ModelSocios::mdlCrearTipoSocio($tabla, $datosCreate);
+        if($respuesta == "ok")
+        {
+          echo '
+          <script>
+            Swal.fire({
+              icon: "success",
+              title: "Correcto",
+              text: "Se creo correctamente el tipo de socio",
+            }).then(function(result){
+              if(result.value){
+                window.location = "socios";
+              }
+            });
+          </script>';
+        }
+        else
+        {
+          echo '
+          <script>
+            Swal.fire({
+              icon: "error",
+              title: "Error",
+              text: "No se pudo crear el tipo de socio",
+            }).then(function(result){
+              if(result.value){
+                window.location = "socios";
+              }
+            });
+          </script>';
+        }
+      }
+      else
+      {
+        echo '
+        <script>
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Tipo de socio no válido",
+          }).then(function(result){
+						if(result.value){
+							window.location = "socios";
+						}
+					});
+        </script>';
+      }
+    }
+  }
 }

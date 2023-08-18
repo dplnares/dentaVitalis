@@ -13,7 +13,7 @@
           
           <div class="d-flex m-2">
             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregarGasto">
-              Agregar Gasto
+              Agregar Costo
             </button>
           </div>
           <div class="card mb-4">

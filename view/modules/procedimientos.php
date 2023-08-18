@@ -14,6 +14,9 @@
               <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregarProcedimiento">
                 Agregar Procedimiento
               </button>
+              <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalAgregarTipoProcedimiento">
+                Agregar Tipo de Procedimiento
+              </button>
             </div>
 
           <div class="card mb-4">

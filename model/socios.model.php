@@ -106,4 +106,19 @@ class ModelSocios
     $statement -> execute();
     return $statement -> fetchAll();
   }
+
+  //  Crear tipo de socio
+  public static function mdlCrearTipoSocio($tabla, $datosCreate)
+  {
+    $statement = Conexion::conn()->prepare("INSERT INTO $tabla (NombreTipoSocio) VALUES(:NombreTipoSocio)");
+    $statement -> bindParam(":NombreTipoSocio", $datosCreate["NombreTipoSocio"], PDO::PARAM_STR);
+    if($statement -> execute())
+    {
+      return "ok";
+    }
+    else
+    {
+      return "error";
+    }
+  }
 }
