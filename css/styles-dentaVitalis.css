@@ -6,12 +6,16 @@
   background-color: #1EABB9;
 }
 
+.cardImage{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
 .imagenLogin{
   width: 300;
   height: 80px;
-  margin-top: 8px;
-  margin-bottom: 8px;
-  padding-left: 140px;
 }
 
 .buttonLogin{

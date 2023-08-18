@@ -6,7 +6,7 @@
           <div class="row justify-content-center">
             <div class="col-lg-5">
               <div class="card shadow-lg border-0 rounded-lg mt-5">
-                <div class="card-header">
+                <div class="card-header cardImage">
                   <h3><img src="view/img/logo-denta.png" class="imagenLogin"></h3>
                 </div>
                 <div class="card-body">

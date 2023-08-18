@@ -4,6 +4,7 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>Denta Vitalis</title>
+<link rel="shortcut icon" href="view/img/icon-dental.ico" type="image/x-icon"> 
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
 <link href="css/styles.css" rel="stylesheet" />
 <link href="css/styles-dentaVitalis.css" rel="stylesheet" />

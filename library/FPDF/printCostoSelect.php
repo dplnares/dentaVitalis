@@ -15,13 +15,11 @@ class PDFCostoSelect extends TFPDF
   function Header()
   {
     // Logo
-    // $this->Image('logo.png', 10, 8, 33);
+    $this->Image('../../view/img/logo-denta.png', 155, 8, 35);
     // Arial bold 15
     $this->AddFont('DejaVu','','DejaVuSansCondensed.ttf',true);
     
     // Título
-    $this->SetFont('DejaVu', '', 12);
-    $this->Cell(0 ,10, 'Denta Vitalis', 0, 0, 'R');
     $this->Ln(15);
     $this->Cell(80);
     $this->SetFont('Arial', 'B', 15);
