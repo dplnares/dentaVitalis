@@ -1,5 +1,8 @@
 .fondoLogin{
-  background-color: #7fa3b4;
+  background-image: url("../view/img/fondo-login.png");
+  background-repeat: round;
+  background-attachment: fixed;
+  background-size: contain;
 }
 
 .fondoLoginCard{
@@ -10,12 +13,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100px;
+  height: 125px;
 }
 
 .imagenLogin{
-  width: 300;
-  height: 80px;
+  width: 280;
+  height: 75px;
+  margin-top: 5px;
 }
 
 .buttonLogin{

@@ -45,11 +45,13 @@ $(".formularioPlanTratamiento").on("change", "input.editarEstadoProcedimiento", 
   var estadoCheckBox = $(this).prop('checked');
   if(estadoCheckBox == true)
   {
+    //  Si está con valor true, bloquearemos los valores de fecha intervención, observación y precio
     $(this).prop('checked', true);
     console.log(estadoCheckBox);
   }
   else
   {
+    //  Si es false, vamos a habilitar los campos de fecha de intervención, observación y precio
     $(this).prop('checked', false);
     console.log(estadoCheckBox);
   }

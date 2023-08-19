@@ -88,24 +88,43 @@ class ControllerProcedimientos
   public static function ctrEliminarProcedimiento()
   {
     if (isset($_GET["codProcedimiento"]))
-    {
-      $tabla = "tba_procedimiento";
+    {      
       $codProcedimiento = $_GET["codProcedimiento"];
-      $respuesta = ModelProcedimientos::mdlEliminarProcedimiento($tabla, $codProcedimiento);
-      if($respuesta == "ok")
+      $confirmarUso = ControllerTratamiento::ctrVerificarUsoProcedimiento($codProcedimiento);
+      if($confirmarUso["TotalUso"] > 0)
       {
         echo '
-        <script>
-          Swal.fire({
-            icon: "success",
-            title: "Correcto",
-            text: "Procedimiento eliminado Correctamente!",
-          }).then(function(result){
-						if(result.value){
-							window.location = "procedimientos";
-						}
-					});
-        </script>';
+          <script>
+            Swal.fire({
+              icon: "error",
+              title: "Error",
+              text: "¡No se puede eliminar un procedimiento en uso!",
+            }).then(function(result){
+              if(result.value){
+                window.location = "procedimientos";
+              }
+            });
+          </script>';
+      }
+      else
+      {
+        $tabla = "tba_procedimiento";
+        $respuesta = ModelProcedimientos::mdlEliminarProcedimiento($tabla, $codProcedimiento);
+        if($respuesta == "ok")
+        {
+          echo '
+            <script>
+              Swal.fire({
+                icon: "success",
+                title: "Correcto",
+                text: "¡Procedimiento eliminado Correctamente!",
+              }).then(function(result){
+                if(result.value){
+                  window.location = "procedimientos";
+                }
+              });
+            </script>';
+        }
       }
     }
   }
@@ -133,4 +152,66 @@ class ControllerProcedimientos
     $datosProcedimiento = ModelProcedimientos::mdlObtenerDatosProcedimiento($tabla, $codProcedimientoAgregar);
     return $datosProcedimiento;
   }
+
+  //  Crear nuevo tipo de procedimiento
+  public static function ctrCrearTipoProcedimiento()
+  {
+    if(isset($_POST["nombreTipoProcedimiento"]))
+    {
+      if($_POST["nombreTipoProcedimiento"] != '')
+      {
+        $tabla = "tba_tipoprocedimiento";
+        $datosCreate = array(
+          "NombreTipoProcedimiento" => $_POST["nombreTipoProcedimiento"]
+        );
+        $respuesta = ModelProcedimientos::mdlCrearTipoProcedimiento($tabla, $datosCreate);
+        if($respuesta == "ok")
+        {
+          echo '
+          <script>
+            Swal.fire({
+              icon: "success",
+              title: "Correcto",
+              text: "Se creo correctamente el tipo de procedimiento",
+            }).then(function(result){
+              if(result.value){
+                window.location = "procedimientos";
+              }
+            });
+          </script>';
+        }
+        else
+        {
+          echo '
+          <script>
+            Swal.fire({
+              icon: "error",
+              title: "Error",
+              text: "No se pudo crear el tipo de procedimiento",
+            }).then(function(result){
+              if(result.value){
+                window.location = "procedimientos";
+              }
+            });
+          </script>';
+        }
+      }
+      else
+      {
+        echo '
+        <script>
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Tipo de procedimiento no válido",
+          }).then(function(result){
+						if(result.value){
+							window.location = "procedimientos";
+						}
+					});
+        </script>';
+      }
+    }
+  }
+  
 }

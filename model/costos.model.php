@@ -301,4 +301,11 @@ class ModelCostos
     return $statement -> fetchAll();
   }
   
+  //  Verificar costo
+  public static function mdlVerificarUsoSocio($tabla, $codSocio)
+  {
+    $statement = Conexion::conn()->prepare("SELECT COUNT(IdDetalleCosto) AS TotalUso FROM $tabla WHERE IdSocio = $codSocio ");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
 }

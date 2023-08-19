@@ -524,4 +524,12 @@ class ControllerCostos
     $listaCentroCostos = ModelCostos::mldMostrarSumaCostosPorCentro($tabla, $codCentroCosto);
     return $listaCentroCostos;
   }
+
+  //  Verificar uso
+  public static function ctrVerificarUsoSocio($codSocio)
+  {
+    $tabla = "tba_detallecosto";
+    $contarSocio = ModelCostos::mdlVerificarUsoSocio($tabla, $codSocio);
+    return $contarSocio;
+  }
 }

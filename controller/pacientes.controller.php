@@ -93,23 +93,44 @@ class ControllerPacientes
   {
     if (isset($_GET["codPaciente"]))
     {
-      $tabla = "tba_paciente";
       $codPaciente = $_GET["codPaciente"];
-      $respuesta = ModelPacientes::mdlEliminarPaciente($tabla, $codPaciente);
-      if($respuesta == "ok")
+      $confirmarUsoHistoria = ControllerHistorias::ctrVerificarUsoPaciente($codPaciente);
+      $confirmarUsoPago = ControllerPagos::ctrVerificarUsoPaciente($codPaciente);
+      $confirmarUsoCita = ControllerCitas::ctrVerificarUsoPaciente($codPaciente);
+      if(($confirmarUsoHistoria["TotalUso"] > 0) || ($confirmarUsoPago["TotalUso"] > 0) || ($confirmarUsoCita["TotalUso"] > 0))
       {
         echo '
-        <script>
-          Swal.fire({
-            icon: "success",
-            title: "Correcto",
-            text: "Paciente eliminado Correctamente!",
-          }).then(function(result){
-						if(result.value){
-							window.location = "pacientes";
-						}
-					});
-        </script>';
+          <script>
+            Swal.fire({
+              icon: "error",
+              title: "Error",
+              text: "¡No se puede eliminar el paciente, está en uso!",
+            }).then(function(result){
+              if(result.value){
+                window.location = "pacientes";
+              }
+            });
+          </script>';
+      }
+      else
+      {
+        $tabla = "tba_paciente";
+        $respuesta = ModelPacientes::mdlEliminarPaciente($tabla, $codPaciente);
+        if($respuesta == "ok")
+        {
+          echo '
+            <script>
+              Swal.fire({
+                icon: "success",
+                title: "Correcto",
+                text: "¡Paciente eliminado Correctamente!",
+              }).then(function(result){
+                if(result.value){
+                  window.location = "pacientes";
+                }
+              });
+            </script>';
+        }
       }
     }
   }
@@ -221,10 +242,10 @@ class ControllerPacientes
   }
 
   //  Obtener los nombres del paciente por el codigo de historia
-  public static function ctrObtenerNombresPaciente($codHistoria)
+  public static function ctrObtenerDNIPaciente($codHistoria)
   {
     $tabla = "tba_paciente";
-    $nombresPaciente = ModelPacientes::mdlObtenerNombresPaciente($tabla, $codHistoria);
+    $nombresPaciente = ModelPacientes::mdlObtenerDNIPaciente($tabla, $codHistoria);
     return $nombresPaciente;
   }
 

@@ -81,4 +81,11 @@ class ModelCitas
     return $statement -> fetch();
   }
   
+  //  Verificar si un usuario tiene citas programadas
+  public static function mdlVerificarUsoPaciente($tabla, $codPaciente)
+  {
+    $statement = Conexion::conn()->prepare("SELECT COUNT(IdCita) AS TotalUso FROM $tabla WHERE IdPaciente = $codPaciente");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
 }

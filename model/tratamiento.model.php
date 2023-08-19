@@ -276,4 +276,12 @@ class ModelTratamiento
       return "error";
     }
   }
+
+  //  Verificar si un procedimiento está siendo usado en algún plan de tratamiento
+  public static function mdlVerificarUsoProcedimiento($tabla, $codProcedimiento)
+  {
+    $statement = Conexion::conn()->prepare("SELECT COUNT(IdProcedimiento) AS TotalUso FROM $tabla WHERE IdProcedimiento = $codProcedimiento ");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
 }

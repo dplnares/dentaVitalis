@@ -107,23 +107,43 @@ class ControllerSocios
   {
     if (isset($_GET["codSocio"]))
     {
-      $tabla = "tba_socio";
       $codSocio = $_GET["codSocio"];
-      $respuesta = ModelSocios::mdlEliminarSocio($tabla, $codSocio);
-      if($respuesta == "ok")
+      $confirmarUsoCosto = ControllerCostos::ctrVerificarUsoSocio($codSocio);
+      $confirmarUsoHistoria = ControllerHistorias::ctrVerificarUsoSocio($codSocio);
+      if(($confirmarUsoCosto["TotalUso"] > 0) || ($confirmarUsoHistoria["TotalUso"] > 0))
       {
         echo '
-        <script>
-          Swal.fire({
-            icon: "success",
-            title: "Correcto",
-            text: "Socio eliminado Correctamente!",
-          }).then(function(result){
-						if(result.value){
-							window.location = "socios";
-						}
-					});
-        </script>';
+          <script>
+            Swal.fire({
+              icon: "error",
+              title: "Error",
+              text: "¡No se puede eliminar el socio, está en uso!",
+            }).then(function(result){
+              if(result.value){
+                window.location = "socios";
+              }
+            });
+          </script>';
+      }
+      else
+      {
+        $tabla = "tba_socio";
+        $respuesta = ModelSocios::mdlEliminarSocio($tabla, $codSocio);
+        if($respuesta == "ok")
+        {
+          echo '
+            <script>
+              Swal.fire({
+                icon: "success",
+                title: "Correcto",
+                text: "¡Socio eliminado Correctamente!",
+              }).then(function(result){
+                if(result.value){
+                  window.location = "socios";
+                }
+              });
+            </script>';
+        }
       }
     }
   }

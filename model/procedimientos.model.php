@@ -97,4 +97,19 @@ class ModelProcedimientos
     $statement -> execute();
     return $statement -> fetch();
   }
+
+  //  Crear nuevo tipo de procedimiento
+  public static function mdlCrearTipoProcedimiento($tabla, $datosCreate)
+  {
+    $statement = Conexion::conn()->prepare("INSERT INTO $tabla (NombreTipoProcedimiento) VALUES(:NombreTipoProcedimiento)");
+    $statement -> bindParam(":NombreTipoProcedimiento", $datosCreate["NombreTipoProcedimiento"], PDO::PARAM_STR);
+    if($statement -> execute())
+    {
+      return "ok";
+    }
+    else
+    {
+      return "error";
+    }
+  }
 }

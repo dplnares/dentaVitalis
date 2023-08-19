@@ -511,10 +511,10 @@ class ControllerHistorias
     {
       if($_FILES["nuevoOdontograma"]["type"] == "image/jpeg" || $_FILES["nuevoOdontograma"]["type"] == "image/jpg" || $_FILES["nuevoOdontograma"]["type"] == "image/png" || $_FILES["nuevoOdontograma"]["type"] == "application/pdf")
       {
-        $datosHistoria = ControllerPacientes::ctrObtenerNombresPaciente($codHistoria);
+        $datosHistoria = ControllerPacientes::ctrObtenerDNIPaciente($codHistoria);
         $formato = explode('/', $_FILES["nuevoOdontograma"]["type"]);            
         $date = date("Y-m-d");
-        $nombreArchivo = $datosHistoria["NombrePaciente"].'_'.$datosHistoria["ApellidoPaciente"].'_'.$_POST["codSubirImg"].'_'.$date.'.'.$formato[1];
+        $nombreArchivo = $datosHistoria["DNIPaciente"].'_'.$datosHistoria["IdPaciente"].'_'.$_POST["codSubirImg"].'_'.$date.'.'.$formato[1];
         $ruta = "../image/odontograma/$nombreArchivo";
         $resultado = move_uploaded_file($_FILES["nuevoOdontograma"]["tmp_name"], $ruta);
 
@@ -570,4 +570,21 @@ class ControllerHistorias
     $sumaHistorias = ModelHistorias::mdlContarHistoriasCreadas($tabla);
     return $sumaHistorias;
   }
+
+  //  Verificar uso de un socio en una historia clínica
+  public static function ctrVerificarUsoSocio($codSocio)
+  {
+    $tabla = "tba_historiaclinica";
+    $contarUso = ModelHistorias::mdlVerificarUsoSocio($tabla, $codSocio);
+    return $contarUso;
+  }
+
+  //  Verificar uso de un paciente en una historia clínica
+  public static function ctrVerificarUsoPaciente($codPaciente)
+  {
+    $tabla = "tba_historiaclinica";
+    $contarUso = ModelHistorias::mdlVerificarUsoPaciente($tabla, $codPaciente);
+    return $contarUso;
+  }
+  
 }

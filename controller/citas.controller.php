@@ -209,4 +209,12 @@ class ControllerCitas
     $sumaCitasHoy = ModelCitas::mdlContarCitasHoy($tabla, $fechaHoy);
     return $sumaCitasHoy;
   }
+
+  //  Verificar si un paciente tiene citas
+  public static function ctrVerificarUsoPaciente($codPaciente)
+  {
+    $tabla = "tba_cita";
+    $contarUso = ModelCitas::mdlVerificarUsoPaciente($tabla, $codPaciente);
+    return $contarUso;
+  }
 }

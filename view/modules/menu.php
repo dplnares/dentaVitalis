@@ -29,7 +29,7 @@
   </a>
   <div class="collapse" id="listaPagos" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
     <nav class="sb-sidenav-menu-nested nav">
-      <a class="nav-link" href="historialPagos">Todo los pagos</a>
+      <a class="nav-link" href="historialPagos">Todos los pagos</a>
       <a class="nav-link" href="pagosPendientes">Pagos pendientes</a>
     </nav>    
 </div> 
@@ -52,6 +52,10 @@
 <!-- Catálogo -->
 <div class="sb-sidenav-menu-heading">Catálogo</div>
 
+  <?php
+    if($_SESSION["perfilUsuario"] == 1 || $_SESSION["perfilUsuario"] == 2 )
+    {
+  ?>
   <!-- Catálogo  de Costos -->
   <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#listaCatalogoCostos" aria-expanded="false" aria-controls="collapseLayouts">
     <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
@@ -65,6 +69,9 @@
       <a class="nav-link" href="gastos">Catálogo de Costos</a>
     </nav>
   </div>
+  <?php
+  }
+  ?>
 
   <!-- Catálogo  de Historias Clinicas -->
   <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#listaCatalogoPacientes" aria-expanded="false" aria-controls="collapseLayouts">
@@ -78,7 +85,10 @@
       <a class="nav-link" href="pacientes">Pacientes</a>
     </nav>
   </div>
-
+  <?php
+    if($_SESSION["perfilUsuario"] == 1)
+    {
+  ?>
   <!-- Catálogo de Usuarios -->
     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#listaCatalogoUsuarios" aria-expanded="false" aria-controls="collapseLayouts">
     <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
@@ -90,3 +100,6 @@
       <a class="nav-link" href="usuario">Usuarios</a>
     </nav>
   </div>
+  <?php
+  }
+  ?>

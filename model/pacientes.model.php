@@ -254,9 +254,9 @@ class ModelPacientes
   }
 
   //  Obtener los nombres del paciente
-  public static function mdlObtenerNombresPaciente($tabla, $codHistoria)
+  public static function mdlObtenerDNIPaciente($tabla, $codHistoria)
   {
-    $statement = Conexion::conn()->prepare("SELECT tba_paciente.NombrePaciente, tba_paciente.ApellidoPaciente FROM $tabla INNER JOIN tba_historiaclinica ON  tba_paciente.IdPaciente = tba_historiaclinica.IdPaciente WHERE tba_historiaclinica.IdHistoriaClinica = $codHistoria");
+    $statement = Conexion::conn()->prepare("SELECT tba_paciente.DNIPaciente, tba_paciente.IdPaciente FROM $tabla INNER JOIN tba_historiaclinica ON  tba_paciente.IdPaciente = tba_historiaclinica.IdPaciente WHERE tba_historiaclinica.IdHistoriaClinica = $codHistoria");
     $statement -> execute();
     return $statement -> fetch();
   }

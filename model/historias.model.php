@@ -211,4 +211,20 @@ class ModelHistorias
     $statement -> execute();
     return $statement -> fetch();
   }
+
+  //  Verificar el uso de un socio en una historia clinica
+  public static function mdlVerificarUsoSocio($tabla, $codSocio)
+  {
+    $statement = Conexion::conn()->prepare("SELECT COUNT(IdHistoriaClinica) AS TotalUso FROM $tabla WHERE IdSocio = $codSocio");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
+
+  //  Verificar el uso de un paciente en una historia clínica
+  public static function mdlVerificarUsoPaciente($tabla, $codPaciente)
+  {
+    $statement = Conexion::conn()->prepare("SELECT COUNT(IdHistoriaClinica) AS TotalUso FROM $tabla WHERE IdPaciente = $codPaciente");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
 }

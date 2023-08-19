@@ -274,4 +274,12 @@ class ControllerPagos
     
     return $respuesta;
   }
+
+  //  Verificar el uso del paciente en un pago
+  public static function ctrVerificarUsoPaciente($codPaciente)
+  {
+    $tabla = "tba_pago";
+    $contarUso = ModelPagos::mdlVerificarUsoPaciente($tabla, $codPaciente);
+    return $contarUso;
+  }
 }

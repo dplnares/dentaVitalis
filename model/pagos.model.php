@@ -156,4 +156,12 @@ class ModelPagos
     $statement -> execute();
     return $statement -> fetch();
   }
+
+  //  Verificar el uso de un paciente en un pago
+  public static function mdlVerificarUsoPaciente($tabla, $codPaciente)
+  {
+    $statement = Conexion::conn()->prepare("SELECT COUNT(IdPago) AS TotalUso FROM $tabla WHERE IdPaciente = $codPaciente");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
 }

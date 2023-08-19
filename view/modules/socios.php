@@ -233,7 +233,6 @@
   </div>
 </div>
 
-
 <?php
   $eliminarSocio = new ControllerSocios();
   $eliminarSocio -> ctrEliminarSocio();

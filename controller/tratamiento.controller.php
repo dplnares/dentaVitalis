@@ -266,4 +266,12 @@ class ControllerTratamiento
     }
     return $respuesta;
   }
+
+  //  Verificar uso de tratamiento
+  public static function ctrVerificarUsoProcedimiento($codProcedimiento)
+  {
+    $tabla = "tba_detalletratamiento";
+    $contarProcedimiento = ModelTratamiento::mdlVerificarUsoProcedimiento($tabla, $codProcedimiento);
+    return $contarProcedimiento;
+  }
 }
