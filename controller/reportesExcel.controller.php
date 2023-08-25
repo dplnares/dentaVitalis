@@ -32,7 +32,7 @@ class ControllerReportesExcel
           <th style='width:10%'>Descripción de Costo</th>
           <th style='width:10%'>Observacion de Costo</th>
           <th style='width:10%'>Numero de Documento</th>
-          <th style='width:10%'>Fecha de Costo</th>
+          <th style='width:10%'>Precio de Costo</th>
           <th style='width:10%'>Fecha de Costo</th>
         </tr> 
       </thead>");
@@ -49,6 +49,55 @@ class ControllerReportesExcel
           <td style="width:10%">'.$value["NumeroDocumento"].'</td>
           <td style="width:10%">'.$value["PrecioGasto"].'</td>
           <td style="width:10%">'.$value["FechaCosto"].'</td>
+        </tr>');
+      }
+      echo "</table>";
+      
+    }
+  }
+
+  //  Descargar reporte de pagos
+  public static function ctrDescargarReportePagos()
+  {
+    if(isset($_GET["descargarPagos"]))
+    {
+      //  Creamos el archivo excel
+      $Name = "ReportePagos.xls";
+
+      header('Expires: 0');
+      header('Cache-control: private');
+      header("Content-type: application/vnd.ms-excel"); // Archivo de Excel
+      header("Cache-Control: cache, must-revalidate"); 
+      header('Content-Description: File Transfer');
+      header('Last-Modified: '.date('D, d M Y H:i:s'));
+      header("Pragma: public"); 
+      header('Content-Disposition:; filename="'.$Name.'"');
+      header("Content-Transfer-Encoding: binary");
+
+      //  Creamos nombre de las columnas del archivo
+      echo utf8_decode("<table border='1'>
+      
+      </thead>
+        <tr> 
+          <th style='width:50%'>Nombre Paciente</th>
+          <th style='width:20%'>DNI</th>
+          <th style='width:20%'>Monto de Pago</th>
+          <th style='width:20%'>Tipo de pago</th>
+          <th style='width:20%'>Fecha de Pago</th>
+        </tr> 
+      </thead>");
+  
+      $listaPagos = ControllerPagos::ctrMostrarTodosLosPagos();
+      // Rellenamos las columnas con los datos obtenidos
+      foreach ($listaPagos as $value) 
+      {
+        echo utf8_decode('<tr style="font-size:12px">
+
+          <td style="width:50%">'.$value["NombrePaciente"].' '.$value["ApellidoPaciente"].'</td>
+          <td style="width:20%">'.$value["DNIPaciente"].'</td>
+          <td style="width:20%">'.$value["TotalPago"].'</td>
+          <td style="width:20%">'.$value["DescripcionTipo"].'</td>
+          <td style="width:20%">'.$value["FechaPago"].'</td>
         </tr>');
       }
       echo "</table>";

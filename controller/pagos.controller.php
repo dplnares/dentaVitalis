@@ -44,7 +44,11 @@ class ControllerPagos
             $nombreArchivo = $datosCreate["FechaPago"].'_'.$datosCreate["IdPaciente"].'_'.$datosCreate["IdTipoPago"].'_'.$totalPagadoActual["IdTratamiento"].'_'.$ultimoPago["Id"].'.'.$formato[1];
             $ruta = "../image/voucher/$nombreArchivo";
             //  Subimos el archivo y nos arroja true si se subió y false caso contrario
+
+
             $resultado = move_uploaded_file($_FILES["comprobantePago"]["tmp_name"], $ruta);
+
+            
             //  Actualizar la ruta en la base de datos
             $actualizarRuta = self::ctrActualizarRuta($nombreArchivo, $ultimoPago["Id"]);
             if($resultado == true)

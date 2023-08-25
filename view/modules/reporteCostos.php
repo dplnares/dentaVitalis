@@ -55,7 +55,14 @@
                 <label style="font-size: 17px">
                   <?php 
                     $mayorCentroCostos = ControllerCostos::ctrSumarMayorCentroCostos();
-                    echo 'Mayor Costo : '.$mayorCentroCostos["DescripcionCentro"].'.  (S/.) '.$mayorCentroCostos["SumaMayorCosto"];
+                    if($mayorCentroCostos != null || $mayorCentroCostos != '')
+                    {
+                      echo 'Mayor Costo : '.$mayorCentroCostos["DescripcionCentro"].'.  (S/.) '.$mayorCentroCostos["SumaMayorCosto"];
+                    }
+                    else
+                    {
+                      echo 'Mayor Costo : ';
+                    }
                   ?>
                 </label>
               </div>

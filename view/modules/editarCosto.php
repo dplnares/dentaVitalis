@@ -65,7 +65,7 @@
                   <div class="col-lg-1">Cantidad</div>
                   <div class="col-lg-2">Socio</div>
                   <div class="col-lg-2">Nro. Documento</div>
-                  <div class="col-lg-2">Fecha</div>
+                  <div class="col-lg-2">Fecha Pago</div>
                   <div class="col-lg-1">Costo(S/.)</div>
                 </div>
 

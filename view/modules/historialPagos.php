@@ -11,8 +11,11 @@
         <div class="container-fluid px-4">
           <h1 class="mt-4">Historial de Pagos</h1>
           <div class="d-inline-flex m-2">
-          <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalAgregarPago">
+            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalAgregarPago">
               Agregar Nuevo Pago
+            </button>
+            <button type="button" class="btn btn-success descargarPagos" id="descargarPagos">
+              Descargar Pagos
             </button>
           </div>
 

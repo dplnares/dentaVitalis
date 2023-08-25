@@ -340,3 +340,8 @@ $(".nuevoProcedimientoAgregar").on("click", ".btnDescargarPago", function () {
     }
   });
 });
+
+//  Descargar todos los pagos realizados
+$("#descargarPagos").on("click", function(){
+  window.location = "view/modules/descargar-reporte.php?&descargarPagos";
+});

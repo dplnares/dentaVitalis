@@ -224,6 +224,8 @@ $(".table").on("click", ".btnEliminarCosto", function () {
 
 //  Actualizar el modal al momento de modificar el centro de costos, solo mostrará los gastos que tienen este codigo de centro de costos.
 $("#centroDeCostos").change(function(){
+  //  Al modificar el centro de costos, automáticamente se elimina la lista actual, para evitar que puedan poner varios recursos de distintos centros de costo
+  $(".nuevaListaGastos").empty();
   var codCCostosModal = $('#centroDeCostos').val();
   var listaGastos = $('.nuevogasto').val();
   //  Datos para ajax
@@ -258,6 +260,10 @@ $("#centroDeCostos").change(function(){
         divVaciar.appendChild(nuevoInput);
         divVaciar.add;
       }
+      else
+      {
+        $(".nuevaListaGastos").empty();
+      }
     });
   }
 
@@ -288,10 +294,6 @@ $("#centroDeCostos").change(function(){
       console.log("Error en la solicitud AJAX: ", textStatus, errorThrown);
     }
   });
-});
-// Al cerrar el modal, la lista de gastos se eliminará totalmente.
-$("#modalAgregarGasto").on('hidden.bs.modal', function () {
-  $(".nuevaListaGastos").empty();
 });
 
 //  FUNCIONES PARA SUMAR Y LISTAR LOS PRODUCTOS

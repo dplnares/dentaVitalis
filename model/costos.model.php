@@ -257,7 +257,7 @@ class ModelCostos
     $statement = Conexion::conn()->prepare("SELECT
     cc.IdCentroCostos, 
     cc.DescripcionCentro, 
-    SUM(c.TotalCosto) AS SumaTotalCosto, 
+    SUM(tba_detallecosto.PrecioGasto) AS SumaTotalCosto, 
     tba_detallecosto.NumeroDocumento, 
     tba_detallecosto.ObservacionGasto, 
     tba_socio.NombreSocio, 
@@ -284,8 +284,8 @@ class ModelCostos
       cc.IdCentroCostos = tba_gasto.IdCentroCostos AND
       tba_detallecosto.IdGasto = tba_gasto.IdGasto
   WHERE
-    c.FechaCreacion >= '$fechaInicial' AND
-    c.FechaCreacion <= '$fechaFinal'
+    tba_detallecosto.FechaCosto >= '$fechaInicial' AND
+    tba_detallecosto.FechaCosto <= '$fechaFinal'
   GROUP BY
     cc.IdCentroCostos, 
     cc.DescripcionCentro");

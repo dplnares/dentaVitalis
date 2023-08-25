@@ -184,7 +184,7 @@ $totalRealizado = ControllerTratamiento::ctrObtenerTotalRealizado($codHistoria["
 $deudaRealizados = number_format($totalRealizado["TotalRealizado"]-$totalesTratamiento["TotalPagado"], 2);
 
 $pdf->SetFont('Arial','B',10);
-$pdf->Cell(40,8,'Total Tratamiento:',0);
+$pdf->Cell(40,8,'Monto Presupuestado:',0);
 $pdf->SetFont('DejaVu', '', 10);
 $pdf->Cell(70,8,'S/. '.number_format($totalesTratamiento["TotalTratamiento"],2),0);
 $pdf->SetFont('Arial','B',10);
@@ -206,11 +206,11 @@ $pdf->Cell(30,8,'S/. '.number_format($totalesTratamiento["TotalPagado"],2),0);
 $pdf->Ln(5);
 
 $pdf->SetFont('Arial','B',10);
-$pdf->Cell(40,8,'Deuda Total:',0);
+$pdf->Cell(40,8,'Saldo Presupuestado:',0);
 $pdf->SetFont('DejaVu', '', 10);
 $pdf->Cell(70,8,'S/. '.number_format($totalesTratamiento["DeudaActual"],2),0);
 $pdf->SetFont('Arial','B',10);
-$pdf->Cell(40,8,'Deuda Realizados:',0);
+$pdf->Cell(40,8,'Saldo Actual:',0);
 $pdf->SetFont('DejaVu', '', 10);
 $pdf->Cell(30,8,'S/. '.$deudaRealizados,0);
 

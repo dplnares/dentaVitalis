@@ -46,17 +46,17 @@ class PDFCostoSelect extends TFPDF
   function TablaCostos($header, $datosDetalleCosto)
   {
     $this->SetFont('Arial', 'B', 10);
-    $this->Cell(50,7,$header[0],1,0,'C'); 
+    $this->Cell(65,7,$header[0],1,0,'C'); 
     $this->Cell(40,7,$header[1],1,0,'C'); 
     $this->Cell(30,7,$header[2],1,0,'C'); 
     $this->Cell(25,7,$header[3],1,0,'C');
-    $this->Cell(25,7,$header[3],1,0,'C'); 
+    $this->Cell(25,7,$header[4],1,0,'C'); 
     
     foreach($datosDetalleCosto as $dato)
     {
       $this->SetFont('DejaVu', '', 10);
       $this->Ln();
-      $this->Cell(50,5,$dato["NombreGasto"],1);
+      $this->Cell(65,5,$dato["NombreGasto"],1);
       $this->Cell(40,5,$dato["ObservacionGasto"],1);
       $this->Cell(30,5,$dato["NumeroDocumento"],1);
       $this->Cell(25,5,$dato["FechaCosto"],1);

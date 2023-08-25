@@ -172,19 +172,19 @@
                 <h3>Costos Totales</h3>
                 <div class="row p-2" style="font-weight: bold">
                   <div class="col-lg-3">
-                    <span>Total Tratamiento(S/.):</span>
+                    <span>Monto Presupuestado (S/.):</span>
                   </div>
                   <div class="col-lg-2">
-                    <input type="text" style="text-align: right;" class="form-control input-lg border-0" value="<?php echo $totalesTratamiento["TotalTratamiento"] ?>" readonly>
+                    <input type="text" style="text-align: right;" class="form-control input-lg border-0" value="<?php echo number_format($totalesTratamiento["TotalTratamiento"], 2) ?>" readonly>
                   </div>
                 </div>
 
                 <div class="row p-2" style="font-weight: bold">
                   <div class="col-lg-3">
-                    <span>Procedimientos Realizados(S/.):</span>
+                    <span>Total Procedimientos Realizados(S/.):</span>
                   </div>
                   <div class="col-lg-2">
-                    <input type="text" style="text-align: right;" class="form-control input-lg border-0" value="<?php echo $totalRealizado["TotalRealizado"] ?>" readonly>
+                    <input type="text" style="text-align: right;" class="form-control input-lg border-0" value="<?php echo number_format($totalRealizado["TotalRealizado"], 2) ?>" readonly>
                   </div>
                 </div>
 
@@ -193,16 +193,16 @@
                     <span>Total Pagado(S/.):</span>
                   </div>
                   <div class="col-lg-2">
-                    <input type="text" style="text-align: right;" class="form-control input-lg border-0" value="<?php echo $totalesTratamiento["TotalPagado"] ?>" readonly>
+                    <input type="text" style="text-align: right;" class="form-control input-lg border-0" value="<?php echo number_format($totalesTratamiento["TotalPagado"], 2) ?>" readonly>
                   </div>
                 </div>
 
                 <div class="row p-2" style="font-weight: bold">
                   <div class="col-lg-3">
-                    <span>Deuda Actual(S/.):</span>
+                    <span>Saldo Actual (S/.):</span>
                   </div>
                   <div class="col-lg-2">
-                    <input type="text" style="text-align: right;" class="form-control input-lg border-0" value="<?php echo $totalesTratamiento["DeudaActual"] ?>" readonly>
+                    <input type="text" style="text-align: right;" class="form-control input-lg border-0" value="<?php echo number_format(($totalRealizado["TotalRealizado"] - $totalesTratamiento["TotalPagado"] ), 2) ?>" readonly>
                   </div>
                 </div>
 

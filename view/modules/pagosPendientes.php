@@ -21,9 +21,10 @@
                   <th>#</th>
                   <th>Paciente</th>
                   <th>DNI</th>
-                  <th>Deuda Total (S/.)</th>
+                  <th>Monto Presupuestado (S/.)</th>
+                  <th>Total Realizado (S/.)</th>
                   <th>Total Pagado (S/.)</th>
-                  <th>Deuda Actual (S/.)</th>
+                  <th>Saldo Actual(S/.)</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -32,15 +33,18 @@
                   $listaCostoTratamientos = ControllerPagos::ctrMostrarTotalPorPaciente();
                   foreach ($listaCostoTratamientos as $key => $value)
                   {
-                    $deudaActual = $value["TotalTratamiento"] - $value["TotalPagado"];
+                    $totalesTratamiento = ControllerTratamiento::ctrObtenerTotalesTratamiento($value["IdPaciente"]);
+                    $totalRealizado = ControllerTratamiento::ctrObtenerTotalRealizado($value["IdHistoriaClinica"]);
+                    $deudaRealizados = number_format($totalRealizado["TotalRealizado"]-$totalesTratamiento["TotalPagado"], 2);
                     echo
                       '<tr>
                         <td>'.($key + 1).'</td>
                         <td>'.$value["NombrePaciente"].' '.$value["ApellidoPaciente"].'</td>
                         <td>'.$value["DNIPaciente"].'</td>
-                        <td>'.$value["TotalTratamiento"].'</td>
-                        <td>'.$value["TotalPagado"].'</td>
-                        <td>'.$deudaActual.'</td>
+                        <td>'.number_format($value["TotalTratamiento"],2).'</td>
+                        <td>'.number_format($totalRealizado["TotalRealizado"],2).'</td>
+                        <td>'.number_format($totalesTratamiento["TotalPagado"],2).'</td>
+                        <td>'.$deudaRealizados.'</td>
                         <td>
                           <button class="btn btn-success btnFichaPagos" id="btnFichaPagos" codPaciente="'.$value["IdPaciente"].'"><i class="fa-solid fa fa-print"></i></button>
                           <button class="btn btn-primary btnVisualizarPagos" id="btnVisualizarPagos" codPaciente="'.$value["IdPaciente"].'" codHistoria="'.$value["IdHistoriaClinica"].'"><i class="fa fa-eye"></i></button>
