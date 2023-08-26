@@ -1,5 +1,8 @@
 <?php
 date_default_timezone_set('America/Lima');
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 class ControllerReportesExcel
 {
   //  Descargar reporte del filtro de costos por fecha en excel
@@ -7,52 +10,34 @@ class ControllerReportesExcel
   {
     if(isset($_GET["fechaInicial"]))
     {
-      $listaImprimir = ControllerCostos::ctrMostrarCostosPorMeses($_GET["fechaInicial"], $_GET["fechaFinal"]);
-      
-      //  Creamos el archivo excel
-      $Name = "ReporteCostos.xls";
+      $listaImprimir = ControllerCostos::ctrMostrarCostosPorFechas($_GET["fechaInicial"], $_GET["fechaFinal"]);
 
-      header('Expires: 0');
-      header('Cache-control: private');
-      header("Content-type: application/vnd.ms-excel"); // Archivo de Excel
-      header("Cache-Control: cache, must-revalidate"); 
-      header('Content-Description: File Transfer');
-      header('Last-Modified: '.date('D, d M Y H:i:s'));
-      header("Pragma: public"); 
-      header('Content-Disposition:; filename="'.$Name.'"');
-      header("Content-Transfer-Encoding: binary");
+      //  Títulos de celdas
+      $titleArray = ['Centro de Costos','Nombre de Socio','Descripción de Costo', 'Observación de Costo', 'Número de Documento','Precio de Costo','Fecha de Costo'];
+      $dataArray = [];
+      $spreadsheet = new Spreadsheet();
+      $activeWorksheet = $spreadsheet->getActiveSheet();
+      $activeWorksheet->fromArray($titleArray, null, 'A1');
 
-      //  Creamos nombre de las columnas del archivo
-      echo utf8_decode("<table border='1'>
-      
-      </thead>
-        <tr> 
-          <th style='width:50%'>Centro de Costos</th>
-          <th style='width:10%'>Nombre de Socio</th>
-          <th style='width:10%'>Descripción de Costo</th>
-          <th style='width:10%'>Observacion de Costo</th>
-          <th style='width:10%'>Numero de Documento</th>
-          <th style='width:10%'>Precio de Costo</th>
-          <th style='width:10%'>Fecha de Costo</th>
-        </tr> 
-      </thead>");
-  
-      // Rellenamos las columnas con los datos obtenidos
-      foreach ($listaImprimir as $value) 
+      foreach($listaImprimir as $value)
       {
-        echo utf8_decode('<tr style="font-size:12px">
-
-          <td style="width:50%">'.$value["DescripcionCentro"].'</td>
-          <td style="width:10%">'.$value["NombreSocio"].'</td>
-          <td style="width:10%">'.$value["NombreGasto"].'</td>
-          <td style="width:10%">'.$value["ObservacionGasto"].'</td>
-          <td style="width:10%">'.$value["NumeroDocumento"].'</td>
-          <td style="width:10%">'.$value["PrecioGasto"].'</td>
-          <td style="width:10%">'.$value["FechaCosto"].'</td>
-        </tr>');
+        $data = array(
+          $value["DescripcionCentro"],
+          $value["NombreSocio"],
+          $value["NombreGasto"],
+          $value["ObservacionGasto"],
+          $value["NumeroDocumento"],
+          $value["PrecioGasto"],
+          $value["FechaCosto"],
+        );
+        //  Data de cada celda
+        array_push($dataArray, $data);
       }
-      echo "</table>";
+      $activeWorksheet->fromArray($dataArray, null, 'A2');
       
+      header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+      $writer = new Xlsx($spreadsheet);
+      $writer->save('php://output');
     }
   }
 
@@ -61,47 +46,33 @@ class ControllerReportesExcel
   {
     if(isset($_GET["descargarPagos"]))
     {
-      //  Creamos el archivo excel
-      $Name = "ReportePagos.xls";
-
-      header('Expires: 0');
-      header('Cache-control: private');
-      header("Content-type: application/vnd.ms-excel"); // Archivo de Excel
-      header("Cache-Control: cache, must-revalidate"); 
-      header('Content-Description: File Transfer');
-      header('Last-Modified: '.date('D, d M Y H:i:s'));
-      header("Pragma: public"); 
-      header('Content-Disposition:; filename="'.$Name.'"');
-      header("Content-Transfer-Encoding: binary");
-
-      //  Creamos nombre de las columnas del archivo
-      echo utf8_decode("<table border='1'>
-      
-      </thead>
-        <tr> 
-          <th style='width:50%'>Nombre Paciente</th>
-          <th style='width:20%'>DNI</th>
-          <th style='width:20%'>Monto de Pago</th>
-          <th style='width:20%'>Tipo de pago</th>
-          <th style='width:20%'>Fecha de Pago</th>
-        </tr> 
-      </thead>");
-  
       $listaPagos = ControllerPagos::ctrMostrarTodosLosPagos();
-      // Rellenamos las columnas con los datos obtenidos
-      foreach ($listaPagos as $value) 
-      {
-        echo utf8_decode('<tr style="font-size:12px">
 
-          <td style="width:50%">'.$value["NombrePaciente"].' '.$value["ApellidoPaciente"].'</td>
-          <td style="width:20%">'.$value["DNIPaciente"].'</td>
-          <td style="width:20%">'.$value["TotalPago"].'</td>
-          <td style="width:20%">'.$value["DescripcionTipo"].'</td>
-          <td style="width:20%">'.$value["FechaPago"].'</td>
-        </tr>');
+      //  Títulos de celdas
+      $titleArray = ['Nombre Paciente', 'Apellido Paciente', 'DNI', 'Monto de Pago', 'Tipo de Pago', 'Fecha de pago'];
+      $dataArray = [];
+      $spreadsheet = new Spreadsheet();
+      $activeWorksheet = $spreadsheet->getActiveSheet();
+      $activeWorksheet->fromArray($titleArray, null, 'A1');
+
+      foreach($listaPagos as $value)
+      {
+        $data = array(
+          $value["NombrePaciente"],
+          $value["ApellidoPaciente"],
+          $value["DNIPaciente"],
+          $value["TotalPago"],
+          $value["DescripcionTipo"],
+          $value["FechaPago"],
+        );
+        //  Data de cada celda
+        array_push($dataArray, $data);
       }
-      echo "</table>";
+      $activeWorksheet->fromArray($dataArray, null, 'A2');
       
+      header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+      $writer = new Xlsx($spreadsheet);
+      $writer->save('php://output');
     }
   }
 }

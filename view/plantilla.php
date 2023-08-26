@@ -27,7 +27,6 @@
         if(
           $_GET["ruta"] == "home" ||
           $_GET["ruta"] == "usuario" ||
-          $_GET["ruta"] == "editarSalida" ||
           $_GET["ruta"] == "procedimientos" ||
           $_GET["ruta"] == "gastos" ||
           $_GET["ruta"] == "socios" ||

@@ -216,7 +216,7 @@ class ModelCostos
   public static function mdlMostrarCostosPorFechas($tabla, $fechaInicial, $fechaFinal)
   {
     $statement = Conexion::conn()->prepare("SELECT tba_costo.IdCosto, tba_costo.IdCentroCostos, tba_detallecosto.IdDetalleCosto, tba_detallecosto.IdGasto, tba_detallecosto.IdSocio, tba_detallecosto.NumeroDocumento, tba_detallecosto.ObservacionGasto, tba_detallecosto.FechaCosto, tba_detallecosto.PrecioGasto, tba_centrocostos.DescripcionCentro, tba_gasto.NombreGasto, tba_socio.NombreSocio 
-    FROM tba_costo 
+    FROM $tabla 
     INNER JOIN tba_detallecosto ON tba_costo.IdCosto = tba_detallecosto.IdCosto 
     INNER JOIN tba_centrocostos ON tba_costo.IdCentroCostos = tba_centrocostos.IdCentroCostos 
     INNER JOIN tba_gasto ON tba_detallecosto.IdGasto = tba_gasto.IdGasto 

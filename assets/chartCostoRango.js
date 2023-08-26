@@ -78,7 +78,7 @@ var chartCostoRango = new Chart(ctx, {
       yAxes: [{
         ticks: {
           min: 0,
-          max: 10000,
+          max: 5000,
           maxTicksLimit: 6
         },
         gridLines: {

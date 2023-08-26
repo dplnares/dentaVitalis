@@ -19,6 +19,7 @@ require_once "../../model/socios.model.php";
 require_once "../../model/usuarios.model.php";
 require_once "../../model/pagos.model.php";
 
+require_once "../../vendor/autoload.php";
 
 /*-------------------------
   DESCARGAR REPORTES EXCEL
